@@ -1,0 +1,36 @@
+{
+  "name": "nishikata-coast-story",
+  "image": "ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/node:1": {}
+  },
+  "runArgs": ["--env-file", ".devcontainer/devcontainer.env", "--rm"],
+  "forwardPorts": [3000],
+  "containerEnv": { "TZ": "Asia/Tokyo" },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Codeium.codeium",
+        "Continue.continue",
+        "ms-azuretools.vscode-docker",
+        "eamodio.gitlens",
+        "MS-CEINTL.vscode-language-pack-ja",
+        "adpyke.codesnap",
+        "bierner.markdown-preview-github-styles",
+        "mutantdino.resourcemonitor",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "Vue.volar",
+        "Nuxtr.nuxtr-vscode",
+        "bradlc.vscode-tailwindcss",
+        "Prisma.prisma"
+      ]
+    }
+  },
+  "onCreateCommand": "bash .devcontainer/script/on_create_command.sh",
+  "postStartCommand": "bash .devcontainer/script/post_start_command.sh",
+  "postAttachCommand": "bash .devcontainer/script/post_attach_command.sh",
+  "waitFor": "onCreateCommand"
+}

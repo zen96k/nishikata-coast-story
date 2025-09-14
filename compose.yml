@@ -1,0 +1,16 @@
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    networks:
+      - nishikata-coast-story
+    ports:
+      - 11434:11434
+    volumes:
+      - /usr/share/zoneinfo/Asia/Tokyo:/etc/localtime:ro
+    environment:
+      - TZ=Asia/Tokyo
+
+networks:
+  nishikata-coast-story:
+    name: nishikata-coast-story
