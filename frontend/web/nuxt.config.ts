@@ -2,8 +2,8 @@
 const config = defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  typescript: { typeCheck: true },
-  modules: ["@nuxt/eslint"]
+  css: ["~/assets/css/main.css"],
+  modules: ["@nuxt/eslint", "@nuxt/ui"]
 })
 
 export default config
