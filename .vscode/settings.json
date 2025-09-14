@@ -3,6 +3,10 @@
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.autoClosingBrackets": "always",
   "editor.autoClosingQuotes": "always",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.fixAll.ts": "always"
+  },
   "editor.tabSize": 2,
   "editor.renderWhitespace": "all",
   "editor.fontSize": 16,

@@ -1,8 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-export default defineNuxtConfig({
+const config = defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  typescript: {
-    typeCheck: true,
-  },
-});
+  typescript: { typeCheck: true },
+  modules: ["@nuxt/eslint"]
+})
+
+export default config
