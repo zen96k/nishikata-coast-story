@@ -1,0 +1,7 @@
+*.env
+!compose.default.env
+!default.env
+
+generated
+node_modules
+volume

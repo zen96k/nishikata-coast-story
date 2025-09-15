@@ -1,7 +1,6 @@
 {
-  "name": "nishikata-coast-story",
+  "name": "ncs-web",
   "type": "module",
-  "private": true,
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev --no-fork",

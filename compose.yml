@@ -7,6 +7,7 @@ services:
     ports:
       - 11434:11434
     volumes:
+      - ./volume/ollama/root/.ollama:/root/.ollama
       - /usr/share/zoneinfo/Asia/Tokyo:/etc/localtime:ro
     environment:
       - TZ=Asia/Tokyo

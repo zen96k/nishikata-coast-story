@@ -7,7 +7,7 @@
     "ghcr.io/devcontainers/features/node:1": {}
   },
   "runArgs": ["--env-file", ".devcontainer/devcontainer.env", "--rm"],
-  "forwardPorts": [3000],
+  "forwardPorts": [3000, 5432, 5555],
   "containerEnv": { "TZ": "Asia/Tokyo" },
   "customizations": {
     "vscode": {
