@@ -2,9 +2,9 @@ name: Local LLM
 version: 1.0.0
 schema: v1
 models:
-  - name: qwen3-coder
+  - name: deepseek-coder-v2
     provider: ollama
-    model: qwen3-coder
+    model: deepseek-coder-v2
     roles:
       - chat
       # - autocomplete

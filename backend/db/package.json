@@ -3,9 +3,13 @@
   "type": "module",
   "scripts": {
     "dev": "docker compose -f compose.dev.yml --env-file compose.dev.env up -d",
+    "backup": "docker container exec ncs-mariadb sh -c 'mariadb-dump --all-databases -u root -p\"${MARIADB_ROOT_PASSWORD}\"' > backup/$(date +%Y%m%d%H%M%S).sql",
+    "restore": "docker container exec ncs-mariadb sh -c 'mariadb -u root -p\"${MARIADB_ROOT_PASSWORD}\"' <",
     "db:pull": "prisma db pull",
     "db:push": "prisma db push",
-    "migrate": "prisma migrate dev",
+    "generate": "prisma generate",
+    "migrate:dev": "prisma migrate dev",
+    "migrate:reset": "prisma migrate reset",
     "studio": "prisma studio"
   },
   "prisma": {

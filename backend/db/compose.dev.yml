@@ -1,18 +1,18 @@
 services:
-  postgres:
-    image: postgres:17.6
-    container_name: ncs-postgres
+  mariadb:
+    image: mariadb:12.0.2
+    container_name: ncs-mariadb
     networks:
       - nishikata-coast-story
     ports:
-      - 5432:5432
+      - 53306:3306
     volumes:
-      - ./volume/postgres/dev/var/lib/postgresql:/var/lib/postgresql
+      - ./volume/mariadb/dev/var/lib/mysql:/var/lib/mysql
     environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
-      - PGDATA=${PGDATA}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
 
 networks:
   nishikata-coast-story:

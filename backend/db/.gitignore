@@ -2,6 +2,7 @@
 !compose.default.env
 !default.env
 
+backup
 generated
 node_modules
 volume
