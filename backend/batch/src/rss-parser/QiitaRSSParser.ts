@@ -9,7 +9,7 @@ type QiitaItem = {
   updated: string
 }
 
-export class QiitaParser {
+export class QiitaRSSParser {
   public async parseUrl(url: string) {
     const parser: Parser<QiitaFeed, QiitaItem> = new Parser({
       customFields: {

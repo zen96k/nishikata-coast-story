@@ -1,14 +1,24 @@
-import { PrismaClient } from "../../db/generated/prisma/index.js"
-import { ArticleManager } from "./module/ArticleManager.ts"
+import cron from "node-cron"
+import { CronTaskScheduler } from "./module/CronTaskScheduler.ts"
 
 const main = async () => {
-  try {
-    const articleManager = new ArticleManager()
-    const prismaClient = new PrismaClient()
+  const cronTaskScheduler = new CronTaskScheduler()
 
-    await articleManager.createOrUpdateQiitaArticlesFromRssFeed(
-      "https://qiita.com/popular-items/feed.atom",
-      prismaClient
+  try {
+    await cronTaskScheduler.deleteTaskSchedule()
+
+    await cronTaskScheduler.manageTaskSchedule(
+      cron.schedule(
+        "*/15 * * * *",
+        async () => {
+          await cronTaskScheduler.runCreateOrUpdateQiitaArticlesByRss()
+        },
+        {
+          name: "CreateOrUpdateQiitaArticlesByRss",
+          timezone: "Asia/Tokyo",
+          noOverlap: true
+        }
+      )
     )
   } catch (error) {
     console.error(error)

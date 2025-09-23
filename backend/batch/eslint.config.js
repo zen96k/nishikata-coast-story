@@ -5,7 +5,7 @@ import tseslint from "typescript-eslint"
 
 export const config = defineConfig(
   eslint.configs.recommended,
-  tseslint.configs.strict,
+  tseslint.configs.recommended,
   eslintConfigPrettier
 )
 
