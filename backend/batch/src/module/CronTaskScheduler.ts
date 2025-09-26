@@ -3,11 +3,12 @@ import { PrismaClient, TaskStatus } from "../../../db/generated/prisma/index.js"
 import { ArticleManager } from "./ArticleManager.ts"
 
 export class CronTaskScheduler {
-  private prismaClient = new PrismaClient()
   private articleManager = new ArticleManager()
 
   public async deleteTaskSchedule() {
-    await this.prismaClient.cronTaskSchedule.deleteMany()
+    const client = new PrismaClient()
+
+    await client.cronTaskSchedule.deleteMany()
   }
 
   public async manageTaskSchedule(task: cron.ScheduledTask) {
@@ -37,7 +38,9 @@ export class CronTaskScheduler {
   }
 
   public async runCreateOrUpdateQiitaArticlesByRss() {
-    await this.prismaClient.$transaction(async (transaction) => {
+    const client = new PrismaClient()
+
+    await client.$transaction(async (transaction) => {
       await this.articleManager.createOrUpdateQiitaArticlesByRss(
         "https://qiita.com/popular-items/feed.atom",
         transaction
@@ -46,10 +49,11 @@ export class CronTaskScheduler {
   }
 
   private async createTaskSchedule(context: cron.TaskContext) {
+    const client = new PrismaClient()
     const task = context.task
     const execution = context.execution
 
-    await this.prismaClient.cronTaskSchedule.create({
+    await client.cronTaskSchedule.create({
       data: {
         executionId: execution?.id,
         taskName: task?.name,
@@ -63,10 +67,11 @@ export class CronTaskScheduler {
   }
 
   private async updateTaskSchedule(context: cron.TaskContext) {
+    const client = new PrismaClient()
     const task = context.task
     const execution = context.execution
 
-    await this.prismaClient.cronTaskSchedule.update({
+    await client.cronTaskSchedule.update({
       data: {
         executionId: execution?.id,
         taskName: task?.name,

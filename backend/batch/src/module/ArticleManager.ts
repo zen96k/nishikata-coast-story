@@ -12,12 +12,18 @@ export class ArticleManager {
     const feed = await this.qiitaParser.parseUrl(url)
 
     for (const item of feed.items) {
+      const url = new URL(item.link)
+      const id = url.pathname.split("/").pop()
+
+      if (!id) {
+        throw new Error("記事IDを取得できません")
+      }
+
       const existingArticle = await transaction.article.findUnique({
         where: {
-          publisher_link_author: {
+          uq_article_publisher_publisher_article_id: {
             publisher: "Qiita",
-            link: item.link,
-            author: item.author
+            publisherArticleId: id
           }
         }
       })
@@ -31,6 +37,7 @@ export class ArticleManager {
       } else {
         insertingArticles.push({
           publisher: "Qiita" as Publisher,
+          publisherArticleId: id,
           title: item.title,
           link: item.link,
           author: item.author,
