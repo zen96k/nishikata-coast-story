@@ -19,21 +19,14 @@ git config --global user.email ${GIT_USER_EMAIL}
 
 docker system prune -af --volumes
 docker compose up -d
-docker container exec -it ollama ollama pull qwen3-coder
-cp -rfv config.yaml ${HOME}/.continue
-
-npm install -g @aikidosec/safe-chain npm-check-updates
-safe-chain setup
 
 cd ${FRONTEND_DIRNAME}/web
+rm -rf .output .data .nuxt .nitro .cache dist
 npm install
-cd ${BACKEND_DIRNAME}/db
-npm install && npm run generate
+cd ${BACKEND_DIRNAME}/api
+npm install
 cd ${BACKEND_DIRNAME}/batch
 npm install
-
-wget https://github.com/fastfetch-cli/fastfetch/releases/download/2.52.0/fastfetch-linux-amd64.deb
-apt install -y ./fastfetch-linux-amd64.deb
-rm -rf ./fastfetch-linux-amd64.deb
-
-fastfetch
+cd ${BACKEND_DIRNAME}/db
+rm -rf type
+npm install && npm run dev && npm run generate

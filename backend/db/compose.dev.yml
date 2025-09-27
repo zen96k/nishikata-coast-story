@@ -5,7 +5,7 @@ services:
     networks:
       - nishikata-coast-story
     ports:
-      - 53306:3306
+      - 5306:3306
     volumes:
       - ./volume/mariadb/dev/var/lib/mysql:/var/lib/mysql
     environment:

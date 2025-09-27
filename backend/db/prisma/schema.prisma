@@ -1,6 +1,6 @@
-generator client {
+generator prismaClient {
   provider     = "prisma-client-js"
-  output       = "../generated/prisma"
+  output       = "../type/prisma-client"
   moduleFormat = "esm"
 }
 

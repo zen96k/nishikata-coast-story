@@ -2,6 +2,8 @@ import cron from "node-cron"
 import { CronTaskScheduler } from "./module/CronTaskScheduler.ts"
 
 const main = async () => {
+  console.info("バッチ処理(cron)を開始します")
+
   const cronTaskScheduler = new CronTaskScheduler()
 
   try {
@@ -11,7 +13,9 @@ const main = async () => {
       cron.schedule(
         "*/15 * * * *",
         async () => {
+          console.info("CreateOrUpdateQiitaArticlesByRssを開始します")
           await cronTaskScheduler.runCreateOrUpdateQiitaArticlesByRss()
+          console.info("CreateOrUpdateQiitaArticlesByRssを終了します")
         },
         {
           name: "CreateOrUpdateQiitaArticlesByRss",

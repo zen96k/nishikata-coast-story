@@ -2,7 +2,7 @@
   "name": "ncs-batch",
   "type": "module",
   "scripts": {
-    "batch": "tsx src/main.ts"
+    "dev": "tsx watch app/main.ts"
   },
   "dependencies": {
     "node-cron": "4.2.1",
@@ -13,9 +13,11 @@
     "@tsconfig/node-lts": "22.0.2",
     "@tsconfig/node-ts": "23.6.1",
     "@tsconfig/recommended": "1.0.10",
+    "@types/luxon": "3.7.1",
     "@types/node": "24.5.2",
     "eslint": "9.36.0",
     "eslint-config-prettier": "10.1.8",
+    "luxon": "3.7.2",
     "prettier": "3.6.2",
     "prettier-plugin-organize-imports": "4.3.0",
     "tsx": "4.20.6",

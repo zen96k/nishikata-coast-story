@@ -1,12 +1,21 @@
-import { Prisma, Publisher } from "../../../db/generated/prisma/index.js"
+import { DateTime as luxon } from "luxon"
+import {
+  Prisma,
+  PrismaClient,
+  Publisher
+} from "../../type/prisma-client/index.js"
 import { QiitaRSSParser } from "../rss-parser/QiitaRSSParser.ts"
+
 export class ArticleManager {
+  private client = new PrismaClient()
   private qiitaParser = new QiitaRSSParser()
 
-  public async createOrUpdateQiitaArticlesByRss(
+  public async createOrUpdateQiitaByRss(
     url: string,
-    transaction: Prisma.TransactionClient
+    transaction?: Prisma.TransactionClient
   ) {
+    const client = transaction || this.client
+
     const existingArticles = []
     const insertingArticles = []
     const feed = await this.qiitaParser.parseUrl(url)
@@ -19,7 +28,7 @@ export class ArticleManager {
         throw new Error("記事IDを取得できません")
       }
 
-      const existingArticle = await transaction.article.findUnique({
+      const existingArticle = await client.article.findUnique({
         where: {
           uq_article_publisher_publisher_article_id: {
             publisher: "Qiita",
@@ -28,11 +37,15 @@ export class ArticleManager {
         }
       })
 
-      if (existingArticle && existingArticle.updated < new Date(item.updated)) {
+      if (
+        existingArticle &&
+        luxon.fromJSDate(existingArticle.updated).toUTC() <
+          luxon.fromISO(item.updated).toUTC()
+      ) {
         existingArticles.push({
           id: existingArticle.id,
           title: item.title,
-          updated: item.updated
+          updated: luxon.fromISO(item.updated).toUTC().toJSDate()
         })
       } else {
         insertingArticles.push({
@@ -41,20 +54,20 @@ export class ArticleManager {
           title: item.title,
           link: item.link,
           author: item.author,
-          published: new Date(item.published),
-          updated: new Date(item.updated)
+          published: luxon.fromISO(item.published).toUTC().toJSDate(),
+          updated: luxon.fromISO(item.updated).toUTC().toJSDate()
         })
       }
     }
 
     for (const article of existingArticles) {
-      await transaction.article.update({
+      await client.article.update({
         where: { id: article.id },
         data: { title: article.title, updated: article.updated }
       })
     }
     if (insertingArticles.length > 0) {
-      await transaction.article.createMany({
+      await client.article.createMany({
         data: insertingArticles,
         skipDuplicates: true
       })

@@ -1,14 +1,14 @@
+import { DateTime as luxon } from "luxon"
 import cron from "node-cron"
-import { PrismaClient, TaskStatus } from "../../../db/generated/prisma/index.js"
+import { PrismaClient, TaskStatus } from "../../type/prisma-client/index.js"
 import { ArticleManager } from "./ArticleManager.ts"
 
 export class CronTaskScheduler {
+  private client = new PrismaClient()
   private articleManager = new ArticleManager()
 
   public async deleteTaskSchedule() {
-    const client = new PrismaClient()
-
-    await client.cronTaskSchedule.deleteMany()
+    await this.client.cronTaskSchedule.deleteMany()
   }
 
   public async manageTaskSchedule(task: cron.ScheduledTask) {
@@ -38,48 +38,53 @@ export class CronTaskScheduler {
   }
 
   public async runCreateOrUpdateQiitaArticlesByRss() {
-    const client = new PrismaClient()
-
-    await client.$transaction(async (transaction) => {
-      await this.articleManager.createOrUpdateQiitaArticlesByRss(
-        "https://qiita.com/popular-items/feed.atom",
-        transaction
-      )
-    })
+    await this.articleManager.createOrUpdateQiitaByRss(
+      "https://qiita.com/popular-items/feed.atom"
+    )
   }
 
   private async createTaskSchedule(context: cron.TaskContext) {
-    const client = new PrismaClient()
     const task = context.task
     const execution = context.execution
 
-    await client.cronTaskSchedule.create({
+    await this.client.cronTaskSchedule.create({
       data: {
         executionId: execution?.id,
         taskName: task?.name,
         taskStatus: task ? ((await task.getStatus()) as TaskStatus) : undefined,
-        scheduledAt: context.date,
-        triggeredAt: context.triggeredAt,
-        startedAt: execution?.startedAt,
-        finishedAt: execution?.finishedAt
+        scheduledAt: luxon.fromJSDate(context.date).toUTC().toJSDate(),
+        triggeredAt: luxon.fromJSDate(context.triggeredAt).toUTC().toJSDate(),
+        startedAt:
+          execution && execution.startedAt
+            ? luxon.fromJSDate(execution.startedAt).toUTC().toJSDate()
+            : undefined,
+        finishedAt:
+          execution && execution.finishedAt
+            ? luxon.fromJSDate(execution.finishedAt).toUTC().toJSDate()
+            : undefined
       }
     })
   }
 
   private async updateTaskSchedule(context: cron.TaskContext) {
-    const client = new PrismaClient()
     const task = context.task
     const execution = context.execution
 
-    await client.cronTaskSchedule.update({
+    await this.client.cronTaskSchedule.update({
       data: {
         executionId: execution?.id,
         taskName: task?.name,
         taskStatus: task ? ((await task.getStatus()) as TaskStatus) : undefined,
-        scheduledAt: context.date,
-        triggeredAt: context.triggeredAt,
-        startedAt: execution?.startedAt,
-        finishedAt: execution?.finishedAt,
+        scheduledAt: luxon.fromJSDate(context.date).toUTC().toJSDate(),
+        triggeredAt: luxon.fromJSDate(context.triggeredAt).toUTC().toJSDate(),
+        startedAt:
+          execution && execution.startedAt
+            ? luxon.fromJSDate(execution.startedAt).toUTC().toJSDate()
+            : undefined,
+        finishedAt:
+          execution && execution.finishedAt
+            ? luxon.fromJSDate(execution.finishedAt).toUTC().toJSDate()
+            : undefined,
         errorMessage: execution?.error?.message
       },
       where: { executionId: execution?.id }
