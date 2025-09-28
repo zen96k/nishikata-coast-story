@@ -1,6 +1,6 @@
 import { DateTime as luxon } from "luxon"
 import cron from "node-cron"
-import { PrismaClient, TaskStatus } from "../../type/prisma-client/index.js"
+import { PrismaClient, TaskStatus } from "../../type/prisma/client.ts"
 import { ArticleManager } from "./ArticleManager.ts"
 
 export class CronTaskScheduler {

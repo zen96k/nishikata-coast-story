@@ -1,9 +1,5 @@
 import { DateTime as luxon } from "luxon"
-import {
-  Prisma,
-  PrismaClient,
-  Publisher
-} from "../../type/prisma-client/index.js"
+import { Prisma, PrismaClient, Publisher } from "../../type/prisma/client.ts"
 import { QiitaRSSParser } from "../rss-parser/QiitaRSSParser.ts"
 
 export class ArticleManager {

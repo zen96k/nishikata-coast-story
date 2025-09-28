@@ -2,8 +2,8 @@
   "name": "ncs-batch",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch --env-file prisma.${NCS_APP_ENV}.env app/main.ts",
-    "generate": "dotenv -e prisma.${NCS_APP_ENV}.env -- prisma generate"
+    "dev": "tsx watch --env-file prisma.dev.env app/main.ts",
+    "generate": "dotenv -e prisma.${NCS_ENV}.env -- prisma generate"
   },
   "prisma": {
     "schema": "prisma"

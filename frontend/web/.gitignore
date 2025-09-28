@@ -8,6 +8,7 @@ dist
 
 *.env
 !nuxt.default.env
+!prisma.default.env
 
 node_modules
 type

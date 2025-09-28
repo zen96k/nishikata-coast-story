@@ -1,10 +1,9 @@
 generator client {
-  provider     = "prisma-client-js"
-  output       = "../type/prisma-client"
-  moduleFormat = "esm"
+  provider = "prisma-client"
+  output   = "../type/prisma"
 }
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  url      = env("PRISMA_DATABASE_URL")
 }
