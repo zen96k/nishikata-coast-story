@@ -2,10 +2,16 @@
   "name": "ncs-batch",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch app/main.ts"
+    "dev": "tsx watch --env-file prisma.${NCS_APP_ENV}.env app/main.ts",
+    "generate": "dotenv -e prisma.${NCS_APP_ENV}.env -- prisma generate"
+  },
+  "prisma": {
+    "schema": "prisma"
   },
   "dependencies": {
+    "@prisma/client": "6.16.2",
     "node-cron": "4.2.1",
+    "prisma": "6.16.2",
     "rss-parser": "3.13.0"
   },
   "devDependencies": {
@@ -15,6 +21,7 @@
     "@tsconfig/recommended": "1.0.10",
     "@types/luxon": "3.7.1",
     "@types/node": "24.5.2",
+    "dotenv-cli": "10.0.0",
     "eslint": "9.36.0",
     "eslint-config-prettier": "10.1.8",
     "luxon": "3.7.2",

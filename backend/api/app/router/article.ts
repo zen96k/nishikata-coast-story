@@ -8,7 +8,7 @@ import {
   Publisher
 } from "../../type/prisma-client/index.js"
 
-const articleSchema = zod
+const articleResponseSchema = zod
   .object({
     id: zod.string(),
     publisher: zod.enum(Publisher),
@@ -22,8 +22,8 @@ const articleSchema = zod
     createdAt: zod.string(),
     updatedAt: zod.string()
   })
-  .describe("Article")
-  .meta({ ref: "Article" })
+  .describe("ArticleResponse")
+  .meta({ ref: "ArticleResponse" })
 
 const app = new Hono()
 
@@ -53,7 +53,7 @@ app.get(
         description: "OK",
         content: {
           "application/json": {
-            vSchema: zod.object({ articles: zod.array(articleSchema) })
+            vSchema: zod.object({ articles: zod.array(articleResponseSchema) })
           }
         }
       }

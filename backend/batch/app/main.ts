@@ -12,10 +12,12 @@ const main = async () => {
     await cronTaskScheduler.manageTaskSchedule(
       cron.schedule(
         "*/15 * * * *",
-        async () => {
-          console.info("CreateOrUpdateQiitaArticlesByRssを開始します")
+        async (context) => {
+          const task = context.task
+
+          console.info(`${task?.name}を開始します`)
           await cronTaskScheduler.runCreateOrUpdateQiitaArticlesByRss()
-          console.info("CreateOrUpdateQiitaArticlesByRssを終了します")
+          console.info(`${task?.name}を終了します`)
         },
         {
           name: "CreateOrUpdateQiitaArticlesByRss",

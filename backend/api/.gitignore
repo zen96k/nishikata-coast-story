@@ -1,5 +1,8 @@
 *.env
-!default.env
+!compose.default.env
+!hono.default.env
+!prisma.default.env
 
 node_modules
 type
+volume

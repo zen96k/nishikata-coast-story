@@ -29,4 +29,4 @@ cd ${BACKEND_DIRNAME}/batch
 npm install
 cd ${BACKEND_DIRNAME}/db
 rm -rf type
-npm install && npm run dev && npm run generate
+npm install && npm run dev

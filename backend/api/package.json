@@ -2,13 +2,19 @@
   "name": "ncs-api",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch --env-file dev.env app/main.ts"
+    "dev": "mkdir -p spec && tsx watch --env-file hono.${NCS_APP_ENV}.env --env-file prisma.${NCS_APP_ENV}.env app/main.ts",
+    "generate": "dotenv -e prisma.${NCS_APP_ENV}.env -- prisma generate"
+  },
+  "prisma": {
+    "schema": "prisma"
   },
   "dependencies": {
     "@hono/node-server": "1.19.4",
     "@hono/standard-validator": "0.1.5",
+    "@prisma/client": "6.16.2",
     "hono": "4.9.9",
-    "hono-openapi": "1.0.8"
+    "hono-openapi": "1.0.8",
+    "prisma": "6.16.2"
   },
   "devDependencies": {
     "@eslint/js": "9.36.0",
@@ -17,6 +23,7 @@
     "@tsconfig/recommended": "1.0.10",
     "@types/luxon": "3.7.1",
     "@types/node": "24.5.2",
+    "dotenv-cli": "10.0.0",
     "eslint": "9.36.0",
     "eslint-config-prettier": "10.1.8",
     "luxon": "3.7.2",
