@@ -3,12 +3,17 @@
 </template>
 
 <script setup lang="ts">
-  import { hc } from "hono/client"
-  import type { App } from "../../server/api/[...]"
+  import type { ArticleResponse } from "~~/server/hono/schema/ArticleResponse"
+  import type { ErrorResponse } from "~~/server/hono/schema/ErrorResponse"
 
   const runtimeConfig = useRuntimeConfig()
-  const client = hc<App>(runtimeConfig.public.ncsApiBaseUrl)
 
-  const response = await client.api.article.$get()
-  const { articles } = await response.json()
+  const { data: articles, error } = await useFetch<
+    ArticleResponse,
+    ErrorResponse
+  >(`${runtimeConfig.public.ncsApiBaseUrl}/api/article`)
+
+  if (error.value) {
+    console.error(error.value)
+  }
 </script>

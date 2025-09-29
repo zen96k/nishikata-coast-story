@@ -1,5 +1,5 @@
 import zod from "zod"
-import { Publisher } from "../../../type/prisma/enums"
+import { Publisher } from "~~/type/prisma/enums"
 
 const ArticleResponse = zod.object({
   id: zod.string(),

@@ -1,5 +1,5 @@
-import type { Prisma } from "../../type/prisma/client"
-import { PrismaClient } from "../../type/prisma/client"
+import type { Prisma } from "~~/type/prisma/client"
+import { PrismaClient } from "~~/type/prisma/client"
 
 export class ArticleManager {
   private client = new PrismaClient()

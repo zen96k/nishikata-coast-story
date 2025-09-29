@@ -1,10 +1,8 @@
 import { Hono } from "hono"
 import { DateTime as luxon } from "luxon"
-import type { ArticleResponse } from "../schema/ArticleResponse"
+import type { ArticleResponse } from "~~/server/hono/schema/ArticleResponse"
 
-const app = new Hono()
-
-app.get("/", async (context) => {
+export const article = new Hono().get("/", async (context) => {
   const articleManager = new ArticleManager()
 
   const articles = await articleManager.findMany()
@@ -22,5 +20,3 @@ app.get("/", async (context) => {
 
   return context.json({ articles: transformedArticles }, 200)
 })
-
-export default app
