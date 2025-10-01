@@ -17,8 +17,7 @@ git config --global init.defaultBranch ${GIT_DEFAULT_BRANCH}
 git config --global user.name ${GIT_USER_NAME}
 git config --global user.email ${GIT_USER_EMAIL}
 
-docker system prune -af --volumes
-docker compose up -d
+docker compose up -d --force-recreate --remove-orphans
 
 cd ${FRONTEND_DIRNAME}/web
 rm -rf .output .data .nuxt .nitro .cache dist

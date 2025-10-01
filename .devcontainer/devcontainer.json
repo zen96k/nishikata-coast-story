@@ -89,6 +89,9 @@
         "[prisma]": {
           "editor.defaultFormatter": "Prisma.prisma"
         },
+        "[sql]": {
+          "editor.defaultFormatter": "Prisma.prisma"
+        },
         "chat.instructionsFilesLocations": {
           ".github/instructions": true,
           "/tmp/postman-collections-post-response.instructions.md": true,
@@ -103,5 +106,6 @@
   },
   "onCreateCommand": "bash .devcontainer/script/on_create_command.sh",
   "postStartCommand": "bash .devcontainer/script/post_start_command.sh",
-  "postAttachCommand": "bash .devcontainer/script/post_attach_command.sh"
+  "postAttachCommand": "bash .devcontainer/script/post_attach_command.sh",
+  "waitFor": "onCreateCommand"
 }
