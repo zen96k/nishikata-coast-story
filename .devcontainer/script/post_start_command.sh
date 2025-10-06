@@ -17,12 +17,12 @@ git config --global init.defaultBranch ${GIT_DEFAULT_BRANCH}
 git config --global user.name ${GIT_USER_NAME}
 git config --global user.email ${GIT_USER_EMAIL}
 
-docker compose up -d --force-recreate --remove-orphans
+docker compose up -d --pull always --force-recreate --remove-orphans
 
 cd ${FRONTEND_DIRNAME}/web
 rm -rf .output .data .nuxt .nitro .cache dist
-npm install
+npm install && npm prune
 cd ${BACKEND_DIRNAME}/batch
-npm install
+npm install && npm prune
 cd ${BACKEND_DIRNAME}/db
-npm install && npm run dev
+npm install && npm prune && npm run mariadb:dev

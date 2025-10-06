@@ -9,10 +9,13 @@ export const article = new Hono().get("/", async (context) => {
 
   const transformedArticles: ArticleResponse[] = articles.map((article) => {
     return {
-      ...article,
       id: article.id.toString(),
-      published: luxon.fromJSDate(article.published).toUTC().toISO() ?? "",
-      updated: luxon.fromJSDate(article.updated).toUTC().toISO() ?? "",
+      publisherId: article.rssPublisherId.toString(),
+      title: article.title,
+      link: article.link,
+      author: article.author,
+      summary: article.summary,
+      publishedAt: luxon.fromJSDate(article.publishedAt).toUTC().toISO() ?? "",
       createdAt: luxon.fromJSDate(article.createdAt).toUTC().toISO() ?? "",
       updatedAt: luxon.fromJSDate(article.updatedAt).toUTC().toISO() ?? ""
     }

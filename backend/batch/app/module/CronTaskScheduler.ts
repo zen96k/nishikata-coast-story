@@ -9,6 +9,9 @@ export class CronTaskScheduler {
 
   public async deleteTaskSchedule() {
     await this.client.cronTaskSchedule.deleteMany()
+    await this.client.$queryRaw`
+      ALTER TABLE cron_task_schedule AUTO_INCREMENT = 1;
+      `
   }
 
   public async manageTaskSchedule(task: cron.ScheduledTask) {
@@ -37,10 +40,8 @@ export class CronTaskScheduler {
     })
   }
 
-  public async runCreateOrUpdateQiitaArticlesByRss() {
-    await this.articleManager.createOrUpdateQiitaByRss(
-      "https://qiita.com/popular-items/feed.atom"
-    )
+  public async runCreateOrUpdateArticlesByRss() {
+    await this.articleManager.createOrUpdateByRss()
   }
 
   private async createTaskSchedule(context: cron.TaskContext) {

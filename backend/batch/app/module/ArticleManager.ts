@@ -1,71 +1,40 @@
 import { DateTime as luxon } from "luxon"
-import { Prisma, PrismaClient, Publisher } from "../../type/prisma/client.ts"
-import { QiitaRSSParser } from "../rss-parser/QiitaRSSParser.ts"
+import { Prisma, PrismaClient } from "../../type/prisma/client.ts"
+import { RssParser } from "./RssParser.ts"
 
 export class ArticleManager {
   private client = new PrismaClient()
-  private qiitaParser = new QiitaRSSParser()
+  private parser = new RssParser()
 
-  public async createOrUpdateQiitaByRss(
-    url: string,
-    transaction?: Prisma.TransactionClient
-  ) {
+  public async createOrUpdateByRss(transaction?: Prisma.TransactionClient) {
     const client = transaction || this.client
 
-    const existingArticles = []
-    const insertingArticles = []
-    const feed = await this.qiitaParser.parseUrl(url)
+    const publishers = await client.rssPublisher.findMany()
+    const articles = (
+      await Promise.all(
+        publishers.map(async (publisher) => {
+          const feed = await this.parser.parseUrl(publisher.url)
+          const articles = feed.items.map((item) => {
+            return {
+              rssPublisherId: publisher.id,
+              title: item.title,
+              link: item.link,
+              author: item.author,
+              publishedAt: luxon.fromISO(item.pubDate).toUTC().toJSDate()
+            }
+          })
 
-    for (const item of feed.items) {
-      const url = new URL(item.link)
-      const id = url.pathname.split("/").pop()
-
-      if (!id) {
-        throw new Error("記事IDを取得できません")
-      }
-
-      const existingArticle = await client.article.findUnique({
-        where: {
-          uq_article_publisher_publisher_article_id: {
-            publisher: "Qiita",
-            publisherArticleId: id
-          }
-        }
-      })
-
-      if (
-        existingArticle &&
-        luxon.fromJSDate(existingArticle.updated).toUTC() <
-          luxon.fromISO(item.updated).toUTC()
-      ) {
-        existingArticles.push({
-          id: existingArticle.id,
-          title: item.title,
-          updated: luxon.fromISO(item.updated).toUTC().toJSDate()
+          return articles
         })
-      } else {
-        insertingArticles.push({
-          publisher: "Qiita" as Publisher,
-          publisherArticleId: id,
-          title: item.title,
-          link: item.link,
-          author: item.author,
-          published: luxon.fromISO(item.published).toUTC().toJSDate(),
-          updated: luxon.fromISO(item.updated).toUTC().toJSDate()
-        })
-      }
-    }
+      )
+    ).flatMap((articles) => articles)
+    console.dir(articles, { depth: null })
 
-    for (const article of existingArticles) {
-      await client.article.update({
-        where: { id: article.id },
-        data: { title: article.title, updated: article.updated }
-      })
-    }
-    if (insertingArticles.length > 0) {
-      await client.article.createMany({
-        data: insertingArticles,
-        skipDuplicates: true
+    for (const article of articles) {
+      await client.article.upsert({
+        where: { link: article.link },
+        update: { title: article.title },
+        create: article
       })
     }
   }

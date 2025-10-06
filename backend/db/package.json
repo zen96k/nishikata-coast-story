@@ -2,30 +2,43 @@
   "name": "ncs-db",
   "type": "module",
   "scripts": {
-    "dev": "docker compose -f compose.dev.yml --env-file compose.dev.env up -d --force-recreate --remove-orphans",
-    "backup": "mkdir -p backup && docker container exec ncs-mariadb sh -c 'mariadb-dump --all-databases -u root -p\"${MARIADB_ROOT_PASSWORD}\"' > backup/$(date +%Y%m%d%H%M%S).sql",
-    "restore": "docker container exec ncs-mariadb sh -c 'mariadb -u root -p\"${MARIADB_ROOT_PASSWORD}\"' <",
-    "generate": "dotenv -e prisma.${NCS_ENV}.env -- prisma generate",
-    "db:pull": "dotenv -e prisma.${NCS_ENV}.env -- prisma db pull",
-    "db:push": "dotenv -e prisma.${NCS_ENV}.env -- prisma db push",
-    "migrate:dev": "dotenv -e prisma.dev.env -- prisma migrate dev",
-    "migrate:reset": "dotenv -e prisma.dev.env -- prisma migrate reset",
-    "studio": "prisma studio"
+    "mariadb:dev": "docker compose -f compose.dev.yml --env-file compose.dev.env up -d --force-recreate --remove-orphans",
+    "mariadb:backup": "mkdir -p backup && docker container exec mariadb sh -c 'mariadb-dump --all-databases -u root -p${MARIADB_ROOT_PASSWORD}' > backup/$(date +%Y%m%d%H%M%S).sql",
+    "mariadb:restore": "docker container exec mariadb sh -c 'mariadb -u root -p${MARIADB_ROOT_PASSWORD}' <",
+    "prisma:generate": "dotenv -e prisma.${NCS_ENV}.env -- prisma generate",
+    "prisma:db:pull": "dotenv -e prisma.${NCS_ENV}.env -- prisma db pull",
+    "prisma:db:push": "dotenv -e prisma.${NCS_ENV}.env -- prisma db push",
+    "prisma:db:seed": "dotenv -e prisma.${NCS_ENV}.env -- prisma db seed",
+    "prisma:migrate:dev": "dotenv -e prisma.dev.env -- prisma migrate dev",
+    "prisma:migrate:reset": "dotenv -e prisma.dev.env -- prisma migrate reset",
+    "prisma:studio": "prisma studio",
+    "ncu": "ncu",
+    "ncu:upgrade": "ncu --upgrade && npm install && npm prune",
+    "knip": "knip"
   },
   "prisma": {
-    "schema": "prisma"
+    "schema": "prisma",
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
-    "@prisma/client": "6.16.2",
-    "prisma": "6.16.2"
+    "@prisma/client": "6.16.3",
+    "prisma": "6.16.3"
   },
   "devDependencies": {
+    "@eslint/js": "9.37.0",
     "@tsconfig/node-lts": "22.0.2",
     "@tsconfig/node-ts": "23.6.1",
     "@tsconfig/recommended": "1.0.10",
-    "@types/node": "24.5.2",
+    "@types/node": "24.7.0",
     "dotenv-cli": "10.0.0",
+    "eslint": "9.37.0",
+    "eslint-config-prettier": "10.1.8",
+    "knip": "5.64.2",
+    "npm-check-updates": "19.0.0",
+    "prettier": "3.6.2",
+    "prettier-plugin-organize-imports": "4.3.0",
     "tsx": "4.20.6",
-    "typescript": "5.9.2"
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.45.0"
   }
 }

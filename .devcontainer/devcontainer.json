@@ -89,9 +89,6 @@
         "[prisma]": {
           "editor.defaultFormatter": "Prisma.prisma"
         },
-        "[sql]": {
-          "editor.defaultFormatter": "Prisma.prisma"
-        },
         "chat.instructionsFilesLocations": {
           ".github/instructions": true,
           "/tmp/postman-collections-post-response.instructions.md": true,

@@ -1,7 +1,7 @@
 model RssPublisher {
   id        BigInt    @id @default(autoincrement()) @db.UnsignedBigInt
-  publisher String    @db.VarChar(255)
-  endpoint  String    @unique(map: "uq_rss_publisher_endpoint") @db.VarChar(255)
+  name      String    @db.VarChar(255)
+  url       String    @unique(map: "uq_rss_publisher_url") @db.VarChar(255)
   articles  Article[]
   createdAt DateTime  @default(now()) @map("created_at") @db.DateTime()
   updatedAt DateTime  @updatedAt @map("updated_at") @db.DateTime()

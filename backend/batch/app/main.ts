@@ -16,11 +16,11 @@ const main = async () => {
           const task = context.task
 
           console.info(`${task?.name}を開始します`)
-          await cronTaskScheduler.runCreateOrUpdateQiitaArticlesByRss()
+          await cronTaskScheduler.runCreateOrUpdateArticlesByRss()
           console.info(`${task?.name}を終了します`)
         },
         {
-          name: "CreateOrUpdateQiitaArticlesByRss",
+          name: "CreateOrUpdateArticlesByRss",
           timezone: "Asia/Tokyo",
           noOverlap: true
         }

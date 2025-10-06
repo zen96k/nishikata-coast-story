@@ -2,9 +2,9 @@ name: Local LLM
 version: 1.0.0
 schema: v1
 models:
-  - name: qwen3-coder
+  - name: gemma3
     provider: ollama
-    model: qwen3-coder
+    model: gemma3
     roles:
       - chat
       # - autocomplete
