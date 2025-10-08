@@ -2,8 +2,12 @@
   <div>
     <AppHeader />
     <UMain>
-      <slot />
+      <UContainer>
+        <div class="my-4">
+          <slot />
+        </div>
+      </UContainer>
     </UMain>
-    <AppFooter />
+    <!-- <AppFooter /> -->
   </div>
 </template>

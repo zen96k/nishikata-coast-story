@@ -2,6 +2,8 @@
   "name": "ncs-web",
   "type": "module",
   "scripts": {
+    "postinstall": "npm run nuxt:postinstall",
+    "ncs:dev": "npm install && npm run prisma:generate && npm run nuxt:dev",
     "nuxt:build": "nuxt build",
     "nuxt:dev": "nuxt dev --dotenv nuxt.dev.env --dotenv prisma.dev.env --clear --no-fork --clipboard",
     "nuxt:generate": "nuxt generate",
@@ -9,7 +11,7 @@
     "nuxt:postinstall": "nuxt prepare",
     "prisma:generate": "dotenv -e prisma.${NCS_ENV}.env -- prisma generate",
     "ncu": "ncu",
-    "ncu:upgrade": "ncu --upgrade && npm install && npm prune",
+    "ncu:upgrade": "ncu --upgrade && npm install",
     "knip": "knip"
   },
   "prisma": {
@@ -24,6 +26,7 @@
     "@compodium/nuxt": "0.1.0-beta.12",
     "@hono/zod-validator": "0.7.3",
     "@nuxt/eslint": "1.9.0",
+    "@nuxt/image": "1.11.0",
     "@nuxt/kit": "4.1.2",
     "@nuxt/ui": "4.0.1",
     "@prisma/client": "6.16.3",

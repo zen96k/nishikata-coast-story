@@ -1,6 +1,5 @@
 import { Hono } from "hono"
 import { article } from "~~/server/hono/router/article"
-import type { ErrorResponse } from "~~/server/hono/schema/ErrorResponse"
 
 const app = new Hono()
   .basePath("/api")
@@ -8,7 +7,7 @@ const app = new Hono()
   .onError((error, context) => {
     console.error(error)
 
-    const errorResponse: ErrorResponse = {
+    const errorResponse = {
       type: context.req.url,
       title: "Internal Server Error",
       detail: error.message,

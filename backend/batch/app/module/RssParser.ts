@@ -5,6 +5,7 @@ type CustomItem = {
   title: string
   link: string
   author: string
+  creator: string
   pubDate: string
 }
 

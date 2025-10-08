@@ -13,7 +13,7 @@
     "prisma:migrate:reset": "dotenv -e prisma.dev.env -- prisma migrate reset",
     "prisma:studio": "prisma studio",
     "ncu": "ncu",
-    "ncu:upgrade": "ncu --upgrade && npm install && npm prune",
+    "ncu:upgrade": "ncu --upgrade && npm install",
     "knip": "knip"
   },
   "prisma": {

@@ -15,12 +15,16 @@ export class ArticleManager {
         publishers.map(async (publisher) => {
           const feed = await this.parser.parseUrl(publisher.url)
           const articles = feed.items.map((item) => {
+            const isIso8601 = luxon.fromISO(item.pubDate).isValid
+
             return {
               rssPublisherId: publisher.id,
               title: item.title,
               link: item.link,
-              author: item.author,
-              publishedAt: luxon.fromISO(item.pubDate).toUTC().toJSDate()
+              author: item.author || item.creator,
+              publishedAt: isIso8601
+                ? luxon.fromISO(item.pubDate).toUTC().toJSDate()
+                : luxon.fromRFC2822(item.pubDate).toUTC().toJSDate()
             }
           })
 
@@ -28,7 +32,6 @@ export class ArticleManager {
         })
       )
     ).flatMap((articles) => articles)
-    console.dir(articles, { depth: null })
 
     for (const article of articles) {
       await client.article.upsert({

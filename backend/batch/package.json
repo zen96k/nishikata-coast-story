@@ -2,10 +2,11 @@
   "name": "ncs-batch",
   "type": "module",
   "scripts": {
+    "ncs:dev": "npm install && npm run prisma:generate && npm run tsx:dev",
     "tsx:dev": "tsx watch --env-file prisma.dev.env app/main.ts",
     "prisma:generate": "dotenv -e prisma.${NCS_ENV}.env -- prisma generate",
     "ncu": "ncu",
-    "ncu:upgrade": "ncu --upgrade && npm install && npm prune",
+    "ncu:upgrade": "ncu --upgrade && npm install",
     "knip": "knip"
   },
   "prisma": {

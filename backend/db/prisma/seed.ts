@@ -4,7 +4,10 @@ const main = async () => {
   const client = new PrismaClient()
 
   await client.rssPublisher.createMany({
-    data: [{ name: "Qiita", url: "https://qiita.com/popular-items/feed.atom" }],
+    data: [
+      { name: "Qiita", url: "https://qiita.com/popular-items/feed.atom" },
+      { name: "Zenn", url: "https://zenn.dev/feed" }
+    ],
     skipDuplicates: true
   })
 }
