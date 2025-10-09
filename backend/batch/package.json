@@ -4,6 +4,7 @@
   "scripts": {
     "ncs:dev": "npm install && npm run prisma:generate && npm run tsx:dev",
     "tsx:dev": "tsx watch --env-file prisma.dev.env app/main.ts",
+    "vitest": "vitest run",
     "prisma:generate": "dotenv -e prisma.${NCS_ENV}.env -- prisma generate",
     "ncu": "ncu",
     "ncu:upgrade": "ncu --upgrade && npm install",
@@ -35,6 +36,7 @@
     "rss-parser": "3.13.0",
     "tsx": "4.20.6",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.45.0"
+    "typescript-eslint": "8.45.0",
+    "vitest": "3.2.4"
   }
 }

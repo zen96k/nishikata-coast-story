@@ -12,12 +12,15 @@
   "customizations": {
     "vscode": {
       "extensions": [
+        "github.github-vscode-theme",
+        "vscode-icons-team.vscode-icons",
         "Codeium.codeium",
         "Continue.continue",
         "ms-azuretools.vscode-docker",
         "eamodio.gitlens",
         "MS-CEINTL.vscode-language-pack-ja",
         "Postman.postman-for-vscode",
+        "vitest.explorer",
         "adpyke.codesnap",
         "bierner.markdown-preview-github-styles",
         "mutantdino.resourcemonitor",
@@ -29,6 +32,9 @@
         "Prisma.prisma"
       ],
       "settings": {
+        "workbench.colorTheme": "GitHub Dark",
+        "workbench.iconTheme": "vscode-icons",
+        "workbench.secondarySideBar.showLabels": false,
         "continue.telemetryEnabled": false,
         "diffEditor.ignoreTrimWhitespace": false,
         "editor.autoClosingBrackets": "always",

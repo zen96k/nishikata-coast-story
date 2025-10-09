@@ -33,7 +33,7 @@
 
   const runtimeConfig = useRuntimeConfig()
 
-  const { data: articles, error } = await useFetch<
+  const { data: articles, error: error } = await useFetch<
     ArticleResponse[],
     ErrorResponse
   >(`${runtimeConfig.public.ncsApiBaseUrl}/api/article`)

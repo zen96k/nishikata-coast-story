@@ -13,8 +13,8 @@ export class ArticleManager {
     const articles = (
       await Promise.all(
         publishers.map(async (publisher) => {
-          const feed = await this.parser.parseUrl(publisher.url)
-          const articles = feed.items.map((item) => {
+          const { items: items } = await this.parser.parseUrl(publisher.url)
+          const articles = items.map((item) => {
             const isIso8601 = luxon.fromISO(item.pubDate).isValid
 
             return {
