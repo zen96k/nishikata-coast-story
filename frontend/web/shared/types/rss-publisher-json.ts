@@ -1,6 +1,6 @@
 import zod from "zod"
 
-export const RssPublisherResponseSchema = zod.object({
+export const RssPublisherJsonSchema = zod.object({
   id: zod.string(),
   name: zod.string(),
   url: zod.string(),
@@ -8,4 +8,4 @@ export const RssPublisherResponseSchema = zod.object({
   updatedAt: zod.string()
 })
 
-export type RssPublisherResponse = zod.infer<typeof RssPublisherResponseSchema>
+export type RssPublisherJson = zod.infer<typeof RssPublisherJsonSchema>

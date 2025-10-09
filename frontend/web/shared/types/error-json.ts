@@ -1,6 +1,6 @@
 import zod from "zod"
 
-export const ErrorResponseSchema = zod.object({
+export const ErrorJsonSchema = zod.object({
   type: zod.string(),
   title: zod.string(),
   detail: zod.string(),
@@ -8,4 +8,4 @@ export const ErrorResponseSchema = zod.object({
   status: zod.number().nullable()
 })
 
-export type ErrorResponse = zod.infer<typeof ErrorResponseSchema>
+export type ErrorJson = zod.infer<typeof ErrorJsonSchema>

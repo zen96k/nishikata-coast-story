@@ -1,10 +1,8 @@
 import zod from "zod"
-import { RssPublisherResponseSchema } from "./RssPublisherResponse"
 
-export const ArticleResponseSchema = zod.object({
+export const ArticleObjectSchema = zod.object({
   id: zod.string(),
   publisherId: zod.string(),
-  rssPublisher: RssPublisherResponseSchema,
   title: zod.string(),
   link: zod.string(),
   author: zod.string(),
@@ -14,4 +12,4 @@ export const ArticleResponseSchema = zod.object({
   updatedAt: zod.string()
 })
 
-export type ArticleResponse = zod.infer<typeof ArticleResponseSchema>
+export type ArticleObject = zod.infer<typeof ArticleObjectSchema>
