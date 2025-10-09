@@ -4,6 +4,7 @@ set -euxo pipefail
 
 export DEBIAN_FRONTEND=noninteractive
 FRONTEND_DIRNAME=$(pwd)/frontend
+COMMON_DIRNAME=$(pwd)/common
 BACKEND_DIRNAME=$(pwd)/backend
 
 apt update && apt install -y curl wget \
@@ -22,6 +23,10 @@ docker compose up -d --pull always --force-recreate --remove-orphans
 cd ${FRONTEND_DIRNAME}/web
 rm -rf .output .data .nuxt .nitro .cache dist
 npm install && npm prune
+
+cd ${COMMON_DIRNAME}
+npm install && npm prune
+
 cd ${BACKEND_DIRNAME}/batch
 npm install && npm prune
 cd ${BACKEND_DIRNAME}/db

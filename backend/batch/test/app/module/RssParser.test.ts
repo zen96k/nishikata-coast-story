@@ -1,5 +1,7 @@
 import { DateTime as luxon } from "luxon"
 import { assert, describe, expect, expectTypeOf, test } from "vitest"
+import { QiitaBaseUrl } from "../../../../../common/constant-variable/qiita.ts"
+import { ZennBaseUrl } from "../../../../../common/constant-variable/zenn.ts"
 import { RssParser } from "../../../app/module/RssParser.ts"
 
 const parser = new RssParser()
@@ -15,7 +17,7 @@ describe("RssParser parseUrl", () => {
 
       expectTypeOf(item.link).toBeString()
       expect(item.link).not.toBe("")
-      expect(item.link).toContain("https://qiita.com")
+      expect(item.link).toContain(QiitaBaseUrl)
 
       expectTypeOf(item.author).toBeString()
       expect(item.author).not.toBe("")
@@ -36,7 +38,7 @@ describe("RssParser parseUrl", () => {
 
       expectTypeOf(item.link).toBeString()
       expect(item.link).not.toBe("")
-      expect(item.link).toContain("https://zenn.dev")
+      expect(item.link).toContain(ZennBaseUrl)
 
       expectTypeOf(item.author).toBeString()
       expect(item.author).toBeUndefined()
