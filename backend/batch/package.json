@@ -3,11 +3,11 @@
   "type": "module",
   "scripts": {
     "ncs:dev": "npm run prisma:generate && npm run tsx:dev",
-    "ncs:test": "docker compose -f compose.test.yml --env-file compose.test.env up -d --pull always && docker container exec -it node-test bash -c 'npm install && NCS_ENV=test npm run prisma:db:push && npm run vitest' && docker compose -f compose.test.yml --env-file compose.test.env down",
-    "prisma:db:push": "dotenv -e prisma.${NCS_ENV}.env -- prisma db push",
+    "ncs:test": "dotenvx run -f compose.test.env -- docker compose -f compose.test.yml up -d --pull always && docker container exec -it node-test bash -c 'npm install && NCS_ENV=test npm run prisma:db:push && npm run vitest' && dotenvx run -f compose.test.env -- docker compose -f compose.test.yml down",
+    "prisma:db:push": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma db push",
     "prisma:generate": "prisma generate",
     "tsx:dev": "tsx watch --env-file prisma.dev.env app/main.ts",
-    "vitest": "dotenv -e prisma.test.env -- vitest run --coverage",
+    "vitest": "dotenvx run -f prisma.test.env -- vitest run --coverage",
     "ncu": "ncu",
     "ncu:upgrade": "ncu --upgrade && npm install",
     "knip": "knip"
@@ -19,6 +19,7 @@
     "node-cron": "4.2.1"
   },
   "devDependencies": {
+    "@dotenvx/dotenvx": "1.51.0",
     "@eslint/js": "9.37.0",
     "@prisma/client": "6.17.1",
     "@tsconfig/node-lts": "22.0.2",
@@ -27,7 +28,6 @@
     "@types/luxon": "3.7.1",
     "@types/node": "24.7.1",
     "@vitest/coverage-v8": "3.2.4",
-    "dotenv-cli": "10.0.0",
     "eslint": "9.37.0",
     "eslint-config-prettier": "10.1.8",
     "knip": "5.64.3",

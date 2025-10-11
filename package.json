@@ -1,0 +1,24 @@
+{
+  "name": "ncs",
+  "type": "module",
+  "scripts": {
+    "ncu": "ncu",
+    "ncu:upgrade": "ncu --upgrade && npm install",
+    "knip": "knip"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.37.0",
+    "@tsconfig/node-lts": "22.0.2",
+    "@tsconfig/node-ts": "23.6.1",
+    "@tsconfig/recommended": "1.0.10",
+    "@types/node": "24.7.1",
+    "eslint": "9.37.0",
+    "eslint-config-prettier": "10.1.8",
+    "knip": "5.64.3",
+    "npm-check-updates": "19.0.0",
+    "prettier": "3.6.2",
+    "prettier-plugin-organize-imports": "4.3.0",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.46.0"
+  }
+}

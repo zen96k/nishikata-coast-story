@@ -6,8 +6,8 @@
 .cache
 dist
 
-*.env
-!*.default.env
+*.env.keys
 
+coverage
 node_modules
 type

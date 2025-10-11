@@ -1,5 +1,4 @@
-*.env
-!*.default.env
+*.env.keys
 
 backup
 node_modules
