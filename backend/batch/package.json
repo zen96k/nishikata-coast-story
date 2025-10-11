@@ -3,7 +3,8 @@
   "type": "module",
   "scripts": {
     "ncs:dev": "npm run prisma:generate && npm run tsx:dev",
-    "ncs:test": "docker compose -f compose.test.yml --env-file compose.test.env up -d --pull always && docker container exec -it node-test bash -c 'npm install && npm run prisma:generate && npm run vitest' && docker compose -f compose.test.yml --env-file compose.test.env down",
+    "ncs:test": "docker compose -f compose.test.yml --env-file compose.test.env up -d --pull always && docker container exec -it node-test bash -c 'npm install && NCS_ENV=test npm run prisma:db:push && npm run vitest' && docker compose -f compose.test.yml --env-file compose.test.env down",
+    "prisma:db:push": "dotenv -e prisma.${NCS_ENV}.env -- prisma db push",
     "prisma:generate": "prisma generate",
     "tsx:dev": "tsx watch --env-file prisma.dev.env app/main.ts",
     "vitest": "dotenv -e prisma.test.env -- vitest run --coverage",
