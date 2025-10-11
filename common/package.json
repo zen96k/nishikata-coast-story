@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "ncu": "ncu",
-    "ncu:upgrade": "ncu --upgrade && npm install",
+    "ncu:upgrade": "ncu -u && npm install",
     "knip": "knip"
   },
   "dependencies": {
@@ -11,7 +11,7 @@
     "@tsconfig/node-lts": "22.0.2",
     "@tsconfig/node-ts": "23.6.1",
     "@tsconfig/recommended": "1.0.10",
-    "@types/node": "24.7.1",
+    "@types/node": "24.7.2",
     "eslint": "9.37.0",
     "eslint-config-prettier": "10.1.8",
     "knip": "5.64.3",

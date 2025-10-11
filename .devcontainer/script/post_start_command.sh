@@ -21,11 +21,9 @@ git config --global user.email ${GIT_USER_EMAIL}
 docker system prune -af --volumes
 docker compose up -d --pull always
 
-npm install && npm prune
-
 cd ${FRONTEND_DIRNAME}/web
 rm -rf .output .data .nuxt .nitro .cache dist
-npm run ncu:upgrade && npm prune
+npm install && npm prune
 
 cd ${COMMON_DIRNAME}
 npm install && npm prune

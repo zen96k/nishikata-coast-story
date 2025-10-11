@@ -11,7 +11,7 @@
     "nuxt:postinstall": "nuxt prepare",
     "prisma:generate": "prisma generate",
     "ncu": "ncu",
-    "ncu:upgrade": "ncu --upgrade && npm install",
+    "ncu:upgrade": "ncu -u && npm install",
     "knip": "knip"
   },
   "prisma": {

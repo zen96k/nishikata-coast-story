@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "mariadb:up": "dotenvx run -f compose.${NCS_ENV}.env -- docker compose -f compose.${NCS_ENV}.yml up -d --pull always",
-    "mariadb:backup": "mkdir -p backup && docker container exec mariadb-${NCS_ENV} sh -c 'mariadb-dump --all-databases -u root -p${MARIADB_ROOT_PASSWORD}' > backup/${NCS_ENV}-$(date +%Y%m%d%H%M%S).sql",
+    "mariadb:backup": "mkdir -p backup && docker container exec mariadb-${NCS_ENV} sh -c 'mariadb-dump -A -u root -p${MARIADB_ROOT_PASSWORD}' > backup/${NCS_ENV}-$(date +%Y%m%d%H%M%S).sql",
     "mariadb:restore": "docker container exec mariadb-${NCS_ENV} sh -c 'mariadb -u root -p${MARIADB_ROOT_PASSWORD}' <",
     "prisma:generate": "prisma generate",
     "prisma:db:pull": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma db pull",
@@ -14,7 +14,7 @@
     "prisma:migrate:deploy": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma migrate deploy",
     "prisma:studio": "prisma studio",
     "ncu": "ncu",
-    "ncu:upgrade": "ncu --upgrade && npm install",
+    "ncu:upgrade": "ncu -u && npm install",
     "knip": "knip"
   },
   "prisma": {
@@ -31,7 +31,7 @@
     "@tsconfig/node-lts": "22.0.2",
     "@tsconfig/node-ts": "23.6.1",
     "@tsconfig/recommended": "1.0.10",
-    "@types/node": "24.7.1",
+    "@types/node": "24.7.2",
     "eslint": "9.37.0",
     "eslint-config-prettier": "10.1.8",
     "knip": "5.64.3",
