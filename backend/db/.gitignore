@@ -1,6 +1,5 @@
 *.env
-!compose.default.env
-!prisma.default.env
+!*.default.env
 
 backup
 node_modules

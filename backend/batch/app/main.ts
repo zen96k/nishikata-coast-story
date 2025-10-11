@@ -1,17 +1,20 @@
 import cron from "node-cron"
+import { PrismaClient } from "../type/prisma/client.ts"
 import { CronTaskScheduler } from "./module/CronTaskScheduler.ts"
 
 const main = async () => {
   console.info("バッチ処理(cron)を開始します")
 
-  const cronTaskScheduler = new CronTaskScheduler()
+  const client = new PrismaClient()
+
+  const cronTaskScheduler = new CronTaskScheduler(client)
 
   try {
     await cronTaskScheduler.deleteTaskSchedule()
 
     await cronTaskScheduler.manageTaskSchedule(
       cron.schedule(
-        "*/15 * * * *",
+        "* * * * *",
         async (context) => {
           const task = context.task
 

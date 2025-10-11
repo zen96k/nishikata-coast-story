@@ -3,13 +3,13 @@
   "type": "module",
   "scripts": {
     "postinstall": "npm run nuxt:postinstall",
-    "ncs:dev": "npm install && npm run prisma:generate && npm run nuxt:dev",
+    "ncs:dev": "npm run prisma:generate && npm run nuxt:dev",
     "nuxt:build": "nuxt build",
     "nuxt:dev": "nuxt dev --dotenv nuxt.dev.env --dotenv prisma.dev.env --clear --no-fork --clipboard",
     "nuxt:generate": "nuxt generate",
     "nuxt:preview": "nuxt preview",
     "nuxt:postinstall": "nuxt prepare",
-    "prisma:generate": "dotenv -e prisma.${NCS_ENV}.env -- prisma generate",
+    "prisma:generate": "prisma generate",
     "ncu": "ncu",
     "ncu:upgrade": "ncu --upgrade && npm install",
     "knip": "knip"

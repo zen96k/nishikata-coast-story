@@ -1,0 +1,39 @@
+services:
+  mariadb-test:
+    image: mariadb:12.0.2
+    container_name: mariadb-test
+    networks:
+      - nishikata-coast-story
+    volumes:
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro
+    environment:
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
+    healthcheck:
+      test: mariadb -u root -p${MARIADB_ROOT_PASSWORD} -D ${MARIADB_DATABASE} -e "SELECT 1;"
+
+  node-test:
+    image: node:lts
+    container_name: node-test
+    init: true
+    depends_on:
+      mariadb-test:
+        condition: service_healthy
+    networks:
+      - nishikata-coast-story
+    volumes:
+      - .:/workspace/nishikata-coast-story
+      - ./constant-variable:/workspace/nishikata-coast-story/constant-variable:ro
+      - ./prisma/model:/workspace/nishikata-coast-story/prisma/model:ro
+      - /usr/share/zoneinfo/Asia/Tokyo:/etc/localtime:ro
+    environment:
+      - TZ=Asia/Tokyo
+    working_dir: /workspace/nishikata-coast-story
+    command: tail -F /dev/null
+
+networks:
+  nishikata-coast-story:
+    name: nishikata-coast-story
+    external: true

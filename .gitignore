@@ -1,4 +1,4 @@
 *.env
-!.devcontainer/devcontainer.default.env
+!*.default.env
 
 volume

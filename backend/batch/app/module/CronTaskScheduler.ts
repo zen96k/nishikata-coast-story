@@ -4,14 +4,21 @@ import { PrismaClient, TaskStatus } from "../../type/prisma/client.ts"
 import { ArticleManager } from "./ArticleManager.ts"
 
 export class CronTaskScheduler {
-  private client = new PrismaClient()
-  private articleManager = new ArticleManager()
+  private client: PrismaClient
+  private articleManager: ArticleManager
+
+  public constructor(client: PrismaClient) {
+    this.client = client
+    this.articleManager = new ArticleManager(client)
+  }
 
   public async deleteTaskSchedule() {
-    await this.client.cronTaskSchedule.deleteMany()
-    await this.client.$queryRaw`
-      ALTER TABLE cron_task_schedule AUTO_INCREMENT = 1;
+    await this.client.$transaction(async (transaction) => {
+      await transaction.cronTaskSchedule.deleteMany()
+      await transaction.$queryRaw`
+        ALTER TABLE cron_task_schedule AUTO_INCREMENT = 1;
       `
+    })
   }
 
   public async manageTaskSchedule(task: cron.ScheduledTask) {

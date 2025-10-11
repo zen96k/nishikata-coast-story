@@ -11,5 +11,4 @@ cp -rfv .zshrc ${HOME}
 npm completion >> ${HOME}/.zshrc
 
 npm install -g @aikidosec/safe-chain
-
 safe-chain setup

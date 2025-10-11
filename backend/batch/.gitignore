@@ -1,7 +1,6 @@
 *.env
-!compose.default.env
-!prisma.default.env
+!*.default.env
 
+coverage
 node_modules
 type
-volume
