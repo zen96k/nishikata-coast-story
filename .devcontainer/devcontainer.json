@@ -10,8 +10,8 @@
   "runArgs": ["--env-file", ".devcontainer/devcontainer.env", "--rm"],
   "mounts": [
     {
-      "source": "${localWorkspaceFolder}/volume/devcontainer/root/.vscode-server",
-      "target": "/root/.vscode-server",
+      "source": "${localWorkspaceFolder}/volume/devcontainer/root/.vscode-server/extensions",
+      "target": "/root/.vscode-server/extensions",
       "type": "bind"
     }
   ],
