@@ -4,14 +4,14 @@ set -euxo pipefail
 
 export DEBIAN_FRONTEND=noninteractive
 FRONTEND_DIRNAME=$(pwd)/frontend
-COMMON_DIRNAME=$(pwd)/common
 BACKEND_DIRNAME=$(pwd)/backend
 
 apt update && apt install -y curl wget \
                              git \
                              zip unzip \
                              rsync \
-                             tzdata
+                             tzdata \
+                             fastfetch
 
 rm -rf ${HOME}/.gitconfig
 git config --global init.defaultBranch ${GIT_DEFAULT_BRANCH}
@@ -23,9 +23,6 @@ docker compose up -d --pull always
 
 cd ${FRONTEND_DIRNAME}/web
 rm -rf .output .data .nuxt .nitro .cache dist
-npm install && npm prune
-
-cd ${COMMON_DIRNAME}
 npm install && npm prune
 
 cd ${BACKEND_DIRNAME}/batch

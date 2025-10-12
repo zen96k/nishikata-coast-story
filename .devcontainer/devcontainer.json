@@ -1,18 +1,26 @@
 {
   "name": "nishikata-coast-story",
-  "image": "ubuntu",
+  "image": "debian",
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": { "moby": false },
     "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/devcontainers/features/node:1": {}
   },
+  "init": true,
   "runArgs": ["--env-file", ".devcontainer/devcontainer.env", "--rm"],
+  "mounts": [
+    {
+      "source": "${localWorkspaceFolder}/volume/devcontainer/root/.vscode-server",
+      "target": "/root/.vscode-server",
+      "type": "bind"
+    }
+  ],
   "forwardPorts": [3000, 5306, 5555],
   "containerEnv": { "TZ": "Asia/Tokyo" },
   "customizations": {
     "vscode": {
       "extensions": [
-        "github.github-vscode-theme",
+        "ms-vscode.cpptools-themes",
         "vscode-icons-team.vscode-icons",
         "Codeium.codeium",
         "Continue.continue",
@@ -32,7 +40,7 @@
         "Prisma.prisma"
       ],
       "settings": {
-        "workbench.colorTheme": "GitHub Dark",
+        "workbench.colorTheme": "Visual Studio Dark - C++",
         "workbench.iconTheme": "vscode-icons",
         "workbench.secondarySideBar.showLabels": false,
         "continue.telemetryEnabled": false,
@@ -86,6 +94,7 @@
         "[typescript]": {
           "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
+        "vue.autoInsert.dotValue": true,
         "[vue]": {
           "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
@@ -107,6 +116,7 @@
       }
     }
   },
+  "initializeCommand": "bash .devcontainer/script/initialize_command.sh",
   "onCreateCommand": "bash .devcontainer/script/on_create_command.sh",
   "postStartCommand": "bash .devcontainer/script/post_start_command.sh",
   "postAttachCommand": "bash .devcontainer/script/post_attach_command.sh",
