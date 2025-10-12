@@ -4,16 +4,16 @@ import { PrismaClient, TaskStatus } from "../../type/prisma/client.ts"
 import { ArticleManager } from "./ArticleManager.ts"
 
 export class CronTaskScheduler {
-  private client: PrismaClient
   private articleManager: ArticleManager
+  private dbClient: PrismaClient
 
-  public constructor(client: PrismaClient) {
-    this.client = client
-    this.articleManager = new ArticleManager(client)
+  public constructor(articleManager: ArticleManager, dbClient: PrismaClient) {
+    this.articleManager = articleManager
+    this.dbClient = dbClient
   }
 
   public async deleteTaskSchedule() {
-    await this.client.$transaction(async (transaction) => {
+    await this.dbClient.$transaction(async (transaction) => {
       await transaction.cronTaskSchedule.deleteMany()
       await transaction.$queryRaw`
         ALTER TABLE cron_task_schedule AUTO_INCREMENT = 1;
@@ -55,7 +55,7 @@ export class CronTaskScheduler {
     const task = context.task
     const execution = context.execution
 
-    await this.client.cronTaskSchedule.create({
+    await this.dbClient.cronTaskSchedule.create({
       data: {
         executionId: execution?.id,
         taskName: task?.name,
@@ -78,7 +78,7 @@ export class CronTaskScheduler {
     const task = context.task
     const execution = context.execution
 
-    await this.client.cronTaskSchedule.update({
+    await this.dbClient.cronTaskSchedule.update({
       data: {
         executionId: execution?.id,
         taskName: task?.name,

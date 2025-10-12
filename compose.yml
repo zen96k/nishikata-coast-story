@@ -2,6 +2,7 @@ services:
   ollama:
     image: ollama/ollama
     container_name: ollama
+    init: true
     networks:
       - nishikata-coast-story
     ports:
@@ -11,6 +12,8 @@ services:
       - /usr/share/zoneinfo/Asia/Tokyo:/etc/localtime:ro
     environment:
       - TZ=Asia/Tokyo
+    stdin_open: true
+    tty: true
 
 networks:
   nishikata-coast-story:

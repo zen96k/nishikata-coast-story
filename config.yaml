@@ -1,31 +1,10 @@
-name: Local LLM
+name: Local Agent
 version: 1.0.0
 schema: v1
 models:
-  - name: qwen3-coder
+  - name: qwen3
     provider: ollama
-    model: qwen3-coder
-    roles:
-      - chat
-      # - autocomplete
-      - embed
-      - rerank
-      - edit
-      - apply
-      - summarize
-context:
-  - provider: file
-  - provider: code
-  - provider: diff
-  - provider: currentFile
-  - provider: terminal
-  - provider: open
-  - provider: clipboard
-  - provider: tree
-  - provider: problems
-  - provider: debugger
-  - provider: repo-map
-  - provider: os
+    model: qwen3
 rules:
   - name: Language Rule
     rule: Always speak Japanese

@@ -1,6 +1,6 @@
 // src/tests/helpers/prisma.ts
 import { PrismaClient } from "../../type/prisma/client.ts"
 
-const client = new PrismaClient()
+const dbClient = new PrismaClient()
 
-export default client
+export default dbClient

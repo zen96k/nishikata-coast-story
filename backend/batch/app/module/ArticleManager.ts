@@ -3,37 +3,61 @@ import { PrismaClient } from "../../type/prisma/client.ts"
 import { RssParser } from "./RssParser.ts"
 
 export class ArticleManager {
-  private client: PrismaClient
-  private parser: RssParser
+  private rssParser: RssParser
+  private dbClient: PrismaClient
 
-  public constructor(client: PrismaClient) {
-    this.client = client
-    this.parser = new RssParser()
+  public constructor(rssParser: RssParser, dbClient: PrismaClient) {
+    this.rssParser = rssParser
+    this.dbClient = dbClient
   }
 
   public async createOrUpdateByRss() {
-    await this.client.$transaction(async (transaction) => {
-      const publishers = await transaction.rssPublisher.findMany()
+    await this.dbClient.$transaction(async (transaction) => {
+      const rssPublishers = await transaction.rssPublisher.findMany()
 
       const articles = (
         await Promise.all(
-          publishers.map(async (publisher) => {
-            const { items: items } = await this.parser.parseUrl(publisher.url)
-            const articles = await Promise.all(
-              items.map((item) => {
-                const isIso8601 = luxon.fromISO(item.pubDate).isValid
-
-                return {
-                  rssPublisherId: publisher.id,
-                  title: item.title,
-                  link: item.link,
-                  author: item.author || item.creator,
-                  publishedAt: isIso8601
-                    ? luxon.fromISO(item.pubDate).toUTC().toJSDate()
-                    : luxon.fromRFC2822(item.pubDate).toUTC().toJSDate()
-                }
-              })
+          rssPublishers.map(async (rssPublisher) => {
+            const { items: items } = await this.rssParser.parseUrl(
+              rssPublisher.url
             )
+            const articles = (
+              await Promise.all(
+                items.map((item) => {
+                  const {
+                    title: title,
+                    link: link,
+                    author: author,
+                    creator: creator,
+                    pubDate: pubDate
+                  } = item
+
+                  const qiitaPattern =
+                    !!title && !!link && !!author && !!pubDate
+                  if (qiitaPattern) {
+                    return {
+                      rssPublisherId: rssPublisher.id,
+                      title: title,
+                      link: link,
+                      author: author,
+                      publishedAt: luxon.fromISO(pubDate).toUTC().toJSDate()
+                    }
+                  }
+
+                  const zennPattern =
+                    !!title && !!link && !!creator && !!pubDate
+                  if (zennPattern) {
+                    return {
+                      rssPublisherId: rssPublisher.id,
+                      title: title,
+                      link: link,
+                      author: creator,
+                      publishedAt: luxon.fromRFC2822(pubDate).toUTC().toJSDate()
+                    }
+                  }
+                })
+              )
+            ).filter((article) => article !== undefined)
 
             return articles
           })
