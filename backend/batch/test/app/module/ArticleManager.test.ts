@@ -1,3 +1,4 @@
+import { DateTime as luxon } from "luxon"
 import { afterEach, beforeEach, describe, expect, test, vitest } from "vitest"
 import { ArticleManager } from "../../../app/module/ArticleManager.ts"
 import { RssParser } from "../../../app/module/RssParser.ts"
@@ -54,11 +55,27 @@ describe("ArticleManager", () => {
 
       await articleManager.createOrUpdateByRss()
 
-      const articles = await dbClient.article.findMany({
+      const qiitaArticle = await dbClient.article.findUniqueOrThrow({
+        where: { link: qiitaItem.link },
         include: { rssPublisher: true }
       })
+      expect(qiitaArticle.title).toBe(qiitaItem.title)
+      expect(qiitaArticle.link).toBe(qiitaItem.link)
+      expect(qiitaArticle.author).toBe(qiitaItem.author)
+      expect(qiitaArticle.publishedAt).toStrictEqual(
+        luxon.fromISO(qiitaItem.pubDate).toUTC().toJSDate()
+      )
 
-      expect(articles).toStrictEqual([])
+      const zennArticle = await dbClient.article.findUniqueOrThrow({
+        where: { link: zennItem.link },
+        include: { rssPublisher: true }
+      })
+      expect(zennArticle.title).toBe(zennItem.title)
+      expect(zennArticle.link).toBe(zennItem.link)
+      expect(zennArticle.author).toBe(zennItem.creator)
+      expect(zennArticle.publishedAt).toStrictEqual(
+        luxon.fromRFC2822(zennItem.pubDate).toUTC().toJSDate()
+      )
     })
   })
 })
