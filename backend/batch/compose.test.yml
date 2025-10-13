@@ -17,7 +17,7 @@ services:
     stdin_open: true
     tty: true
 
-  node-test:
+  node:
     image: node:lts
     container_name: node-test
     init: true
@@ -32,6 +32,7 @@ services:
       - ./prisma/model:/workspace/nishikata-coast-story/prisma/model:ro
       - /usr/share/zoneinfo/Asia/Tokyo:/etc/localtime:ro
     environment:
+      - NCS_ENV=test
       - TZ=Asia/Tokyo
     working_dir: /workspace/nishikata-coast-story
     stdin_open: true
@@ -41,4 +42,3 @@ services:
 networks:
   nishikata-coast-story:
     name: nishikata-coast-story
-    # external: true

@@ -2,14 +2,13 @@ pipeline {
     agent any
 
     tools {
-        nodejs "NodeJS-22"
+        nodejs "node:22"
     }
 
     stages {
         stage('test') {
             steps {
-                // sh "cd backend/batch && npm clean-install && npm run ncs:test"
-                sh "whoami"
+                sh "cd backend/batch && npm clean-install && npm run ncs:test"
             }
         }
     }
