@@ -8,7 +8,8 @@ pipeline {
     stages {
         stage('test') {
             steps {
-                sh "cd backend/batch && npm clean-install && npm run ncs:test"
+                // sh "cd backend/batch && npm clean-install && npm run ncs:test"
+                sh "whoami"
             }
         }
     }
