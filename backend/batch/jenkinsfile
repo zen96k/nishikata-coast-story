@@ -2,20 +2,11 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('test') {
             steps {
-                echo 'Building..'
+                sh "npm run ncs:test"
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+
     }
 }
