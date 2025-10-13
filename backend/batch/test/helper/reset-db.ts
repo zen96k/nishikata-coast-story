@@ -1,4 +1,4 @@
-import dbClient from "./client.ts"
+import dbClient from "./db-client.ts"
 
 const resetDb = async () => {
   await dbClient.$transaction(async (transaction) => {

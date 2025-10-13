@@ -4,12 +4,10 @@ import { ArticleManager } from "../../../app/module/ArticleManager.ts"
 import { RssParser } from "../../../app/module/RssParser.ts"
 import { QiitaBaseUrl } from "../../../constant-variable/qiita.ts"
 import { ZennBaseUrl } from "../../../constant-variable/zenn.ts"
-import { PrismaClient } from "../../../type/prisma/client.ts"
+import dbClient from "../../helper/db-client.ts"
 import resetDb from "../../helper/reset-db.ts"
 
 const rssParser = new RssParser()
-const dbClient = new PrismaClient()
-
 const articleManager = new ArticleManager(rssParser, dbClient)
 
 describe("ArticleManager", () => {

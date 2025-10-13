@@ -1,15 +1,13 @@
 import cron from "node-cron"
-import { PrismaClient } from "../type/prisma/client.ts"
 import { ArticleManager } from "./module/ArticleManager.ts"
 import { CronTaskScheduler } from "./module/CronTaskScheduler.ts"
+import { dbClient } from "./module/DbClient.ts"
 import { RssParser } from "./module/RssParser.ts"
 
 const main = async () => {
   console.info("バッチ処理(cron)を開始します")
 
   const rssParser = new RssParser()
-  const dbClient = new PrismaClient()
-
   const articleManager = new ArticleManager(rssParser, dbClient)
   const cronTaskScheduler = new CronTaskScheduler(articleManager, dbClient)
 

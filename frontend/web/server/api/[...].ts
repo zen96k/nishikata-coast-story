@@ -20,5 +20,6 @@ const app = new Hono()
 
 export default defineEventHandler(async (event) => {
   const request = toWebRequest(event)
+
   return app.fetch(request)
 })

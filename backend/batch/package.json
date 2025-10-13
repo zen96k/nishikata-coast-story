@@ -6,7 +6,7 @@
     "ncs:test": "dotenvx run -f compose.test.env -- docker compose -f compose.test.yml up -d --pull always --force-recreate -V && docker container exec -it node-test bash -c 'npm install && NCS_ENV=test npm run prisma:db:push && npm run vitest' && dotenvx run -f compose.test.env -- docker compose -f compose.test.yml down",
     "prisma:db:push": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma db push",
     "prisma:generate": "prisma generate",
-    "tsx:dev": "tsx watch --env-file prisma.dev.env app/main.ts",
+    "tsx:dev": "dotenvx run -f prisma.dev.env -- tsx watch app/main.ts",
     "vitest": "dotenvx run -f prisma.test.env -- vitest run --coverage",
     "ncu": "ncu",
     "ncu:upgrade": "ncu -u && npm install",

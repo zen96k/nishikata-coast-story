@@ -1,27 +1,14 @@
-import { DateTime as luxon } from "luxon"
-import type { Prisma } from "~~/type/prisma/client"
-import { PrismaClient } from "~~/type/prisma/client"
+import type { Prisma, PrismaClient } from "~~/type/prisma/client"
 
 export class ArticleManager {
-  private client = new PrismaClient()
+  private dbClient: PrismaClient
 
-  public async findMany(transaction?: Prisma.TransactionClient) {
-    const client = transaction || this.client
+  public constructor(dbClient: PrismaClient) {
+    this.dbClient = dbClient
+  }
 
-    const articles = (await client.article.findMany()).map((article) => {
-      return {
-        id: article.id.toString(),
-        publisherId: article.rssPublisherId.toString(),
-        title: article.title,
-        link: article.link,
-        author: article.author,
-        summary: article.summary,
-        publishedAt:
-          luxon.fromJSDate(article.publishedAt).toUTC().toISO() ?? "",
-        createdAt: luxon.fromJSDate(article.createdAt).toUTC().toISO() ?? "",
-        updatedAt: luxon.fromJSDate(article.updatedAt).toUTC().toISO() ?? ""
-      }
-    })
+  public async findMany(args?: Prisma.ArticleFindManyArgs) {
+    const articles = await this.dbClient.article.findMany(args)
 
     return articles
   }

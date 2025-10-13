@@ -4,41 +4,66 @@
       <UPageCard
         v-for="(article, index) of articles"
         :key="index"
-        :title="article.title"
-        :description="article.summary ?? ''"
         variant="soft"
         :to="article.link"
         target="_blank"
       >
-        <NuxtImg
-          v-if="article.link.includes(QiitaBaseUrl)"
-          src="/qiita/logo-background-color.png"
-        />
-        <NuxtImg
-          v-else-if="article.link.includes(ZennBaseUrl)"
-          src="/zenn/logo.png"
-        />
-        <NuxtImg
-          v-else
-          src="https://nuxt.com/assets/design-kit/logo-green-white.png"
-        />
-        <div>{{ article.publishedAt }}</div>
+        <template #header>
+          <div class="h-16 font-bold">
+            {{ article.title }}
+          </div>
+        </template>
+        <template #description>
+          <div>{{ article.summary ?? "" }}</div>
+        </template>
+        <template #body>
+          <div>
+            <NuxtImg
+              v-if="article.link.includes(QiitaBaseUrl)"
+              src="/qiita/logo-background-color.png"
+            />
+            <NuxtImg
+              v-else-if="article.link.includes(ZennBaseUrl)"
+              src="/zenn/logo.png"
+            />
+            <NuxtImg
+              v-else
+              src="https://nuxt.com/assets/design-kit/logo-green-white.png"
+            />
+          </div>
+        </template>
+        <template #footer>
+          <ClientOnly>
+            <div>
+              公開日時:
+              {{
+                useDateFormat(
+                  luxon.fromJSDate(article.publishedAt).toISO() ?? "",
+                  "YYYY-MM-DD HH:mm"
+                )
+              }}
+            </div>
+          </ClientOnly>
+        </template>
       </UPageCard>
     </UPageGrid>
   </div>
 </template>
 
 <script setup lang="ts">
+  import { useDateFormat } from "@vueuse/core"
+  import { DateTime as luxon } from "luxon"
   import { QiitaBaseUrl } from "../../../../common/constant-variable/qiita"
   import { ZennBaseUrl } from "../../../../common/constant-variable/zenn"
 
   const runtimeConfig = useRuntimeConfig()
 
-  const articles = ref<ArticleObject[]>()
+  const articles = ref<DeserializedArticle[]>()
 
-  const { data: data, error: error } = await useFetch<ArticleJson[], ErrorJson>(
-    `${runtimeConfig.public.ncsApiBaseUrl}/api/article`
-  )
+  const { data: data, error: error } = await useFetch<
+    SerializedArticle[],
+    SerializedError
+  >(`${runtimeConfig.public.ncsApiBaseUrl}/api/article`)
 
   if (data.value) {
     articles.value = data.value.map((article) => {
@@ -49,9 +74,9 @@
         link: article.link,
         summary: article.summary,
         author: article.author,
-        publishedAt: article.publishedAt,
-        createdAt: article.createdAt,
-        updatedAt: article.updatedAt
+        publishedAt: luxon.fromISO(article.publishedAt).toLocal().toJSDate(),
+        createdAt: luxon.fromISO(article.createdAt).toLocal().toJSDate(),
+        updatedAt: luxon.fromISO(article.updatedAt).toLocal().toJSDate()
       }
     })
   }
