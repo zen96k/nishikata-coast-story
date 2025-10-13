@@ -8,6 +8,7 @@ pipeline {
     stages {
         stage('test') {
             steps {
+                sh "export UID=1000 && export GID=1000"
                 sh "cd backend/batch && npm clean-install && npm run ncs:test"
             }
         }
