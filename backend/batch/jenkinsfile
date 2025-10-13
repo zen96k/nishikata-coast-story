@@ -11,6 +11,5 @@ pipeline {
                 sh "cd backend/batch && npm clean-install && npm run ncs:test"
             }
         }
-
     }
 }
