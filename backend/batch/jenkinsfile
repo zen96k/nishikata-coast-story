@@ -14,7 +14,7 @@ pipeline {
 
                     // 2. Execute the shell command, correctly interpolating the Groovy variable
                     //    I recommend adding single quotes around the interpolated variable for safety.
-                    sh "cd backend/batch && npm clean-install && env DOTENV_PRIVATE_KEY_ENV='${DOTENV_PRIVATE_KEY_ENV}' npm run ncs:test"
+                    sh "cd backend/batch && npm clean-install && env DOTENV_PRIVATE_KEY_ENV='${DOTENV_PRIVATE_KEY_ENV}' UID=1000 GID=1000 npm run ncs:test"
                 }
             }
         }
