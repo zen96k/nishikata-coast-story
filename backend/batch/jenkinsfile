@@ -8,7 +8,8 @@ pipeline {
     stages {
         stage('test') {
             steps {
-                sh "cd backend/batch && npm clean-install && UID=1000 GID=1000 npm run ncs:test"
+                DOTENV_PRIVATE_KEY_ENV = credentials("DOTENV_PRIVATE_KEY")
+                sh "cd backend/batch && npm clean-install && DOTENV_PRIVATE_KEY_ENV npm run ncs:test"
             }
         }
     }
