@@ -41,4 +41,4 @@ services:
 networks:
   nishikata-coast-story:
     name: nishikata-coast-story
-    external: true
+    # external: true
