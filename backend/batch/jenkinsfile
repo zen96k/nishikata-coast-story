@@ -9,7 +9,7 @@ pipeline {
         stage('test') {
             steps {
                 sh "cd backend/batch"
-                sh "npm run ncs:test"
+                sh "pwd && npm run ncs:test"
             }
         }
 
