@@ -1,0 +1,16 @@
+name: Test Batch
+on:
+  push:
+    branches:
+      - work
+    paths:
+      - "backend/batch/**"
+jobs:
+  test-batch:
+    name: Test Batch
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+        with:
+          ref: work
