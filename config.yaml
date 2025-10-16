@@ -2,9 +2,9 @@ name: Local Agent
 version: 1.0.0
 schema: v1
 models:
-  - name: qwen3
+  - name: gemma3
     provider: ollama
-    model: qwen3
+    model: gemma3
 rules:
   - name: Language Rule
     rule: Always speak Japanese
