@@ -4,11 +4,11 @@
   "scripts": {
     "ncs:dev": "npm run prisma:generate && npm run tsx:dev",
     "ncs:test": "dotenvx run -f compose.test.env -- docker compose -f compose.test.yml up -d --pull always --force-recreate -V && docker container exec -it node-test bash -c 'npm run prisma:db:push && npm run vitest' && dotenvx run -f compose.test.env -- docker compose -f compose.test.yml down && docker system prune -af --volumes",
-    "actions:test": "dotenvx run -f compose.test.env -- docker compose -f compose.test.yml up -d --pull always --force-recreate -V && docker container exec node-test bash -c 'npm run prisma:db:push && npm run vitest'",
+    "actions:test": "dotenvx run -f compose.test.env -- docker compose -f compose.test.yml up -d --pull always --force-recreate -V && dotenvx run -f compose.test.env -- docker compose -f compose.test.yml exec node bash -c 'npm run prisma:db:push && npm run vitest'",
     "prisma:db:push": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma db push",
     "prisma:generate": "prisma generate",
     "tsx:dev": "dotenvx run -f prisma.dev.env -- tsx watch app/main.ts",
-    "vitest": "dotenvx run -f prisma.test.env -- vitest run",
+    "vitest": "dotenvx run -f prisma.test.env -- vitest run --coverage",
     "ncu": "ncu",
     "ncu:upgrade": "ncu -u && npm install",
     "knip": "knip"
@@ -28,6 +28,7 @@
     "@tsconfig/recommended": "1.0.10",
     "@types/luxon": "3.7.1",
     "@types/node": "24.7.2",
+    "@vitest/coverage-v8": "3.2.4",
     "eslint": "9.37.0",
     "eslint-config-prettier": "10.1.8",
     "knip": "5.64.3",
