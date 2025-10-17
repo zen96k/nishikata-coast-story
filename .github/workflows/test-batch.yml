@@ -24,4 +24,4 @@ jobs:
         env:
           DOTENV_PRIVATE_KEY_ENV: ${{ secrets.DOTENV_PRIVATE_KEY_ENV }}
         run: |
-          dotenvx run -f compose.test.env -- docker compose -f compose.test.yml up -d --pull always --force-recreate -V
+          npx dotenvx run -f compose.test.env -- docker compose -f compose.test.yml up -d --pull always --force-recreate -V
