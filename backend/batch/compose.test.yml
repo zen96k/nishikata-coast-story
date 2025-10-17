@@ -21,7 +21,7 @@ services:
   node:
     image: node:lts
     container_name: node-test
-    init: true
+    # init: true
     mem_limit: 2gb
     depends_on:
       mariadb:
