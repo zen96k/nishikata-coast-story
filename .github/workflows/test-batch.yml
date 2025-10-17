@@ -2,7 +2,7 @@ name: Test Batch
 on:
   workflow_run:
     workflows:
-      - setup-environment
+      - Setup Environment
     types:
       - completed
 jobs:
