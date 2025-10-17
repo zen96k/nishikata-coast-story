@@ -45,7 +45,6 @@
         "workbench.iconTheme": "vscode-icons",
         "workbench.secondarySideBar.showLabels": false,
         "continue.telemetryEnabled": false,
-        "diffEditor.ignoreTrimWhitespace": false,
         "editor.autoClosingBrackets": "always",
         "editor.autoClosingQuotes": "always",
         "editor.codeActionsOnSave": {
@@ -60,6 +59,8 @@
         "editor.quickSuggestions": {
           "strings": true
         },
+        "debug.javascript.autoAttachFilter": "always",
+        "diffEditor.ignoreTrimWhitespace": false,
         "files.associations": {
           "*.css": "tailwindcss"
         },
