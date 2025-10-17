@@ -10,10 +10,5 @@ jobs:
     name: Setup Environment
     runs-on: ubuntu-22.04
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v5
-        with:
-          ref: work
       - name: Setup Node.jobs
         uses: actions/setup-node@v6
-      - run: pwd && ls -lah backend/batch
