@@ -1,0 +1,26 @@
+name: Test Batch
+on:
+  workflow_run:
+    workflows:
+      - Setup Environment
+    types:
+      - completed
+jobs:
+  test-batch:
+    name: Test Batch
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        shell: bash
+        working-directory: backend/batch
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+        with:
+          ref: work
+    steps:
+      - name: Install Dependencies
+        run: npm install
+      - name: Run Tests
+        run: npm run ncs:test

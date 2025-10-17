@@ -1,8 +1,8 @@
 {
   "name": "nishikata-coast-story",
-  "image": "debian",
+  "image": "ubuntu",
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": { "moby": false },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
     "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/devcontainers/features/node:1": {}
   },
@@ -24,9 +24,10 @@
         "vscode-icons-team.vscode-icons",
         "Codeium.codeium",
         "Continue.continue",
+        "MS-CEINTL.vscode-language-pack-ja",
         "ms-azuretools.vscode-docker",
         "eamodio.gitlens",
-        "MS-CEINTL.vscode-language-pack-ja",
+        "GitHub.vscode-github-actions",
         "Postman.postman-for-vscode",
         "vitest.explorer",
         "adpyke.codesnap",
@@ -44,7 +45,6 @@
         "workbench.iconTheme": "vscode-icons",
         "workbench.secondarySideBar.showLabels": false,
         "continue.telemetryEnabled": false,
-        "diffEditor.ignoreTrimWhitespace": false,
         "editor.autoClosingBrackets": "always",
         "editor.autoClosingQuotes": "always",
         "editor.codeActionsOnSave": {
@@ -59,6 +59,8 @@
         "editor.quickSuggestions": {
           "strings": true
         },
+        "debug.javascript.autoAttachFilter": "always",
+        "diffEditor.ignoreTrimWhitespace": false,
         "files.associations": {
           "*.css": "tailwindcss"
         },
@@ -69,6 +71,7 @@
         "files.insertFinalNewline": true,
         "files.trimFinalNewlines": true,
         "files.trimTrailingWhitespace": true,
+        "git.autofetch": true,
         "git.postCommitCommand": "push",
         "terminal.integrated.defaultProfile.linux": "zsh",
         "terminal.integrated.fontSize": 16,
