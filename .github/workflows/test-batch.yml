@@ -23,4 +23,4 @@ jobs:
         working-directory: backend/batch
         env:
           DOTENV_PRIVATE_KEY_ENV: ${{ secrets.DOTENV_PRIVATE_KEY_ENV }}
-        run: npm run ncs:test
+        run: npm run actions:test
