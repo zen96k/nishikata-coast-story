@@ -2,4 +2,5 @@
 
 set -euxo pipefail
 
+env
 npm run ncs:test
