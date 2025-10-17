@@ -1,20 +1,21 @@
 name: Test Batch
 on:
-  push:
+  pull_request:
     branches:
       - test
-    # paths:
-    #   - "backend/batch/**"
 jobs:
   test-batch:
     name: Test Batch
     runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v5
         with:
           ref: test
-      - name: Setup Node.jobs
+      - name: Setup Node.js
         uses: actions/setup-node@v6
       - name: Install Dependencies
         working-directory: backend/batch
@@ -24,3 +25,7 @@ jobs:
         env:
           DOTENV_PRIVATE_KEY_ENV: ${{ secrets.DOTENV_PRIVATE_KEY_ENV }}
         run: npm run actions:test
+      - name: Report Coverage
+        uses: davelosert/vitest-coverage-report-action@v2
+        with:
+          working-directory: backend/batch
