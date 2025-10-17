@@ -71,6 +71,7 @@
         "files.insertFinalNewline": true,
         "files.trimFinalNewlines": true,
         "files.trimTrailingWhitespace": true,
+        "git.autofetch": true,
         "git.postCommitCommand": "push",
         "terminal.integrated.defaultProfile.linux": "zsh",
         "terminal.integrated.fontSize": 16,
