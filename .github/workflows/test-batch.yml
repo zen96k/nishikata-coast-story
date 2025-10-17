@@ -23,5 +23,4 @@ jobs:
         working-directory: backend/batch
         env:
           DOTENV_PRIVATE_KEY_ENV: ${{ secrets.DOTENV_PRIVATE_KEY_ENV }}
-        run: |
-          npx dotenvx run -f compose.test.env -- docker compose -f compose.test.yml up -d --pull always --force-recreate -V
+        run: echo ${DOTENV_PRIVATE_KEY_ENV}
