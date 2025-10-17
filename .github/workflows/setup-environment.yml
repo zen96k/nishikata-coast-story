@@ -5,6 +5,7 @@ on:
       - work
     # paths:
     #   - "backend/batch/**"
+  workflow_dispatch:
 jobs:
   setup-environment:
     name: Setup Environment
