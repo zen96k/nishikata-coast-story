@@ -2,7 +2,7 @@ name: Test Batch
 on:
   push:
     branches:
-      - work
+      - test
     # paths:
     #   - "backend/batch/**"
 jobs:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v5
         with:
-          ref: work
+          ref: test
       - name: Setup Node.jobs
         uses: actions/setup-node@v6
       - name: Install Dependencies
