@@ -28,6 +28,7 @@ services:
       - nishikata-coast-story
     volumes:
       - .:/workspace/nishikata-coast-story
+      - ./.env.keys:/workspace/nishikata-coast-story/.env.keys:ro
       - ./constant-variable:/workspace/nishikata-coast-story/constant-variable:ro
       - ./prisma/model:/workspace/nishikata-coast-story/prisma/model:ro
       - /usr/share/zoneinfo/Asia/Tokyo:/etc/localtime:ro
