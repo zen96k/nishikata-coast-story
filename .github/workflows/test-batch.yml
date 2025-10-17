@@ -21,6 +21,4 @@ jobs:
         run: npm install
       - name: Run Tests
         working-directory: backend/batch
-        env:
-          DOTENV_PRIVATE_KEY_ENV: ${{ secrets.DOTENV_PRIVATE_KEY_ENV }}
-        run: echo ${DOTENV_PRIVATE_KEY_ENV}
+        run: echo ${{ secrets.DOTENV_PRIVATE_KEY_ENV }}
