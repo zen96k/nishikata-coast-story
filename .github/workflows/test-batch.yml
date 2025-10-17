@@ -1,5 +1,6 @@
 name: Test Batch
 on:
+  workflow_call:
   workflow_run:
     workflows: ["Setup Environment"]
     types:
