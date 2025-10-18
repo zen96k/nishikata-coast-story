@@ -4,5 +4,5 @@ set -euxo pipefail
 
 export DEBIAN_FRONTEND=noninteractive
 
-docker container exec ollama ollama pull gemma3
+docker container exec ollama ollama pull qwen3-coder
 cp -rfv config.yaml ${HOME}/.continue

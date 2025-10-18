@@ -10,8 +10,8 @@
   "runArgs": ["--env-file", ".devcontainer/devcontainer.env", "--rm"],
   "mounts": [
     {
-      "source": "${localWorkspaceFolder}/volume/devcontainer/root/.vscode-server",
-      "target": "/root/.vscode-server",
+      "source": "${localWorkspaceFolder}/volume/devcontainer/root/.vscode-server/extensions",
+      "target": "/root/.vscode-server/extensions",
       "type": "bind"
     }
   ],
@@ -27,12 +27,8 @@
         "MS-CEINTL.vscode-language-pack-ja",
         "ms-azuretools.vscode-docker",
         "eamodio.gitlens",
-        "GitHub.vscode-github-actions",
-        "Postman.postman-for-vscode",
         "vitest.explorer",
-        "adpyke.codesnap",
-        "bierner.markdown-preview-github-styles",
-        "mutantdino.resourcemonitor",
+        "ms-vscode.js-debug",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "Vue.volar",
@@ -71,7 +67,6 @@
         "files.insertFinalNewline": true,
         "files.trimFinalNewlines": true,
         "files.trimTrailingWhitespace": true,
-        "git.autofetch": true,
         "git.postCommitCommand": "push",
         "terminal.integrated.defaultProfile.linux": "zsh",
         "terminal.integrated.fontSize": 16,
@@ -106,15 +101,6 @@
         },
         "[prisma]": {
           "editor.defaultFormatter": "Prisma.prisma"
-        },
-        "chat.instructionsFilesLocations": {
-          ".github/instructions": true,
-          "/tmp/postman-collections-post-response.instructions.md": true,
-          "/tmp/postman-collections-pre-request.instructions.md": true,
-          "/tmp/postman-folder-post-response.instructions.md": true,
-          "/tmp/postman-folder-pre-request.instructions.md": true,
-          "/tmp/postman-http-request-post-response.instructions.md": true,
-          "/tmp/postman-http-request-pre-request.instructions.md": true
         }
       }
     }
