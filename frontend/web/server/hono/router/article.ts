@@ -1,5 +1,5 @@
 import { Hono } from "hono"
-import { Prisma } from "~~/type/prisma/client"
+import type { Prisma } from "~~/type/prisma/client"
 
 export const article = new Hono().get("/", async (context) => {
   const articleManager = new ArticleManager(dbClient)

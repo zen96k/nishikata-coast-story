@@ -3,7 +3,7 @@ services:
     image: mariadb:12.0.2
     container_name: mariadb-qa
     init: true
-    # mem_limit: 2gb
+    mem_limit: 2gb
     networks:
       - nishikata-coast-story
     volumes:
@@ -22,7 +22,7 @@ services:
     image: node:lts
     container_name: node-qa
     init: true
-    # mem_limit: 2gb
+    mem_limit: 2gb
     depends_on:
       mariadb:
         condition: service_healthy
