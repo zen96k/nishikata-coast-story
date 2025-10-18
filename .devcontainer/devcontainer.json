@@ -8,13 +8,13 @@
   },
   "init": true,
   "runArgs": ["--env-file", ".devcontainer/devcontainer.env", "--rm"],
-  "mounts": [
-    {
-      "source": "${localWorkspaceFolder}/volume/devcontainer/root/.vscode-server",
-      "target": "/root/.vscode-server",
-      "type": "bind"
-    }
-  ],
+  // "mounts": [
+  //   {
+  //     "source": "${localWorkspaceFolder}/volume/devcontainer/root/.vscode-server",
+  //     "target": "/root/.vscode-server",
+  //     "type": "bind"
+  //   }
+  // ],
   "forwardPorts": [3000, 5306, 5555],
   "containerEnv": { "TZ": "Asia/Tokyo" },
   "customizations": {
@@ -105,7 +105,7 @@
       }
     }
   },
-  "initializeCommand": "bash .devcontainer/script/initialize_command.sh",
+  // "initializeCommand": "bash .devcontainer/script/initialize_command.sh",
   "onCreateCommand": "bash .devcontainer/script/on_create_command.sh",
   "postStartCommand": "bash .devcontainer/script/post_start_command.sh",
   "postAttachCommand": "bash .devcontainer/script/post_attach_command.sh",
