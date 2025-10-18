@@ -1,11 +1,11 @@
-name: Test Batch
+name: QA Batch
 on:
   pull_request:
     branches:
-      - test
+      - dev
 jobs:
-  test-batch:
-    name: Test Batch
+  qa-batch:
+    name: QA Batch
     runs-on: ubuntu-22.04
     permissions:
       contents: read
@@ -24,7 +24,7 @@ jobs:
         working-directory: backend/batch
         env:
           DOTENV_PRIVATE_KEY_ENV: ${{ secrets.DOTENV_PRIVATE_KEY_ENV }}
-        run: npm run actions:test
+        run: npm run ncs:qa:github
       - name: Report Coverage
         uses: davelosert/vitest-coverage-report-action@v2
         with:

@@ -2,4 +2,4 @@
 
 set -euxo pipefail
 
-mkdir -p volume/devcontainer/root/.vscode-server
+mkdir -p volume/devcontainer/root/.vscode-server/extensions
