@@ -28,7 +28,6 @@
         "ms-azuretools.vscode-docker",
         "eamodio.gitlens",
         "vitest.explorer",
-        "ms-vscode.js-debug",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "Vue.volar",
@@ -55,7 +54,7 @@
         "editor.quickSuggestions": {
           "strings": true
         },
-        "debug.javascript.autoAttachFilter": "always",
+        "debug.javascript.autoAttachFilter": "disabled",
         "diffEditor.ignoreTrimWhitespace": false,
         "files.associations": {
           "*.css": "tailwindcss"
