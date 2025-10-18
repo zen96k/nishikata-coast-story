@@ -8,7 +8,7 @@ jobs:
     name: QC Batch
     runs-on: ubuntu-22.04
     permissions:
-      contents: read
+      # contents: read
       pull-requests: write
     steps:
       - name: Checkout Repository
