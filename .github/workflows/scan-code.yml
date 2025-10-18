@@ -9,6 +9,7 @@ jobs:
     name: Scan Code
     runs-on: ubuntu-22.04
     permissions:
+      pull-requests: write
       security-events: write
     steps:
       - name: Checkout Repository
