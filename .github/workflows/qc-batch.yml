@@ -7,9 +7,8 @@ jobs:
   qc-batch:
     name: QC Batch
     runs-on: ubuntu-22.04
-    permissions:
-      # contents: read
-      pull-requests: write
+    # permissions:
+    #   pull-requests: write
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v5
