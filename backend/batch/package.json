@@ -3,8 +3,7 @@
   "type": "module",
   "scripts": {
     "ncs:dev": "npm run prisma:generate && npm run tsx:dev",
-    "ncs:qa": "dotenvx run -f compose.qa.env -- docker compose -f compose.qa.yml up -d --pull always --force-recreate -V && docker container exec -it node-test bash -c 'npm run prisma:db:push && npm run vitest' && dotenvx run -f compose.qa.env -- docker compose -f compose.qa.yml down && docker system prune -af --volumes",
-    "actions:qa": "dotenvx run -f compose.qa.env -- docker compose -f compose.qa.yml up -d --pull always --force-recreate -V && docker container exec node-test bash -c 'npm run prisma:db:push && npm run vitest' && dotenvx run -f compose.qa.env -- docker compose -f compose.qa.yml down",
+    "ncs:qa": "dotenvx run -f compose.qa.env -- docker compose -f compose.qa.yml up -d --pull always --force-recreate -V && docker container exec -it node-qa bash -c 'npm run prisma:db:push && npm run vitest' && dotenvx run -f compose.qa.env -- docker compose -f compose.qa.yml down && docker system prune -af --volumes",
     "prisma:db:push": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma db push",
     "prisma:generate": "prisma generate",
     "tsx:dev": "dotenvx run -f prisma.dev.env -- tsx watch app/main.ts",
