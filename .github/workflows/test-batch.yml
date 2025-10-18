@@ -2,7 +2,7 @@ name: Test Batch
 on:
   pull_request:
     branches:
-      - test
+      - dev
 jobs:
   test-batch:
     name: Test Batch

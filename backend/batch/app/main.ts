@@ -16,7 +16,7 @@ const main = async () => {
 
     await cronTaskScheduler.manageTaskSchedule(
       cron.schedule(
-        "* * * * *",
+        "*/15 * * * *",
         async (context) => {
           const task = context.task
 
