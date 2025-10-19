@@ -12,4 +12,4 @@ docker container run -it \
                      -v $(pwd):/app \
                      -v $(pwd)/.env.keys:/app/.env.keys \
                      dotenv/dotenvx run -f compose.${NCS_ENV}.env -- \
-                     docker --version
+                     node --version
