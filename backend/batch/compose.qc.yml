@@ -17,6 +17,8 @@ services:
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: mariadb -u root -p${MARIADB_ROOT_PASSWORD} -D ${MARIADB_DATABASE} -e "SELECT 1;"
+      interval: 10s
+      retries: 30
     stdin_open: true
     tty: true
 
