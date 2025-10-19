@@ -12,4 +12,4 @@ docker container run -it \
                      -v $(pwd):/app \
                      -v $(pwd)/.env.keys:/app/.env.keys \
                      dotenv/dotenvx run -f compose.${NCS_ENV}.env -- \
-                     docker compose -f compose.migrate.yml up -d --pull always --force-recreate -V --wait
+                     docker --version
