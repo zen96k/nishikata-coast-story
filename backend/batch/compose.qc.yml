@@ -1,47 +1,24 @@
 services:
   mariadb:
     image: mariadb:12.0.2
-    container_name: mariadb-qc
+    container_name: ncs-mariadb-qc
     init: true
     # mem_limit: 2gb
     networks:
       - nishikata-coast-story
-    volumes:
-      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro
+    ports:
+      - 5307:3306
     environment:
       - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
       - MARIADB_USER=${MARIADB_USER}
       - MARIADB_PASSWORD=${MARIADB_PASSWORD}
       - MARIADB_DATABASE=${MARIADB_DATABASE}
+    volumes:
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: mariadb -u root -p${MARIADB_ROOT_PASSWORD} -D ${MARIADB_DATABASE} -e "SELECT 1;"
     stdin_open: true
     tty: true
-
-  node:
-    image: node:lts
-    container_name: node-qc
-    init: true
-    # mem_limit: 2gb
-    depends_on:
-      mariadb:
-        condition: service_healthy
-    networks:
-      - nishikata-coast-story
-    volumes:
-      - .:/workspace/nishikata-coast-story
-      - ./.env.keys:/workspace/nishikata-coast-story/.env.keys:ro
-      - ./constant-variable:/workspace/nishikata-coast-story/constant-variable:ro
-      - ./prisma/model:/workspace/nishikata-coast-story/prisma/model:ro
-      - /usr/share/zoneinfo/Asia/Tokyo:/etc/localtime:ro
-    environment:
-      - NCS_ENV=qc
-      - DOTENV_PRIVATE_KEY_ENV=${DOTENV_PRIVATE_KEY_ENV}
-      - TZ=Asia/Tokyo
-    working_dir: /workspace/nishikata-coast-story
-    stdin_open: true
-    tty: true
-    command: npm install -g @aikidosec/safe-chain && safe-chain setup && tail -F /dev/null
 
 networks:
   nishikata-coast-story:

@@ -6,12 +6,6 @@ export DEBIAN_FRONTEND=noninteractive
 FRONTEND_DIRNAME=$(pwd)/frontend
 BACKEND_DIRNAME=$(pwd)/backend
 
-apt update && apt install -y curl wget \
-                             git \
-                             zip unzip \
-                             rsync \
-                             tzdata
-
 rm -rf ${HOME}/.gitconfig
 git config --global init.defaultBranch ${GIT_DEFAULT_BRANCH}
 git config --global user.name ${GIT_USER_NAME}
