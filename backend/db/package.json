@@ -3,8 +3,8 @@
   "type": "module",
   "scripts": {
     "mariadb:up": "dotenvx run -f compose.${NCS_ENV}.env -- docker compose -f compose.${NCS_ENV}.yml up -d --pull always --force-recreate -V",
-    "mariadb:backup": "mkdir -p backup && docker container exec mariadb-${NCS_ENV} bash -c 'mariadb-dump -A -u root -p${MARIADB_ROOT_PASSWORD}' > backup/${NCS_ENV}-$(date +%Y%m%d%H%M%S).sql",
-    "mariadb:restore": "docker container exec mariadb-${NCS_ENV} bash -c 'mariadb -u root -p${MARIADB_ROOT_PASSWORD}' <",
+    "mariadb:backup": "mkdir -p backup && docker container exec ncs-mariadb-${NCS_ENV} bash -c 'mariadb-dump -A -u root -p${MARIADB_ROOT_PASSWORD}' > backup/${NCS_ENV}-$(date +%Y%m%d%H%M%S).sql",
+    "mariadb:restore": "docker container exec ncs-mariadb-${NCS_ENV} bash -c 'mariadb -u root -p${MARIADB_ROOT_PASSWORD}' <",
     "prisma:generate": "prisma generate",
     "prisma:db:pull": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma db pull",
     "prisma:db:push": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma db push",
