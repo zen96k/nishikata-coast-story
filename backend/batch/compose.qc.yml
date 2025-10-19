@@ -20,31 +20,6 @@ services:
     stdin_open: true
     tty: true
 
-  # node:
-  #   image: node:lts
-  #   container_name: ncs-node-qc
-  #   init: true
-  #   mem_limit: 2gb
-  #   depends_on:
-  #     mariadb:
-  #       condition: service_healthy
-  #   networks:
-  #     - nishikata-coast-story
-  #   environment:
-  #     - DOTENV_PRIVATE_KEY_ENV=${DOTENV_PRIVATE_KEY_ENV}
-  #     - NCS_ENV=qc
-  #     - TZ=Asia/Tokyo
-  #   volumes:
-  #     - .:/workspace/nishikata-coast-story
-  #     - ./.env.keys:/workspace/nishikata-coast-story/.env.keys:ro
-  #     - ./constant-variable:/workspace/nishikata-coast-story/constant-variable:ro
-  #     - ./prisma/model:/workspace/nishikata-coast-story/prisma/model:ro
-  #     - /usr/share/zoneinfo/Asia/Tokyo:/etc/localtime:ro
-  #   working_dir: /workspace/nishikata-coast-story
-  #   stdin_open: true
-  #   tty: true
-  #   command: npm install -g @aikidosec/safe-chain && safe-chain setup && tail -F /dev/null
-
 networks:
   nishikata-coast-story:
     name: nishikata-coast-story
