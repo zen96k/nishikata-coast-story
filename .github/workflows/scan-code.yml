@@ -2,10 +2,8 @@ name: Scan Code
 on:
   pull_request:
     branches:
-      - dev
-  push:
-    branches:
       - main
+      - dev
 jobs:
   scan-code:
     name: Scan Code
@@ -20,7 +18,7 @@ jobs:
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v4
         with:
-          languages: javascript-typescript, actions
+          languages: actions, javascript-typescript
           queries: security-and-quality
       - name: Run CodeQL
         uses: github/codeql-action/init@v4

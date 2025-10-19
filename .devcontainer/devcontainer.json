@@ -16,7 +16,6 @@
   //   }
   // ],
   "forwardPorts": [3000, 5306, 5555],
-  "containerEnv": { "TZ": "Asia/Tokyo" },
   "customizations": {
     "vscode": {
       "extensions": [

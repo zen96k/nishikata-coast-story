@@ -1,13 +1,12 @@
 services:
   mariadb:
     image: mariadb:12.0.2
-    container_name: ncs-mariadb-qc
+    container_name: ncs-mariadb-migrate
     init: true
-    # mem_limit: 2gb
     networks:
       - nishikata-coast-story
     ports:
-      - 5307:3306
+      - 5306:3306
     environment:
       - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
       - MARIADB_USER=${MARIADB_USER}
@@ -15,6 +14,7 @@ services:
       - MARIADB_DATABASE=${MARIADB_DATABASE}
     volumes:
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro
+      - ./volume/mariadb/${NCS_ENV}/var/lib/mysql:/var/lib/mysql
     healthcheck:
       test: mariadb -u root -p${MARIADB_ROOT_PASSWORD} -D ${MARIADB_DATABASE} -e "SELECT 1;"
     stdin_open: true
