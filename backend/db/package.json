@@ -26,7 +26,6 @@
     "prisma": "6.17.1"
   },
   "devDependencies": {
-    "@dotenvx/dotenvx": "1.51.0",
     "@eslint/js": "9.37.0",
     "@tsconfig/node-lts": "22.0.2",
     "@tsconfig/node-ts": "23.6.1",
