@@ -19,7 +19,7 @@ services:
       test: mariadb -u root -p${MARIADB_ROOT_PASSWORD} -D ${MARIADB_DATABASE} -e "SELECT 1;"
     stdin_open: true
     tty: true
-    user: 100998:100998
+    user: 998:998
 
 networks:
   nishikata-coast-story:
