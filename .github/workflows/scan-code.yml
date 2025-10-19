@@ -18,7 +18,7 @@ jobs:
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v4
         with:
-          languages: javascript-typescript, actions
+          languages: actions, javascript-typescript
           queries: security-and-quality
       - name: Run CodeQL
         uses: github/codeql-action/init@v4
