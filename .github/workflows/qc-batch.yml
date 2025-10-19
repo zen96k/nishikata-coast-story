@@ -24,7 +24,7 @@ jobs:
         working-directory: backend/batch
         env:
           DOTENV_PRIVATE_KEY_ENV: ${{ secrets.DOTENV_PRIVATE_KEY_ENV }}
-        run: npm run ncs:qc:github
+        run: npm run ncs:qc
       - name: Report Coverage
         uses: davelosert/vitest-coverage-report-action@v2
         with:
