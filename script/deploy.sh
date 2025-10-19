@@ -8,5 +8,5 @@ PROJECT_DIRNAME=$(cd ${SCRIPT_DIRNAME}/.. && pwd)
 FRONTEND_DIRNAME=$(cd ${PROJECT_DIRNAME}/frontend && pwd)
 BACKEND_DIRNAME=$(cd ${PROJECT_DIRNAME}/backend && pwd)
 
-cd ${BACKEND_DIRNAME}
+cd ${BACKEND_DIRNAME}/db
 bash -E script/deploy.sh
