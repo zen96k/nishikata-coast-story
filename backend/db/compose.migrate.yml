@@ -14,7 +14,7 @@ services:
       - MARIADB_DATABASE=${MARIADB_DATABASE}
     volumes:
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro
-      # - ./volume/mariadb/${NCS_ENV}/var/lib/mysql:/var/lib/mysql
+      - ./volume/mariadb/${NCS_ENV}/var/lib/mysql:/var/lib/mysql
     healthcheck:
       test: mariadb -u root -p${MARIADB_ROOT_PASSWORD} -D ${MARIADB_DATABASE} -e "SELECT 1;"
     stdin_open: true
