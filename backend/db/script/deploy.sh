@@ -9,4 +9,5 @@ cd ${PROJECT_DIRNAME}
 
 npm install && npm prune
 dotenvx run -f compose.${NCS_ENV}.env -- docker compose -f compose.migrate.yml up -d --pull always --force-recreate -V --wait
-dotenvx run -f prisma.migrate.env -- npm run prisma:migrate:deploy && npm run prisma:db:seed
+dotenvx run -f prisma.migrate.env -- npx prisma migrate deploy
+dotenvx run -f prisma.migrate.env -- npx prisma db seed
