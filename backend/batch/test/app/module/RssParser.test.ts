@@ -13,7 +13,7 @@ describe("RssParser", () => {
       const { items: items } = await rssParser.parseUrl(url)
 
       await Promise.all(
-        items.map((item) => async () => {
+        items.map(async (item) => {
           expect(item.title).toBeDefined()
           expect(item.title).not.toBe("")
 
@@ -36,7 +36,7 @@ describe("RssParser", () => {
       const { items: items } = await rssParser.parseUrl(url)
 
       await Promise.all(
-        items.map((item) => async () => {
+        items.map(async (item) => {
           expect(item.title).toBeDefined()
           expect(item.title).not.toBe("")
 
