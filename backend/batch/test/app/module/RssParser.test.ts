@@ -27,6 +27,8 @@ describe("RssParser", () => {
           expect(item.pubDate).toBeDefined()
           expect(item.pubDate).not.toBe("")
           assert(luxon.fromISO(item.pubDate!).isValid)
+
+          return void 0
         })
       )
     })
@@ -53,6 +55,8 @@ describe("RssParser", () => {
           expect(item.pubDate).toBeDefined()
           expect(item.pubDate).not.toBe("")
           assert(luxon.fromRFC2822(item.pubDate!).isValid)
+
+          return void 0
         })
       )
     })
