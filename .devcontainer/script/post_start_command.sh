@@ -17,6 +17,8 @@ cd ${FRONTEND_DIRNAME}/web
 rm -rf .output .data .nuxt .nitro .cache dist
 npm install && npm run prisma:generate
 
+cd ${BACKEND_DIRNAME}/api
+npm install && npm run prisma:generate
 cd ${BACKEND_DIRNAME}/batch
 npm install && npm run prisma:generate
 cd ${BACKEND_DIRNAME}/db
