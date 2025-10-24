@@ -15,11 +15,13 @@ docker compose up -d --pull always --force-recreate -V
 
 cd ${FRONTEND_DIRNAME}/web
 rm -rf .output .data .nuxt .nitro .cache dist
-npm install && npm prune && npm run prisma:generate
+npm install && npm run prisma:generate
 
+cd ${BACKEND_DIRNAME}/api
+npm install && npm run prisma:generate
 cd ${BACKEND_DIRNAME}/batch
-npm install && npm prune && npm run prisma:generate
+npm install && npm run prisma:generate
 cd ${BACKEND_DIRNAME}/db
-npm install && npm prune && npm run prisma:generate && npm run mariadb:up
+npm install && npm run prisma:generate && npm run mariadb:up
 
 docker system prune -af --volumes

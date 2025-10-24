@@ -22,24 +22,23 @@
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
-    "@prisma/client": "6.17.1",
-    "prisma": "6.17.1"
+    "@prisma/client": "6.18.0",
+    "prisma": "6.18.0"
   },
   "devDependencies": {
-    "@dotenvx/dotenvx": "1.51.0",
-    "@eslint/js": "9.37.0",
+    "@eslint/js": "9.38.0",
     "@tsconfig/node-lts": "22.0.2",
     "@tsconfig/node-ts": "23.6.1",
     "@tsconfig/recommended": "1.0.10",
-    "@types/node": "24.7.2",
-    "eslint": "9.37.0",
+    "@types/node": "24.9.1",
+    "eslint": "9.38.0",
     "eslint-config-prettier": "10.1.8",
-    "knip": "5.64.3",
-    "npm-check-updates": "19.0.0",
+    "knip": "5.66.2",
+    "npm-check-updates": "19.1.1",
     "prettier": "3.6.2",
     "prettier-plugin-organize-imports": "4.3.0",
     "tsx": "4.20.6",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.46.0"
+    "typescript-eslint": "8.46.2"
   }
 }
