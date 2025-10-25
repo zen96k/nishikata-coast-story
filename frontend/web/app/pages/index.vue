@@ -52,6 +52,7 @@
 
 <script setup lang="ts">
   import { useDateFormat } from "@vueuse/core"
+  import type { H3Error } from "h3"
   import { DateTime as luxon } from "luxon"
   import superjson from "superjson"
   import QiitaBaseUrl from "../../../../common/constant-variable/qiita"
@@ -59,10 +60,10 @@
 
   const articles = ref<DeserializedArticle[]>()
 
-  const { data: data, error: error } = await useFetch<DeserializedArticle[]>(
-    "/api/article",
-    { parseResponse: superjson.parse }
-  )
+  const { data: data, error: error } = await useFetch<
+    DeserializedArticle[],
+    H3Error
+  >("/api/article", { parseResponse: superjson.parse })
 
   if (data.value) {
     articles.value = data.value

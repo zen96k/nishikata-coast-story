@@ -13,11 +13,9 @@ const app = new Hono()
     console.error(error)
 
     const errorResponse = {
-      type: context.req.url,
-      title: "Internal Server Error",
-      detail: error.message,
-      instance: null,
-      status: 500
+      statusCode: 500,
+      statusMessage: "Internal Server Error",
+      message: error.message
     }
 
     return context.text(superjson.stringify(errorResponse), 500, {
