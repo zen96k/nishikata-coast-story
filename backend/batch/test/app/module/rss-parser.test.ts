@@ -1,8 +1,8 @@
 import { DateTime as luxon } from "luxon"
 import { assert, describe, expect, test } from "vitest"
-import { RssParser } from "../../../app/module/RssParser.ts"
-import { QiitaBaseUrl } from "../../../constant-variable/qiita.ts"
-import { ZennBaseUrl } from "../../../constant-variable/zenn.ts"
+import RssParser from "../../../app/module/rss-parser.ts"
+import QiitaBaseUrl from "../../../constant-variable/qiita.ts"
+import ZennBaseUrl from "../../../constant-variable/zenn.ts"
 
 const rssParser = new RssParser()
 
@@ -13,7 +13,7 @@ describe("RssParser", () => {
       const { items: items } = await rssParser.parseUrl(url)
 
       await Promise.all(
-        items.map((item) => async () => {
+        items.map(async (item) => {
           expect(item.title).toBeDefined()
           expect(item.title).not.toBe("")
 
@@ -27,6 +27,8 @@ describe("RssParser", () => {
           expect(item.pubDate).toBeDefined()
           expect(item.pubDate).not.toBe("")
           assert(luxon.fromISO(item.pubDate!).isValid)
+
+          return void 0
         })
       )
     })
@@ -36,7 +38,7 @@ describe("RssParser", () => {
       const { items: items } = await rssParser.parseUrl(url)
 
       await Promise.all(
-        items.map((item) => async () => {
+        items.map(async (item) => {
           expect(item.title).toBeDefined()
           expect(item.title).not.toBe("")
 
@@ -53,6 +55,8 @@ describe("RssParser", () => {
           expect(item.pubDate).toBeDefined()
           expect(item.pubDate).not.toBe("")
           assert(luxon.fromRFC2822(item.pubDate!).isValid)
+
+          return void 0
         })
       )
     })

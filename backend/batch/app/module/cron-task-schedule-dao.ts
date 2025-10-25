@@ -1,14 +1,14 @@
 import { DateTime as luxon } from "luxon"
 import cron from "node-cron"
 import { PrismaClient, TaskStatus } from "../../type/prisma/client.ts"
-import { ArticleManager } from "./ArticleManager.ts"
+import ArticleDao from "./article-dao.ts"
 
-export class CronTaskScheduler {
-  private articleManager: ArticleManager
+class CronTaskScheduleDao {
+  private articleDao: ArticleDao
   private dbClient: PrismaClient
 
-  public constructor(articleManager: ArticleManager, dbClient: PrismaClient) {
-    this.articleManager = articleManager
+  public constructor(articleDao: ArticleDao, dbClient: PrismaClient) {
+    this.articleDao = articleDao
     this.dbClient = dbClient
   }
 
@@ -48,7 +48,7 @@ export class CronTaskScheduler {
   }
 
   public async runCreateOrUpdateArticlesByRss() {
-    await this.articleManager.createOrUpdateByRss()
+    await this.articleDao.createOrUpdateByRss()
   }
 
   private async createTaskSchedule(context: cron.TaskContext) {
@@ -99,3 +99,5 @@ export class CronTaskScheduler {
     })
   }
 }
+
+export default CronTaskScheduleDao

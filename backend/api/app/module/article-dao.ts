@@ -1,6 +1,6 @@
-import type { Prisma, PrismaClient } from "~~/type/prisma/client"
+import { Prisma, PrismaClient } from "../../type/prisma/client.ts"
 
-export class ArticleManager {
+class ArticleDao {
   private dbClient: PrismaClient
 
   public constructor(dbClient: PrismaClient) {
@@ -13,3 +13,5 @@ export class ArticleManager {
     return articles
   }
 }
+
+export default ArticleDao

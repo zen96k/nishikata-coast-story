@@ -9,7 +9,7 @@ type CustomItem = {
   pubDate?: string
 }
 
-export class RssParser {
+class RssParser {
   public async parseUrl(url: string) {
     const parser: Parser<CustomFeed, CustomItem> = new Parser()
 
@@ -18,3 +18,5 @@ export class RssParser {
     return rssFeed
   }
 }
+
+export default RssParser

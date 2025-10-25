@@ -8,14 +8,7 @@
   },
   "init": true,
   "runArgs": ["--env-file", ".devcontainer/devcontainer.env", "--rm"],
-  // "mounts": [
-  //   {
-  //     "source": "${localWorkspaceFolder}/volume/devcontainer/root/.vscode-server/extensions",
-  //     "target": "/root/.vscode-server/extensions",
-  //     "type": "bind"
-  //   }
-  // ],
-  "forwardPorts": [3000, 5306, 5555],
+  "forwardPorts": [3000, 3001, 5306, 5555],
   "customizations": {
     "vscode": {
       "extensions": [
@@ -26,6 +19,7 @@
         "MS-CEINTL.vscode-language-pack-ja",
         "ms-azuretools.vscode-docker",
         "eamodio.gitlens",
+        "dotenv.dotenvx-vscode",
         "vitest.explorer",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
@@ -103,7 +97,6 @@
       }
     }
   },
-  // "initializeCommand": "bash .devcontainer/script/initialize_command.sh",
   "onCreateCommand": "bash .devcontainer/script/on_create_command.sh",
   "postStartCommand": "bash .devcontainer/script/post_start_command.sh",
   "postAttachCommand": "bash .devcontainer/script/post_attach_command.sh",

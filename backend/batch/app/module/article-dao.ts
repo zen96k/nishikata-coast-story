@@ -1,8 +1,8 @@
 import { DateTime as luxon } from "luxon"
 import { PrismaClient } from "../../type/prisma/client.ts"
-import { RssParser } from "./RssParser.ts"
+import RssParser from "./rss-parser.ts"
 
-export class ArticleManager {
+class ArticleDao {
   private rssParser: RssParser
   private dbClient: PrismaClient
 
@@ -21,9 +21,10 @@ export class ArticleManager {
             const { items: items } = await this.rssParser.parseUrl(
               rssPublisher.url
             )
+
             const articles = (
               await Promise.all(
-                items.map((item) => {
+                items.map(async (item) => {
                   const {
                     title: title,
                     link: link,
@@ -62,11 +63,11 @@ export class ArticleManager {
             return articles
           })
         )
-      ).flatMap((articles) => articles)
+      ).flatMap((article) => article)
 
       await Promise.all(
-        articles.map((article) => {
-          return transaction.article.upsert({
+        articles.map(async (article) => {
+          return await transaction.article.upsert({
             where: { link: article.link },
             update: { title: article.title },
             create: article
@@ -76,3 +77,5 @@ export class ArticleManager {
     })
   }
 }
+
+export default ArticleDao

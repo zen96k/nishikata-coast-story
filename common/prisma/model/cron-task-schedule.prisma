@@ -1,5 +1,5 @@
 model CronTaskSchedule {
-  id           Int         @id @default(autoincrement()) @db.UnsignedInt
+  id           BigInt      @id @default(autoincrement()) @db.UnsignedBigInt
   executionId  String?     @unique(map: "uq_cron_task_schedule_execution_id") @map("execution_id") @db.VarChar(255)
   taskName     String?     @map("task_name") @db.VarChar(255)
   taskStatus   TaskStatus? @map("task_status")

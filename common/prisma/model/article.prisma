@@ -1,7 +1,7 @@
 model Article {
-  id             Int          @id @default(autoincrement()) @db.UnsignedInt
+  id             BigInt       @id @default(autoincrement()) @db.UnsignedBigInt
   rssPublisher   RssPublisher @relation(fields: [rssPublisherId], references: [id], map: "fk_article_rss_publisher_id", onDelete: Cascade, onUpdate: Cascade)
-  rssPublisherId Int          @map("rss_publisher_id") @db.UnsignedInt
+  rssPublisherId BigInt       @map("rss_publisher_id") @db.UnsignedBigInt
   title          String       @db.VarChar(255)
   link           String       @unique(map: "uq_article_link") @db.VarChar(255)
   author         String       @db.VarChar(255)
