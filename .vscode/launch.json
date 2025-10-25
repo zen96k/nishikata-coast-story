@@ -1,0 +1,27 @@
+{
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Client Side",
+      "runtimeExecutable": "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser",
+      "runtimeArgs": ["--incognito", "http://localhost:3000"],
+      "webRoot": "${workspaceFolder}/frontend/web/app"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Server Side",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "ncs:debug"],
+      "outputCapture": "std",
+      "cwd": "${workspaceFolder}/frontend/web"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Fullstack Mode",
+      "configurations": ["Server Side", "Client Side"]
+    }
+  ]
+}
