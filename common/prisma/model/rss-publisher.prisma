@@ -1,5 +1,5 @@
 model RssPublisher {
-  id        Int       @id @default(autoincrement()) @db.UnsignedInt
+  id        BigInt    @id @default(autoincrement()) @db.UnsignedBigInt
   name      String    @db.VarChar(255)
   url       String    @unique(map: "uq_rss_publisher_url") @db.VarChar(255)
   articles  Article[]

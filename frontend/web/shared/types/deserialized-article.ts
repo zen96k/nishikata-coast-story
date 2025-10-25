@@ -1,9 +1,9 @@
 import zod from "zod"
-import { DeserializedRssPublisherSchema } from "./deserialized-rss-publisher"
+import DeserializedRssPublisherSchema from "./deserialized-rss-publisher"
 
-export const DeserializedArticleSchema = zod.object({
-  id: zod.number(),
-  publisherId: zod.number(),
+const DeserializedArticleSchema = zod.object({
+  id: zod.bigint(),
+  publisherId: zod.bigint(),
   rssPublisher: DeserializedRssPublisherSchema.optional(),
   title: zod.string(),
   link: zod.string(),
@@ -14,4 +14,5 @@ export const DeserializedArticleSchema = zod.object({
   updatedAt: zod.date()
 })
 
+export default DeserializedArticleSchema
 export type DeserializedArticle = zod.infer<typeof DeserializedArticleSchema>

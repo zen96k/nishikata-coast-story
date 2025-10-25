@@ -1,8 +1,8 @@
 import { DateTime as luxon } from "luxon"
 import { PrismaClient } from "../../type/prisma/client.ts"
-import { RssParser } from "./RssParser.ts"
+import RssParser from "./rss-parser.ts"
 
-export class ArticleManager {
+class ArticleDao {
   private rssParser: RssParser
   private dbClient: PrismaClient
 
@@ -77,3 +77,5 @@ export class ArticleManager {
     })
   }
 }
+
+export default ArticleDao

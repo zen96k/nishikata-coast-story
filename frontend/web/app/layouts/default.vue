@@ -8,6 +8,5 @@
         </div>
       </UContainer>
     </UMain>
-    <!-- <AppFooter /> -->
   </div>
 </template>

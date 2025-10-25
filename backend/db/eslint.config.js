@@ -3,7 +3,7 @@ import eslintConfigPrettier from "eslint-config-prettier/flat"
 import { defineConfig } from "eslint/config"
 import tseslint from "typescript-eslint"
 
-export const config = defineConfig(
+const config = defineConfig(
   eslint.configs.recommended,
   tseslint.configs.recommended,
   eslintConfigPrettier

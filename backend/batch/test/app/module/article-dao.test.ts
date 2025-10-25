@@ -1,16 +1,16 @@
 import { DateTime as luxon } from "luxon"
 import { afterEach, beforeEach, describe, expect, test, vitest } from "vitest"
-import { ArticleManager } from "../../../app/module/ArticleManager.ts"
-import { RssParser } from "../../../app/module/RssParser.ts"
-import { QiitaBaseUrl } from "../../../constant-variable/qiita.ts"
-import { ZennBaseUrl } from "../../../constant-variable/zenn.ts"
+import ArticleDao from "../../../app/module/article-dao.ts"
+import RssParser from "../../../app/module/rss-parser.ts"
+import QiitaBaseUrl from "../../../constant-variable/qiita.ts"
+import ZennBaseUrl from "../../../constant-variable/zenn.ts"
 import dbClient from "../../helper/db-client.ts"
 import resetDb from "../../helper/reset-db.ts"
 
 const rssParser = new RssParser()
-const articleManager = new ArticleManager(rssParser, dbClient)
+const articleDao = new ArticleDao(rssParser, dbClient)
 
-describe("ArticleManager", () => {
+describe("ArticleDao", () => {
   describe("createOrUpdateByRss", () => {
     beforeEach(async () => {
       await resetDb()
@@ -21,7 +21,7 @@ describe("ArticleManager", () => {
     })
 
     test("Publisherが存在しない場合", async () => {
-      await articleManager.createOrUpdateByRss()
+      await articleDao.createOrUpdateByRss()
 
       const articles = await dbClient.article.findMany({
         include: { rssPublisher: true }
@@ -51,7 +51,7 @@ describe("ArticleManager", () => {
         .spyOn(rssParser, "parseUrl")
         .mockResolvedValue({ items: [qiitaItem, zennItem] })
 
-      await articleManager.createOrUpdateByRss()
+      await articleDao.createOrUpdateByRss()
 
       const qiitaArticle = await dbClient.article.findUniqueOrThrow({
         where: { link: qiitaItem.link },

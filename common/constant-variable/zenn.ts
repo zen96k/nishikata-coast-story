@@ -1,1 +1,3 @@
-export const ZennBaseUrl = "https://zenn.dev"
+const ZennBaseUrl = "https://zenn.dev"
+
+export default ZennBaseUrl

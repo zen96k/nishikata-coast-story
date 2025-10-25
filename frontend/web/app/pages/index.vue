@@ -52,33 +52,21 @@
 
 <script setup lang="ts">
   import { useDateFormat } from "@vueuse/core"
+  import type { H3Error } from "h3"
   import { DateTime as luxon } from "luxon"
-  import { QiitaBaseUrl } from "../../../../common/constant-variable/qiita"
-  import { ZennBaseUrl } from "../../../../common/constant-variable/zenn"
-
-  const runtimeConfig = useRuntimeConfig()
+  import superjson from "superjson"
+  import QiitaBaseUrl from "../../../../common/constant-variable/qiita"
+  import ZennBaseUrl from "../../../../common/constant-variable/zenn"
 
   const articles = ref<DeserializedArticle[]>()
 
   const { data: data, error: error } = await useFetch<
-    SerializedArticle[],
-    SerializedError
-  >(`${runtimeConfig.public.ncsApiBaseUrl}/api/article`)
+    DeserializedArticle[],
+    H3Error
+  >("/api/article", { parseResponse: superjson.parse })
 
   if (data.value) {
-    articles.value = data.value.map((article) => {
-      return {
-        id: article.id,
-        publisherId: article.publisherId,
-        title: article.title,
-        link: article.link,
-        summary: article.summary,
-        author: article.author,
-        publishedAt: luxon.fromISO(article.publishedAt).toLocal().toJSDate(),
-        createdAt: luxon.fromISO(article.createdAt).toLocal().toJSDate(),
-        updatedAt: luxon.fromISO(article.updatedAt).toLocal().toJSDate()
-      }
-    })
+    articles.value = data.value
   }
   if (error.value) {
     console.error(error.value)

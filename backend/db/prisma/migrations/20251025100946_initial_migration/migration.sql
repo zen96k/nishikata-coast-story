@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE `article` (
-    `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-    `rss_publisher_id` INTEGER UNSIGNED NOT NULL,
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `rss_publisher_id` BIGINT UNSIGNED NOT NULL,
     `title` VARCHAR(255) NOT NULL,
     `link` VARCHAR(255) NOT NULL,
     `author` VARCHAR(255) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE `article` (
 
 -- CreateTable
 CREATE TABLE `cron_task_schedule` (
-    `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `execution_id` VARCHAR(255) NULL,
     `task_name` VARCHAR(255) NULL,
     `task_status` ENUM('idle', 'running', 'stopped', 'destroyed') NULL,
@@ -34,7 +34,7 @@ CREATE TABLE `cron_task_schedule` (
 
 -- CreateTable
 CREATE TABLE `rss_publisher` (
-    `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL,
     `url` VARCHAR(255) NOT NULL,
     `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
