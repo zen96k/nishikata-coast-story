@@ -3,9 +3,11 @@
   "type": "module",
   "scripts": {
     "ncs:dev": "npm run prisma:generate && npm run tsx:dev",
+    "ncs:debug": "npm run prisma:generate && npm run tsx:debug",
     "ncs:qc": "dotenvx run -f compose.qc.env -- docker compose -f compose.qc.yml up -d --pull always --force-recreate -V --wait && NCS_ENV=qc npm run prisma:db:push && npm run vitest",
     "prisma:generate": "prisma generate",
     "tsx:dev": "dotenvx run -f hono.dev.env prisma.dev.env -- tsx watch app/main.ts",
+    "tsx:debug": "dotenvx run -f hono.dev.env prisma.dev.env -- tsx watch app/main.ts",
     "vitest": "dotenvx run -f prisma.qc.env -- vitest run --coverage",
     "ncu": "ncu",
     "ncu:upgrade": "ncu -u && npm install",

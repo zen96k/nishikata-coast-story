@@ -1,27 +1,38 @@
 {
+  "version": "0.2.0",
   "configurations": [
     {
       "type": "chrome",
       "request": "launch",
-      "name": "Client Side",
+      "name": "Nuxt Client",
       "runtimeExecutable": "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser",
       "runtimeArgs": ["--incognito", "http://localhost:3000"],
+      "preLaunchTask": "wait-for-nuxt-server",
       "webRoot": "${workspaceFolder}/frontend/web/app"
     },
     {
       "type": "node",
       "request": "launch",
-      "name": "Server Side",
+      "name": "Nuxt Server",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "ncs:debug"],
       "outputCapture": "std",
       "cwd": "${workspaceFolder}/frontend/web"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "API Server",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "ncs:debug"],
+      "outputCapture": "std",
+      "cwd": "${workspaceFolder}/backend/api"
     }
   ],
   "compounds": [
     {
       "name": "Fullstack Mode",
-      "configurations": ["Server Side", "Client Side"]
+      "configurations": ["API Server", "Nuxt Server", "Nuxt Client"]
     }
   ]
 }
