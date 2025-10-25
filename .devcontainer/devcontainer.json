@@ -47,7 +47,6 @@
         "editor.quickSuggestions": {
           "strings": true
         },
-        "debug.javascript.autoAttachFilter": "always",
         "diffEditor.ignoreTrimWhitespace": false,
         "files.associations": {
           "*.css": "tailwindcss"
