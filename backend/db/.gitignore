@@ -1,6 +1,0 @@
-*.env.keys
-
-backup
-node_modules
-type
-volume

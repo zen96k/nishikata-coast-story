@@ -1,1 +1,0 @@
-# Nishikata-Coast-Story

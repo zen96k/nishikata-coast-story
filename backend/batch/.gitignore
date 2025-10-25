@@ -1,5 +1,0 @@
-*.env.keys
-
-coverage
-node_modules
-type
