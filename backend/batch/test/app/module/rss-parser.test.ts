@@ -9,7 +9,7 @@ const rssParser = new RssParser()
 describe("RssParser", () => {
   describe("parseUrl", () => {
     test.concurrent("Qiita", async () => {
-      const url = "https://qiita.com/popular-items/feed.atom"
+      const url = `${QiitaBaseUrl}/popular-items/feed.atom`
       const { items: items } = await rssParser.parseUrl(url)
 
       await Promise.all(
@@ -34,7 +34,7 @@ describe("RssParser", () => {
     })
 
     test.concurrent("Zenn", async () => {
-      const url = "https://zenn.dev/feed"
+      const url = `${ZennBaseUrl}/feed`
       const { items: items } = await rssParser.parseUrl(url)
 
       await Promise.all(

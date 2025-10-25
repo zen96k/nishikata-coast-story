@@ -1,3 +1,5 @@
+import QiitaBaseUrl from "../constant-variable/qiita.ts"
+import ZennBaseUrl from "../constant-variable/zenn.ts"
 import { PrismaClient } from "../type/prisma/client.ts"
 
 const main = async () => {
@@ -6,8 +8,8 @@ const main = async () => {
   await dbClient.$transaction(async (transaction) => {
     await transaction.rssPublisher.createMany({
       data: [
-        { name: "Qiita", url: "https://qiita.com/popular-items/feed.atom" },
-        { name: "Zenn", url: "https://zenn.dev/feed" }
+        { name: "Qiita", url: `${QiitaBaseUrl}/popular-items/feed.atom` },
+        { name: "Zenn", url: `${ZennBaseUrl}/feed` }
       ],
       skipDuplicates: true
     })
