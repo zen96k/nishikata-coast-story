@@ -8,8 +8,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v5
-        with:
-          ref: ${{ github.head_ref }}
       - name: Install dotenvx
         run: curl -sfS https://dotenvx.sh | sh
       - name: Run Gitleaks Scan
