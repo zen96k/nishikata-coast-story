@@ -26,6 +26,7 @@ npm install && npm run prisma:generate
 dotenvx encrypt -f *.env
 cd ${BACKEND_DIRNAME}/db
 npm install && npm run prisma:generate && npm run mariadb:up
+npm run prisma:migrate:deploy && npm run prisma:db:seed
 dotenvx encrypt -f *.env
 
 docker system prune -af --volumes
