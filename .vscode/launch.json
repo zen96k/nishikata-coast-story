@@ -5,26 +5,28 @@
       "type": "chrome",
       "request": "launch",
       "name": "Nuxt Client",
+      "preLaunchTask": "Wait for Nuxt Server",
       "runtimeExecutable": "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser",
-      "runtimeArgs": ["--incognito", "http://localhost:3000"],
-      "preLaunchTask": "wait-for-nuxt-server"
+      "runtimeArgs": ["--incognito", "http://localhost:3000"]
     },
     {
       "type": "node",
       "request": "launch",
       "name": "Nuxt Server",
+      "cwd": "${workspaceFolder}/frontend/web",
+      "preLaunchTask": "npm: install - frontend/web",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "ncs:debug"],
-      "cwd": "${workspaceFolder}/frontend/web",
       "outputCapture": "std"
     },
     {
       "type": "node",
       "request": "launch",
       "name": "API Server",
+      "cwd": "${workspaceFolder}/backend/api",
+      "preLaunchTask": "npm: install - backend/api",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "ncs:debug"],
-      "cwd": "${workspaceFolder}/backend/api",
       "outputCapture": "std"
     }
   ],
