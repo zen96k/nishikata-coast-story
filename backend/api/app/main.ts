@@ -16,7 +16,7 @@ const app = new Hono()
 
     const errorResponse = {
       statusCode: statusCode.InternalServerError.code,
-      statusMessage: statusCode.InternalServerError.message,
+      statusMessage: "API Server Error",
       message: error.message
     }
 

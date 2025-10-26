@@ -70,5 +70,11 @@
   }
   if (error.value) {
     console.error(error.value)
+
+    const toast = useToast()
+    toast.add({
+      title: `${error.value.statusCode} Error`,
+      description: error.value.statusMessage
+    })
   }
 </script>
