@@ -12,7 +12,8 @@ BACKEND_DIRNAME=${PROJECT_DIRNAME}/backend
 COMMON_DIRNAME=${PROJECT_DIRNAME}/common
 
 cd ${COMMON_DIRNAME}
-dotenvx encrypt -f ${FRONTEND_DIRNAME}/web/*.env \
+dotenvx encrypt -fk .env.keys \
+                -f ${FRONTEND_DIRNAME}/web/*.env \
                 -f ${BACKEND_DIRNAME}/api/*.env \
                 -f ${BACKEND_DIRNAME}/batch/*.env \
                 -f ${BACKEND_DIRNAME}/db/*.env

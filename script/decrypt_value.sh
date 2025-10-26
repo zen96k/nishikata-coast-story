@@ -12,7 +12,7 @@ BACKEND_DIRNAME=${PROJECT_DIRNAME}/backend
 COMMON_DIRNAME=${PROJECT_DIRNAME}/common
 
 cd ${COMMON_DIRNAME}
-dotenvx rotate  -fk .env.keys \
+dotenvx decrypt -fk .env.keys \
                 -f ${FRONTEND_DIRNAME}/web/*.env \
                 -f ${BACKEND_DIRNAME}/api/*.env \
                 -f ${BACKEND_DIRNAME}/batch/*.env \
