@@ -7,8 +7,7 @@
       "name": "Nuxt Client",
       "runtimeExecutable": "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser",
       "runtimeArgs": ["--incognito", "http://localhost:3000"],
-      "preLaunchTask": "wait-for-nuxt-server",
-      "webRoot": "${workspaceFolder}/frontend/web/app"
+      "preLaunchTask": "wait-for-nuxt-server"
     },
     {
       "type": "node",
@@ -16,8 +15,8 @@
       "name": "Nuxt Server",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "ncs:debug"],
-      "outputCapture": "std",
-      "cwd": "${workspaceFolder}/frontend/web"
+      "cwd": "${workspaceFolder}/frontend/web",
+      "outputCapture": "std"
     },
     {
       "type": "node",
@@ -25,8 +24,8 @@
       "name": "API Server",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "ncs:debug"],
-      "outputCapture": "std",
-      "cwd": "${workspaceFolder}/backend/api"
+      "cwd": "${workspaceFolder}/backend/api",
+      "outputCapture": "std"
     }
   ],
   "compounds": [
