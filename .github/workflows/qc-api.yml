@@ -1,9 +1,5 @@
 name: QC API
-on:
-  pull_request:
-    branches:
-      - main
-      - dev
+on: pull_request
 jobs:
   qc-api:
     name: QC API

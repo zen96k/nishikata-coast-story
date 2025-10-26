@@ -1,9 +1,5 @@
 name: Scan Code
-on:
-  pull_request:
-    branches:
-      - main
-      - dev
+on: pull_request
 jobs:
   scan-code:
     name: Scan Code
