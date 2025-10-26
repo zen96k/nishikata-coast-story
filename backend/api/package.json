@@ -4,7 +4,9 @@
   "scripts": {
     "ncs:dev": "npm run prisma:generate && npm run tsx:dev",
     "ncs:debug": "npm run prisma:generate && npm run tsx:debug",
+    "eslint": "eslint",
     "prisma:generate": "prisma generate",
+    "tsc:check": "tsc --noEmit",
     "tsx:dev": "dotenvx run -f hono.dev.env prisma.dev.env -- tsx watch app/main.ts",
     "tsx:debug": "dotenvx run -f hono.dev.env prisma.dev.env -- tsx watch app/main.ts",
     "ncu": "ncu",

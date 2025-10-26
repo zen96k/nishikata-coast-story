@@ -5,6 +5,7 @@
     "mariadb:up": "dotenvx run -f compose.${NCS_ENV}.env -- docker compose -f compose.${NCS_ENV}.yml up -d --pull always --force-recreate -V --wait",
     "mariadb:backup": "mkdir -p backup && docker container exec ncs-mariadb-${NCS_ENV} bash -c 'mariadb-dump -A -u root -p${MARIADB_ROOT_PASSWORD}' > backup/${NCS_ENV}-$(date +%Y%m%d%H%M%S).sql",
     "mariadb:restore": "docker container exec ncs-mariadb-${NCS_ENV} bash -c 'mariadb -u root -p${MARIADB_ROOT_PASSWORD}' <",
+    "eslint": "eslint",
     "prisma:generate": "prisma generate",
     "prisma:db:pull": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma db pull",
     "prisma:db:push": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma db push",
@@ -13,6 +14,7 @@
     "prisma:migrate:reset": "dotenvx run -f prisma.dev.env -- prisma migrate reset",
     "prisma:migrate:deploy": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma migrate deploy",
     "prisma:studio": "prisma studio",
+    "tsc:check": "tsc --noEmit",
     "ncu": "ncu",
     "ncu:upgrade": "ncu -u && npm install",
     "knip": "knip"
