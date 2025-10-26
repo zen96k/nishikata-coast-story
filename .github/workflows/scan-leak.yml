@@ -1,6 +1,6 @@
 name: Scan Leak
 on:
-  - push:
+  push:
     branches:
       - work
 jobs:
