@@ -1,12 +1,12 @@
-name: QC Batch
+name: QC DB
 on:
   pull_request:
     branches:
       - main
       - dev
 jobs:
-  qc-batch:
-    name: QC Batch
+  qc-db:
+    name: QC DB
     runs-on: ubuntu-22.04
     permissions:
       pull-requests: write
@@ -20,20 +20,11 @@ jobs:
       - name: Install dotenvx
         run: curl -sfS https://dotenvx.sh | sh
       - name: Install Dependencies
-        working-directory: backend/batch
+        working-directory: backend/db
         run: npm install
       - name: Run ESLint
-        working-directory: backend/batch
+        working-directory: backend/db
         run: npm run eslint
       - name: Run TypeCheck
-        working-directory: backend/batch
+        working-directory: backend/db
         run: npm run tsc:check
-      - name: Run QC
-        working-directory: backend/batch
-        env:
-          DOTENV_PRIVATE_KEY_ENV: ${{ secrets.DOTENV_PRIVATE_KEY_ENV }}
-        run: npm run ncs:qc
-      - name: Report Coverage
-        uses: davelosert/vitest-coverage-report-action@v2
-        with:
-          working-directory: backend/batch

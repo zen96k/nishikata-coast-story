@@ -1,0 +1,39 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Web Client",
+      "preLaunchTask": "Wait for Web Server",
+      "runtimeExecutable": "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser",
+      "runtimeArgs": ["--incognito", "http://localhost:3000"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Web Server",
+      "cwd": "${workspaceFolder}/frontend/web",
+      "preLaunchTask": "npm: install - frontend/web",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "ncs:debug"],
+      "outputCapture": "std"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "API Server",
+      "cwd": "${workspaceFolder}/backend/api",
+      "preLaunchTask": "npm: install - backend/api",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "ncs:debug"],
+      "outputCapture": "std"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Fullstack Mode",
+      "configurations": ["API Server", "Web Server", "Web Client"]
+    }
+  ]
+}

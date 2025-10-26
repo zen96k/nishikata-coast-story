@@ -1,6 +1,8 @@
 import { serve } from "@hono/node-server"
 import { Hono } from "hono"
+import type { ContentfulStatusCode } from "hono/utils/http-status"
 import superjson from "superjson"
+import statusCode from "../constant-variable/status-code.ts"
 import article from "./router/article.ts"
 
 const honoServerBasePath = process.env.HONO_SERVER_BASE_PATH || ""
@@ -13,14 +15,16 @@ const app = new Hono()
     console.error(error)
 
     const errorResponse = {
-      statusCode: 500,
-      statusMessage: "Internal Server Error",
+      statusCode: statusCode.InternalServerError.code,
+      statusMessage: "API Server Error",
       message: error.message
     }
 
-    return context.text(superjson.stringify(errorResponse), 500, {
-      "Content-Type": "application/json"
-    })
+    return context.text(
+      superjson.stringify(errorResponse),
+      statusCode.InternalServerError.code as ContentfulStatusCode,
+      { "Content-Type": "application/json" }
+    )
   })
 
 serve({ fetch: app.fetch, port: honoServerPort })

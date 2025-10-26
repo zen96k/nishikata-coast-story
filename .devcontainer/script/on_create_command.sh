@@ -16,6 +16,7 @@ curl -sfS https://dotenvx.sh | sh
 
 apt update && apt install -y curl wget \
                              git \
+                             netcat-traditional \
                              zip unzip \
                              rsync \
                              tzdata
