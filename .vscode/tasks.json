@@ -1,0 +1,10 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Wait for Web Server",
+      "type": "shell",
+      "command": "while ! nc -z localhost 3000; do echo 'Waiting for http://localhost:3000 ...'; sleep 1; done"
+    }
+  ]
+}

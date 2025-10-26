@@ -1,0 +1,104 @@
+{
+  "name": "nishikata-coast-story",
+  "image": "ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/node:1": {}
+  },
+  "init": true,
+  "runArgs": ["--env-file", ".devcontainer/devcontainer.env", "--rm"],
+  "appPort": 3000,
+  "forwardPorts": [3000, 3001, 5306, 5555],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools-themes",
+        "vscode-icons-team.vscode-icons",
+        "Codeium.codeium",
+        "Continue.continue",
+        "MS-CEINTL.vscode-language-pack-ja",
+        "ms-azuretools.vscode-docker",
+        "eamodio.gitlens",
+        "dotenv.dotenvx-vscode",
+        "vitest.explorer",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "Vue.volar",
+        "Nuxtr.nuxtr-vscode",
+        "bradlc.vscode-tailwindcss",
+        "Prisma.prisma"
+      ],
+      "settings": {
+        "workbench.colorTheme": "Visual Studio Dark - C++",
+        "workbench.iconTheme": "vscode-icons",
+        "workbench.secondarySideBar.showLabels": false,
+        "continue.telemetryEnabled": false,
+        "editor.autoClosingBrackets": "always",
+        "editor.autoClosingQuotes": "always",
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "always",
+          "source.fixAll.ts": "always"
+        },
+        "editor.tabSize": 2,
+        "editor.renderWhitespace": "all",
+        "editor.fontSize": 16,
+        "editor.fontFamily": "BIZ UDGothic",
+        "editor.formatOnSave": true,
+        "editor.quickSuggestions": {
+          "strings": true
+        },
+        "diffEditor.ignoreTrimWhitespace": false,
+        "files.associations": {
+          "*.css": "tailwindcss"
+        },
+        "tailwindCSS.classAttributes": ["class", "ui"],
+        "tailwindCSS.experimental.classRegex": [
+          ["ui:\\s*{([^)]*)\\s*}", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+        ],
+        "files.insertFinalNewline": true,
+        "files.trimFinalNewlines": true,
+        "files.trimTrailingWhitespace": true,
+        "git.postCommitCommand": "push",
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.fontSize": 16,
+        "[markdown]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "files.trimTrailingWhitespace": false
+        },
+        "[json]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[jsonc]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[yml]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[yaml]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[javascript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[typescript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "vue.autoInsert.dotValue": true,
+        "[vue]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[css]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[prisma]": {
+          "editor.defaultFormatter": "Prisma.prisma"
+        }
+      }
+    }
+  },
+  "onCreateCommand": "bash .devcontainer/script/on_create_command.sh",
+  "postStartCommand": "bash .devcontainer/script/post_start_command.sh",
+  "postAttachCommand": "bash .devcontainer/script/post_attach_command.sh",
+  "waitFor": "onCreateCommand"
+}
