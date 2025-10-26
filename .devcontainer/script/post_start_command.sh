@@ -16,17 +16,15 @@ docker compose up -d --pull always --force-recreate -V
 cd ${FRONTEND_DIRNAME}/web
 rm -rf .output .data .nuxt .nitro .cache dist
 npm install && npm run prisma:generate
-dotenvx encrypt -f *.env
 
 cd ${BACKEND_DIRNAME}/api
 npm install && npm run prisma:generate
-dotenvx encrypt -f *.env
+
 cd ${BACKEND_DIRNAME}/batch
 npm install && npm run prisma:generate
-dotenvx encrypt -f *.env
+
 cd ${BACKEND_DIRNAME}/db
 npm install && npm run prisma:generate && npm run mariadb:up
 npm run prisma:migrate:deploy && npm run prisma:db:seed
-dotenvx encrypt -f *.env
 
 docker system prune -af --volumes
