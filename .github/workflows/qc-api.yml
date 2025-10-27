@@ -16,11 +16,8 @@ jobs:
       - name: Install dotenvx
         run: curl -sfS https://dotenvx.sh | sh
       - name: Install Dependencies
-        working-directory: backend/api
         run: npm install
       - name: Run ESLint
-        working-directory: backend/api
-        run: npm run eslint
+        run: npm run eslint -w backend/api
       - name: Run TypeCheck
-        working-directory: backend/api
-        run: npm run tsc:check
+        run: npm run tsc:check -w backend/api

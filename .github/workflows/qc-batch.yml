@@ -16,19 +16,15 @@ jobs:
       - name: Install dotenvx
         run: curl -sfS https://dotenvx.sh | sh
       - name: Install Dependencies
-        working-directory: backend/batch
-        run: npm install
+        run: npm install -w backend/batch
       - name: Run ESLint
-        working-directory: backend/batch
-        run: npm run eslint
+        run: npm run eslint -w backend/batch
       - name: Run TypeCheck
-        working-directory: backend/batch
-        run: npm run tsc:check
+        run: npm run tsc:check -w backend/batch
       - name: Run QC
-        working-directory: backend/batch
         env:
           DOTENV_PRIVATE_KEY_ENV: ${{ secrets.DOTENV_PRIVATE_KEY_ENV }}
-        run: npm run ncs:qc
+        run: npm run ncs:qc -w backend/batch
       - name: Report Coverage
         uses: davelosert/vitest-coverage-report-action@v2
         with:
