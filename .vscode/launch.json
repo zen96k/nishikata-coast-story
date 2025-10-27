@@ -6,9 +6,8 @@
       "request": "launch",
       "name": "API Server",
       "preLaunchTask": "npm-install",
-      "cwd": "${workspaceFolder}/backend/api",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "ncs:dev"],
+      "runtimeArgs": ["run", "ncs:dev", "-w", "backend/api"],
       "outputCapture": "std"
     },
     {
@@ -16,9 +15,8 @@
       "request": "launch",
       "name": "Batch Server",
       "preLaunchTask": "wait-for-api-server",
-      "cwd": "${workspaceFolder}/backend/batch",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "ncs:dev"],
+      "runtimeArgs": ["run", "ncs:dev", "-w", "backend/batch"],
       "outputCapture": "std"
     },
     {
@@ -26,9 +24,8 @@
       "request": "launch",
       "name": "Web Server",
       "preLaunchTask": "wait-for-api-server",
-      "cwd": "${workspaceFolder}/frontend/web",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "ncs:dev"],
+      "runtimeArgs": ["run", "ncs:dev", "-w", "frontend/web"],
       "outputCapture": "std"
     },
     {
