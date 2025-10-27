@@ -1,0 +1,16 @@
+{
+  "name": "ncs",
+  "type": "module",
+  "workspaces": [
+    "backend/api",
+    "backend/batch",
+    "backend/db",
+    "common",
+    "frontend/web"
+  ],
+  "devDependencies": {
+    "knip": "5.66.3",
+    "lefthook": "2.0.1",
+    "npm-check-updates": "19.1.1"
+  }
+}

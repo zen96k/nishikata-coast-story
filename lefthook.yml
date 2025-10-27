@@ -1,0 +1,5 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - name: encrypt environment variables
+      run: npm run dotenvx:encrypt --workspaces --if-present

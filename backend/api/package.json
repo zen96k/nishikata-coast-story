@@ -1,0 +1,37 @@
+{
+  "name": "ncs-api",
+  "type": "module",
+  "scripts": {
+    "ncs:dev": "npm run prisma:generate && npm run tsx:dev",
+    "dotenvx:decrypt": "dotenvx decrypt -fk .env.keys -f *.env",
+    "dotenvx:encrypt": "dotenvx encrypt -fk .env.keys -f *.env",
+    "eslint": "eslint",
+    "prisma:generate": "prisma generate",
+    "tsc:check": "tsc --noEmit",
+    "tsx:dev": "dotenvx run -f hono.dev.env prisma.dev.env -- tsx watch app/main.ts"
+  },
+  "prisma": {
+    "schema": "prisma"
+  },
+  "dependencies": {
+    "@hono/node-server": "1.19.5",
+    "hono": "4.10.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.38.0",
+    "@prisma/client": "6.18.0",
+    "@tsconfig/node-lts": "22.0.2",
+    "@tsconfig/node-ts": "23.6.1",
+    "@tsconfig/recommended": "1.0.10",
+    "@types/node": "24.9.1",
+    "eslint": "9.38.0",
+    "eslint-config-prettier": "10.1.8",
+    "prettier": "3.6.2",
+    "prettier-plugin-organize-imports": "4.3.0",
+    "prisma": "6.18.0",
+    "superjson": "2.2.3",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.46.2"
+  }
+}

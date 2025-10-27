@@ -1,0 +1,20 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "npm-install",
+      "type": "shell",
+      "command": "npm install"
+    },
+    {
+      "label": "wait-for-api-server",
+      "type": "shell",
+      "command": "while ! nc -z localhost 3001; do echo 'Waiting for http://localhost:3001 ...'; sleep 1; done"
+    },
+    {
+      "label": "wait-for-web-server",
+      "type": "shell",
+      "command": "while ! nc -z localhost 3000; do echo 'Waiting for http://localhost:3000 ...'; sleep 1; done"
+    }
+  ]
+}
