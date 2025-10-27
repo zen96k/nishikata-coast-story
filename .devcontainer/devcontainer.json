@@ -48,6 +48,7 @@
         "editor.quickSuggestions": {
           "strings": true
         },
+        "eslint.workingDirectories": [{ "mode": "auto" }],
         "diffEditor.ignoreTrimWhitespace": false,
         "files.associations": {
           "*.css": "tailwindcss"
