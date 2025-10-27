@@ -48,7 +48,12 @@
         "editor.quickSuggestions": {
           "strings": true
         },
-        "eslint.workingDirectories": [{ "mode": "auto" }],
+        "eslint.workingDirectories": [
+          "backend/api",
+          "backend/batch",
+          "backend/db",
+          "frontend/web"
+        ],
         "diffEditor.ignoreTrimWhitespace": false,
         "files.associations": {
           "*.css": "tailwindcss"
