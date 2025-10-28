@@ -1,0 +1,7 @@
+{
+  "name": "ncs",
+  "type": "module",
+  "devDependencies": {
+    "lefthook": "2.0.1"
+  }
+}

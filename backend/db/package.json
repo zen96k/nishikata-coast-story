@@ -1,0 +1,48 @@
+{
+  "name": "ncs-db",
+  "type": "module",
+  "scripts": {
+    "mariadb:up": "dotenvx run -f compose.${NCS_ENV}.env -- docker compose -f compose.${NCS_ENV}.yml up -d --pull always --force-recreate -V --wait",
+    "mariadb:backup": "mkdir -p backup && docker container exec ncs-mariadb-${NCS_ENV} bash -c 'mariadb-dump -A -u root -p${MARIADB_ROOT_PASSWORD}' > backup/${NCS_ENV}-$(date +%Y%m%d%H%M%S).sql",
+    "mariadb:restore": "docker container exec ncs-mariadb-${NCS_ENV} bash -c 'mariadb -u root -p${MARIADB_ROOT_PASSWORD}' <",
+    "dotenvx:decrypt": "dotenvx decrypt -fk .env.keys -f *.env",
+    "dotenvx:encrypt": "dotenvx encrypt -fk .env.keys -f *.env",
+    "eslint": "eslint",
+    "prisma:generate": "prisma generate",
+    "prisma:db:pull": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma db pull",
+    "prisma:db:push": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma db push",
+    "prisma:db:seed": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma db seed",
+    "prisma:migrate:dev": "dotenvx run -f prisma.dev.env -- prisma migrate dev",
+    "prisma:migrate:reset": "dotenvx run -f prisma.dev.env -- prisma migrate reset",
+    "prisma:migrate:deploy": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma migrate deploy",
+    "prisma:studio": "prisma studio",
+    "tsc:check": "tsc --noEmit",
+    "knip": "knip",
+    "ncu": "ncu",
+    "ncu:upgrade": "ncu -u"
+  },
+  "prisma": {
+    "schema": "prisma",
+    "seed": "tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "6.18.0",
+    "prisma": "6.18.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.38.0",
+    "@tsconfig/node-lts": "22.0.2",
+    "@tsconfig/node-ts": "23.6.1",
+    "@tsconfig/recommended": "1.0.10",
+    "@types/node": "24.9.1",
+    "eslint": "9.38.0",
+    "eslint-config-prettier": "10.1.8",
+    "knip": "5.66.4",
+    "npm-check-updates": "19.1.1",
+    "prettier": "3.6.2",
+    "prettier-plugin-organize-imports": "4.3.0",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.46.2"
+  }
+}

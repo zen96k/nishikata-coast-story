@@ -1,0 +1,20 @@
+name: Scan Code
+on: pull_request
+jobs:
+  scan-code:
+    name: Scan Code
+    runs-on: ubuntu-22.04
+    permissions:
+      security-events: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: actions, javascript-typescript
+          queries: security-and-quality
+      - name: Run CodeQL
+        uses: github/codeql-action/init@v4

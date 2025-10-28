@@ -1,0 +1,15 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - name: encrypt environment variables - backend/api
+      run: npm run dotenvx:encrypt
+      root: backend/api
+    - name: encrypt environment variables - backend/batch
+      run: npm run dotenvx:encrypt
+      root: backend/batch
+    - name: encrypt environment variables - backend/db
+      run: npm run dotenvx:encrypt
+      root: backend/db
+    - name: encrypt environment variables - frontend/web
+      run: npm run dotenvx:encrypt
+      root: frontend/web

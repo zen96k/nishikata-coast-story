@@ -1,0 +1,26 @@
+name: QC Web
+on: pull_request
+jobs:
+  qc-web:
+    name: QC Web
+    runs-on: ubuntu-22.04
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+      - name: Install dotenvx
+        run: curl -sfS https://dotenvx.sh | sh
+      - name: Install Dependencies
+        run: npm install
+        working-directory: frontend/web
+      - name: Run ESLint
+        run: npm run eslint
+        working-directory: frontend/web
+      - name: Run TypeCheck
+        run: npm run tsc:check
+        working-directory: frontend/web

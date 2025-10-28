@@ -1,0 +1,57 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "API Server",
+      "preLaunchTask": "npm: install - backend/api",
+      "cwd": "${workspaceFolder}/backend/api",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "ncs:dev"],
+      "outputCapture": "std"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Batch Server",
+      "preLaunchTask": "npm: install - backend/batch",
+      "cwd": "${workspaceFolder}/backend/batch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "ncs:dev"],
+      "outputCapture": "std"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Web Server",
+      "preLaunchTask": "npm: install - frontend/web",
+      "cwd": "${workspaceFolder}/frontend/web",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "ncs:dev"],
+      "outputCapture": "std"
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Web Client",
+      "preLaunchTask": "wait-for-backend",
+      "runtimeArgs": [
+        "--incognito",
+        "--auto-open-devtools-for-tabs",
+        "http://localhost:3000"
+      ]
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Fullstack Mode",
+      "configurations": [
+        "API Server",
+        "Batch Server",
+        "Web Server",
+        "Web Client"
+      ]
+    }
+  ]
+}
