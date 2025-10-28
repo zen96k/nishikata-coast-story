@@ -16,7 +16,7 @@
     "tsc:check": "tsc --noEmit",
     "knip": "knip",
     "ncu": "ncu",
-    "ncu:upgrade": "ncu -u"
+    "ncu:upgrade": "ncu -u && npm install"
   },
   "prisma": {
     "schema": "prisma"
@@ -46,7 +46,7 @@
     "prettier-plugin-organize-imports": "4.3.0",
     "prettier-plugin-tailwindcss": "0.7.1",
     "prisma": "6.18.0",
-    "superjson": "2.2.3",
+    "superjson": "2.2.5",
     "typescript": "5.9.3",
     "vue-tsc": "3.1.2",
     "zod": "4.1.12"

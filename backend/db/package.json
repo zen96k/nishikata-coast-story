@@ -19,7 +19,7 @@
     "tsc:check": "tsc --noEmit",
     "knip": "knip",
     "ncu": "ncu",
-    "ncu:upgrade": "ncu -u"
+    "ncu:upgrade": "ncu -u && npm install"
   },
   "prisma": {
     "schema": "prisma",
