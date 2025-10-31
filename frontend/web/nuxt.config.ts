@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 const config = defineNuxtConfig({
+  compatibilityDate: "2025-11-01",
   devtools: { enabled: true },
   app: { head: { title: "西方コーストストーリー", htmlAttrs: { lang: "ja" } } },
   runtimeConfig: { ncsApiBaseUrl: "" },
