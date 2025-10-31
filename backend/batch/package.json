@@ -14,7 +14,7 @@
     "vitest": "dotenvx run -f prisma.qc.env -- vitest run --coverage",
     "knip": "knip",
     "ncu": "ncu",
-    "ncu:upgrade": "ncu -u"
+    "ncu:upgrade": "ncu -u && npm install"
   },
   "prisma": {
     "schema": "prisma"
@@ -30,7 +30,7 @@
     "@tsconfig/recommended": "1.0.10",
     "@types/luxon": "3.7.1",
     "@types/node": "24.9.1",
-    "@vitest/coverage-v8": "4.0.3",
+    "@vitest/coverage-v8": "4.0.4",
     "eslint": "9.38.0",
     "eslint-config-prettier": "10.1.8",
     "knip": "5.66.4",
@@ -43,6 +43,6 @@
     "tsx": "4.20.6",
     "typescript": "5.9.3",
     "typescript-eslint": "8.46.2",
-    "vitest": "4.0.3"
+    "vitest": "4.0.4"
   }
 }

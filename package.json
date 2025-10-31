@@ -1,7 +1,12 @@
 {
   "name": "ncs",
   "type": "module",
+  "scripts": {
+    "ncu": "ncu",
+    "ncu:upgrage": "ncu -u && npm install"
+  },
   "devDependencies": {
-    "lefthook": "2.0.1"
+    "lefthook": "2.0.1",
+    "npm-check-updates": "19.1.1"
   }
 }
