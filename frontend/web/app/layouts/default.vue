@@ -3,7 +3,7 @@
     <AppHeader />
     <UMain>
       <UContainer>
-        <div class="my-4">
+        <div class="my-8">
           <slot />
         </div>
       </UContainer>

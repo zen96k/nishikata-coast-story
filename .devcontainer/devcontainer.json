@@ -13,26 +13,23 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "ms-vscode.cpptools-themes",
-        "vscode-icons-team.vscode-icons",
+        "bradlc.vscode-tailwindcss",
         "Codeium.codeium",
         "Continue.continue",
-        "MS-CEINTL.vscode-language-pack-ja",
-        "ms-azuretools.vscode-docker",
-        "eamodio.gitlens",
-        "dotenv.dotenvx-vscode",
-        "vitest.explorer",
         "dbaeumer.vscode-eslint",
+        "dotenv.dotenvx-vscode",
+        "eamodio.gitlens",
         "esbenp.prettier-vscode",
-        "Vue.volar",
+        "ms-azuretools.vscode-docker",
+        "MS-CEINTL.vscode-language-pack-ja",
+        "ms-vscode.cpptools-themes",
         "Nuxtr.nuxtr-vscode",
-        "bradlc.vscode-tailwindcss",
-        "Prisma.prisma"
+        "Prisma.prisma",
+        "vscode-icons-team.vscode-icons",
+        "vitest.explorer",
+        "Vue.volar"
       ],
       "settings": {
-        "workbench.colorTheme": "Visual Studio Dark - C++",
-        "workbench.iconTheme": "vscode-icons",
-        "workbench.secondarySideBar.showLabels": false,
         "continue.telemetryEnabled": false,
         "editor.autoClosingBrackets": "always",
         "editor.autoClosingQuotes": "always",
@@ -40,28 +37,32 @@
           "source.fixAll.eslint": "always",
           "source.fixAll.ts": "always"
         },
-        "editor.tabSize": 2,
-        "editor.renderWhitespace": "all",
-        "editor.fontSize": 16,
         "editor.fontFamily": "BIZ UDGothic",
+        "editor.fontSize": 14,
         "editor.formatOnSave": true,
         "editor.quickSuggestions": {
           "strings": true
         },
+        "editor.renderWhitespace": "all",
+        "editor.tabSize": 2,
         "diffEditor.ignoreTrimWhitespace": false,
         "files.associations": {
           "*.css": "tailwindcss"
         },
-        "tailwindCSS.classAttributes": ["class", "ui"],
-        "tailwindCSS.experimental.classRegex": [
-          ["ui:\\s*{([^)]*)\\s*}", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
-        ],
         "files.insertFinalNewline": true,
         "files.trimFinalNewlines": true,
         "files.trimTrailingWhitespace": true,
         "git.postCommitCommand": "push",
+        "tailwindCSS.classAttributes": ["class", "ui"],
+        "tailwindCSS.experimental.classRegex": [
+          ["ui:\\s*{([^)]*)\\s*}", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+        ],
         "terminal.integrated.defaultProfile.linux": "zsh",
-        "terminal.integrated.fontSize": 16,
+        "terminal.integrated.fontSize": 14,
+        "vue.autoInsert.dotValue": true,
+        "workbench.colorTheme": "Visual Studio Dark - C++",
+        "workbench.iconTheme": "vscode-icons",
+        "workbench.secondarySideBar.showLabels": false,
         "[markdown]": {
           "editor.defaultFormatter": "esbenp.prettier-vscode",
           "files.trimTrailingWhitespace": false
@@ -84,7 +85,6 @@
         "[typescript]": {
           "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
-        "vue.autoInsert.dotValue": true,
         "[vue]": {
           "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
