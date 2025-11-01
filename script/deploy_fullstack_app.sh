@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 set -euxo pipefail
-source ${HOME}/.bashrc
+source ${HOME}/.nvm/nvm.sh
 
 export DEBIAN_FRONTEND=noninteractive
 
