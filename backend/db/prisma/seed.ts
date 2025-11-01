@@ -1,5 +1,5 @@
-import QiitaBaseUrl from "../constant-variable/qiita.ts"
-import ZennBaseUrl from "../constant-variable/zenn.ts"
+import QiitaBaseUrl from "../constant-variable/qiita.mts"
+import ZennBaseUrl from "../constant-variable/zenn.mts"
 import { PrismaClient } from "../type/prisma/client.ts"
 
 const main = async () => {
