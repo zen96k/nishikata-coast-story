@@ -14,7 +14,7 @@
     "prisma:generate": "prisma generate",
     "tsc:check": "tsc --noEmit",
     "tsx:dev": "dotenvx run -f prisma.dev.env -- tsx watch app/main.ts",
-    "tsx:prod": "dotenvx run -f prisma.dev.env -- tsx app/main.ts",
+    "tsx:prod": "dotenvx run -f prisma.prod.env -- tsx app/main.ts",
     "vitest": "dotenvx run -f prisma.qc.env -- vitest run --coverage",
     "knip": "knip",
     "ncu": "ncu",
