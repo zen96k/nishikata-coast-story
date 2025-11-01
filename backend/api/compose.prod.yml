@@ -19,10 +19,16 @@ services:
       - NCS_ENV=${NCS_ENV}
       - TZ=Asia/Tokyo
     volumes:
-      - .:/workspace/nishikata-coast-story
+      - ./app:/workspace/nishikata-coast-story/app
       - ./constant-variable:/workspace/nishikata-coast-story/constant-variable
       - ./prisma/model:/workspace/nishikata-coast-story/prisma/model
+      - ./prisma/schema.prisma:/workspace/nishikata-coast-story/prisma/schema.prisma
       - ./.env.keys:/workspace/nishikata-coast-story/.env.keys
+      - ./hono.prod.env:/workspace/nishikata-coast-story/hono.prod.env
+      - ./prisma.prod.env:/workspace/nishikata-coast-story/prisma.prod.env
+      - ./package.json:/workspace/nishikata-coast-story/package.json
+      - ./package-lock.json:/workspace/nishikata-coast-story/package-lock.json
+      - ./tsconfig.json:/workspace/nishikata-coast-story/tsconfig.json
       - /usr/share/zoneinfo/Asia/Tokyo:/etc/localtime:ro
     working_dir: /workspace/nishikata-coast-story
     command:
