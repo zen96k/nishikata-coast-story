@@ -1,6 +1,7 @@
 #! /usr/bin/env bash
 
 set -euxo pipefail
+source ${HOME}/.bashrc
 
 export DEBIAN_FRONTEND=noninteractive
 
