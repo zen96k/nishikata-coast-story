@@ -18,15 +18,15 @@
         </template>
         <template #body>
           <div>
-            <NuxtImg
+            <img
               v-if="article.link.includes(QiitaBaseUrl)"
-              src="/qiita/logo-background-color.png"
+              src="assets/image/qiita/logo-background-color.png"
             />
-            <NuxtImg
+            <img
               v-else-if="article.link.includes(ZennBaseUrl)"
-              src="/zenn/logo.png"
+              src="assets/image/zenn/logo.png"
             />
-            <NuxtImg
+            <img
               v-else
               src="https://nuxt.com/assets/design-kit/logo-green-white.png"
             />
