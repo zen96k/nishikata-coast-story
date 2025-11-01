@@ -52,29 +52,29 @@
 
 <script setup lang="ts">
   import { useDateFormat } from "@vueuse/core"
-  // import type { H3Error } from "h3"
+  import type { H3Error } from "h3"
   import { DateTime as luxon } from "luxon"
-  // import superjson from "superjson"
+  import superjson from "superjson"
   import QiitaBaseUrl from "../../../../../common/constant-variable/qiita"
   import ZennBaseUrl from "../../../../../common/constant-variable/zenn"
 
   const articles = ref<DeserializedArticle[]>()
 
-  // const { data: data, error: error } = await useFetch<
-  //   DeserializedArticle[],
-  //   H3Error
-  // >("/api/article", { parseResponse: superjson.parse })
+  const { data: data, error: error } = await useFetch<
+    DeserializedArticle[],
+    H3Error
+  >("/api/article", { parseResponse: superjson.parse })
 
-  // if (data.value) {
-  //   articles.value = data.value
-  // }
-  // if (error.value) {
-  //   console.error(error.value)
+  if (data.value) {
+    articles.value = data.value
+  }
+  if (error.value) {
+    console.error(error.value)
 
-  //   const toast = useToast()
-  //   toast.add({
-  //     title: `${error.value.statusCode} Error`,
-  //     description: error.value.statusMessage
-  //   })
-  // }
+    const toast = useToast()
+    toast.add({
+      title: `${error.value.statusCode} Error`,
+      description: error.value.statusMessage
+    })
+  }
 </script>
