@@ -9,7 +9,14 @@ import article from "./router/article.ts"
 const honoServerPort = Number(process.env.HONO_SERVER_PORT) || 3000
 
 const app = new Hono()
-  .use(cors({ origin: ["https://ncs.zen96k.mydns.jp"] }))
+  .use(
+    cors({
+      origin: [
+        "https://ncs.zen96k.mydns.jp",
+        "https://nishikata-coast-story.netlify.app"
+      ]
+    })
+  )
   .route("/article", article)
   .onError((error, context) => {
     console.error(error)
