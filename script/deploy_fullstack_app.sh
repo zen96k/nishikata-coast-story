@@ -28,6 +28,7 @@ rm -rf node_modules
 cd ${BACKEND_DIRNAME}/api
 nvm install
 rm -rf node_modules
+npm run ncs:down
 
 cd ${BACKEND_DIRNAME}/batch
 nvm install
@@ -44,4 +45,7 @@ npm run ncs:migrate
 npm run ncs:up
 
 cd ${BACKEND_DIRNAME}/batch
+npm run ncs:up
+
+cd ${BACKEND_DIRNAME}/api
 npm run ncs:up
