@@ -11,5 +11,12 @@ FRONTEND_DIRNAME=${PROJECT_DIRNAME}/frontend
 BACKEND_DIRNAME=${PROJECT_DIRNAME}/backend
 COMMON_DIRNAME=${PROJECT_DIRNAME}/common
 
-cd ${FRONTEND_DIRNAME}/web
-dotenvx run -f compose.prod.env -- docker compose -f compose.prod.yml up -d --pull always --force-recreate -V --wait
+cd ${PROJECT_DIRNAME}
+git pull
+nvm install
+npm install -g @dotenvx/dotenvx
+
+cd ${BACKEND_DIRNAME}/db
+nvm install
+npm install && npm run prisma:generate
+npm run ncs:migrate

@@ -9,7 +9,7 @@
     "dotenvx:encrypt": "dotenvx encrypt -fk .env.keys -f *.env",
     "eslint": "eslint",
     "nuxt:build": "dotenvx run -f nuxt.${NCS_ENV}.env -- nuxt build",
-    "nuxt:dev": "dotenvx run -f nuxt.dev.env -- nuxt dev --no-fork --inspect-brk=9229",
+    "nuxt:dev": "dotenvx run -f nuxt.dev.env -- nuxt dev --no-fork",
     "nuxt:generate": "nuxt generate",
     "nuxt:preview": "nuxt preview",
     "nuxt:postinstall": "nuxt prepare",
