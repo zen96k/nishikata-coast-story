@@ -12,6 +12,7 @@ services:
     volumes:
       - .:/workspace/nishikata-coast-story
       - ./constant-variable:/workspace/nishikata-coast-story/constant-variable
+      - ./prisma/model:/workspace/nishikata-coast-story/prisma/model
       - ./.env.keys:/workspace/nishikata-coast-story/.env.keys
       - /usr/share/zoneinfo/Asia/Tokyo:/etc/localtime:ro
     working_dir: /workspace/nishikata-coast-story
