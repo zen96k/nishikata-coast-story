@@ -15,7 +15,6 @@ services:
       - traefik.http.services.ncs-api-prod.loadbalancer.server.port=${HONO_SERVER_PORT}
     environment:
       - HONO_SERVER_HOST=${HONO_SERVER_HOST}
-      - HONO_SERVER_BASE_PATH=${HONO_SERVER_BASE_PATH}
       - HONO_SERVER_PORT=${HONO_SERVER_PORT}
       - NCS_ENV=${NCS_ENV}
       - TZ=Asia/Tokyo
