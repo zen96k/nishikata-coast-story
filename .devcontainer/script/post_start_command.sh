@@ -21,6 +21,8 @@ git config --global user.email ${GIT_USER_EMAIL}
 docker compose up -d --pull always --force-recreate -V
 
 npm install
+cd ${COMMON_DIRNAME}
+npm install
 cd ${FRONTEND_DIRNAME}/web
 rm -rf .output .data .nuxt .nitro .cache dist
 npm install && npm run prisma:generate
@@ -31,7 +33,5 @@ npm install && npm run prisma:generate
 cd ${BACKEND_DIRNAME}/db
 npm install && npm run prisma:generate
 npm run ncs:dev && npm run prisma:migrate:deploy && npm run prisma:db:seed
-cd ${COMMON_DIRNAME}
-npm install
 
 docker system prune -af --volumes

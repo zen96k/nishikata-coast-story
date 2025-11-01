@@ -1,0 +1,24 @@
+services:
+  batch:
+    image: node:lts
+    container_name: ncs-batch-prod
+    init: true
+    networks:
+      - nishikata-coast-story
+    environment:
+      - NCS_ENV=${NCS_ENV}
+      - TZ=Asia/Tokyo
+    volumes:
+      - .:/workspace/nishikata-coast-story
+      - ./constant-variable:/workspace/nishikata-coast-story/constant-variable
+      - ./.env.keys:/workspace/nishikata-coast-story/.env.keys
+      - /usr/share/zoneinfo/Asia/Tokyo:/etc/localtime:ro
+    working_dir: /workspace/nishikata-coast-story
+    command: |
+      npm clean-install && npm run prisma:generate && npm run ncs:prod
+    stdin_open: true
+    tty: true
+
+networks:
+  nishikata-coast-story:
+    name: nishikata-coast-story
