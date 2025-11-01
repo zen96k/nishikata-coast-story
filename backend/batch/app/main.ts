@@ -16,7 +16,7 @@ const main = async () => {
 
     await cronTaskScheduleDao.manageTaskSchedule(
       cron.schedule(
-        process.env.NCS_ENV === "dev" ? "*/15 * * * *" : "* */1 * * *",
+        process.env.NCS_ENV === "dev" ? "*/15 * * * *" : "00 */1 * * *",
         async (context) => {
           const task = context.task
 
