@@ -2,7 +2,7 @@ import { serve } from "@hono/node-server"
 import { Hono } from "hono"
 import type { ContentfulStatusCode } from "hono/utils/http-status"
 import superjson from "superjson"
-import statusCode from "../constant-variable/status-code.ts"
+import statusCode from "../constant-variable/status-code.mts"
 import article from "./router/article.ts"
 
 const honoServerPort = Number(process.env.HONO_SERVER_PORT) || 3000

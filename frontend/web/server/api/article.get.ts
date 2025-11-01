@@ -1,6 +1,5 @@
 import type { H3Error } from "h3"
 import superjson from "superjson"
-import handleNitroError from "../utils/handle-nitro-error"
 
 export default defineEventHandler(async (event) => {
   const { ncsApiBaseUrl: ncsApiBaseUrl } = useRuntimeConfig(event)
