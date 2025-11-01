@@ -1,0 +1,44 @@
+services:
+  api:
+    image: node:lts
+    container_name: ncs-api-prod
+    init: true
+    restart: always
+    networks:
+      - nishikata-coast-story
+      - reverse-proxy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.ncs-api-prod.entrypoints=websecure
+      - traefik.http.routers.ncs-api-prod.tls.certresolver=mydnsjp
+      - traefik.http.routers.ncs-api-prod.rule=Host(`${HONO_SERVER_HOST}`) && PathPrefix(`${HONO_SERVER_BASE_PATH}`)
+      - traefik.http.services.ncs-api-prod.loadbalancer.server.port=${HONO_SERVER_PORT}
+    environment:
+      - HONO_SERVER_HOST=${HONO_SERVER_HOST}
+      - HONO_SERVER_BASE_PATH=${HONO_SERVER_BASE_PATH}
+      - HONO_SERVER_PORT=${HONO_SERVER_PORT}
+      - NCS_ENV=${NCS_ENV}
+      - TZ=Asia/Tokyo
+    volumes:
+      - .:/workspace/nishikata-coast-story
+      - ./constant-variable:/workspace/nishikata-coast-story/constant-variable
+      - ./prisma/model:/workspace/nishikata-coast-story/prisma/model
+      - ./.env.keys:/workspace/nishikata-coast-story/.env.keys
+      - /usr/share/zoneinfo/Asia/Tokyo:/etc/localtime:ro
+    working_dir: /workspace/nishikata-coast-story
+    command:
+      - bash
+      - -c
+      - |
+        npm install -g @dotenvx/dotenvx
+        npm clean-install
+        npm run prisma:generate
+        npm run ncs:prod
+    stdin_open: true
+    tty: true
+
+networks:
+  nishikata-coast-story:
+    name: nishikata-coast-story
+  reverse-proxy:
+    name: reverse-proxy
