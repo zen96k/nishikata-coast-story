@@ -5,14 +5,7 @@ const config = defineNuxtConfig({
   runtimeConfig: { ncsApiBaseUrl: "" },
   typescript: { typeCheck: "build" },
   css: ["assets/css/main.css"],
-  modules: [
-    "@nuxt/eslint",
-    "@nuxt/ui",
-    "@nuxt/image",
-    "@compodium/nuxt",
-    "@vueuse/nuxt"
-  ],
-  image: { dir: "assets/image" }
+  modules: ["@nuxt/eslint", "@nuxt/ui", "@compodium/nuxt", "@vueuse/nuxt"]
 })
 
 export default config
