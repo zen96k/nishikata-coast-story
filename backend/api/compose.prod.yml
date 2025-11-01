@@ -11,7 +11,7 @@ services:
       - traefik.enable=true
       - traefik.http.routers.ncs-api-prod.entrypoints=websecure
       - traefik.http.routers.ncs-api-prod.tls.certresolver=mydnsjp
-      - traefik.http.routers.ncs-api-prod.rule=Host(`${HONO_SERVER_HOST}`) && PathPrefix(`${HONO_SERVER_BASE_PATH}`)
+      - traefik.http.routers.ncs-api-prod.rule=Host(`${HONO_SERVER_HOST}`)
       - traefik.http.services.ncs-api-prod.loadbalancer.server.port=${HONO_SERVER_PORT}
     environment:
       - HONO_SERVER_HOST=${HONO_SERVER_HOST}
