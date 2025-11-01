@@ -3,6 +3,7 @@ services:
     image: node:lts
     container_name: ncs-batch-prod
     init: true
+    restart: always
     networks:
       - nishikata-coast-story
     environment:

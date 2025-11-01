@@ -3,6 +3,7 @@ services:
     image: mariadb:12.0.2
     container_name: ncs-mariadb-prod
     init: true
+    restart: always
     networks:
       - nishikata-coast-story
     environment:
