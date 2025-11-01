@@ -19,6 +19,7 @@ services:
       - bash
       - -c
       - |
+        npm install -g @dotenvx/dotenvx
         npm clean-install
         npm run prisma:generate
         npm run ncs:prod
