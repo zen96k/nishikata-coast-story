@@ -19,4 +19,4 @@ npm install -g @dotenvx/dotenvx
 cd ${BACKEND_DIRNAME}/db
 nvm install
 npm install && npm run prisma:generate
-npm run ncs:migrate && npm run prisma:migrate:deploy && npm run prisma:db:seed
+npm run ncs:migrate
