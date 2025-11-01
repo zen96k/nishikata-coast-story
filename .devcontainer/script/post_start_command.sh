@@ -9,6 +9,7 @@ PROJECT_DIRNAME=$(cd ${SCRIPT_DIRNAME}/../.. && pwd)
 
 FRONTEND_DIRNAME=${PROJECT_DIRNAME}/frontend
 BACKEND_DIRNAME=${PROJECT_DIRNAME}/backend
+COMMON_DIRNAME=${PROJECT_DIRNAME}/common
 
 cd ${PROJECT_DIRNAME}
 
@@ -29,6 +30,8 @@ cd ${BACKEND_DIRNAME}/batch
 npm install && npm run prisma:generate
 cd ${BACKEND_DIRNAME}/db
 npm install && npm run prisma:generate
-npm run mariadb:up && npm run prisma:migrate:deploy && npm run prisma:db:seed
+npm run ncs:dev && npm run prisma:migrate:deploy && npm run prisma:db:seed
+cd ${COMMON_DIRNAME}
+npm install
 
 docker system prune -af --volumes
