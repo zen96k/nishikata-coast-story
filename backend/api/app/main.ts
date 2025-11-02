@@ -13,7 +13,7 @@ const app = new Hono()
     cors({
       origin: [
         "https://ncs.zen96k.mydns.jp",
-        "https://nishikata-coast-story.netlify.app"
+        "https://nishikata-coast-story.pages.dev"
       ]
     })
   )
