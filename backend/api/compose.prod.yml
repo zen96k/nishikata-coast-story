@@ -11,11 +11,9 @@ services:
       - traefik.enable=true
       - traefik.http.routers.ncs-api-prod.entrypoints=websecure
       - traefik.http.routers.ncs-api-prod.tls.certresolver=mydnsjp
-      - traefik.http.routers.ncs-api-prod.rule=Host(`${HONO_SERVER_HOST}`)
-      - traefik.http.services.ncs-api-prod.loadbalancer.server.port=${HONO_SERVER_PORT}
+      - traefik.http.routers.ncs-api-prod.rule=Host(`${API_SERVER_HOST}`)
+      - traefik.http.services.ncs-api-prod.loadbalancer.server.port=${API_SERVER_PORT}
     environment:
-      - HONO_SERVER_HOST=${HONO_SERVER_HOST}
-      - HONO_SERVER_PORT=${HONO_SERVER_PORT}
       - NCS_ENV=${NCS_ENV}
       - TZ=Asia/Tokyo
     volumes:
@@ -38,7 +36,7 @@ services:
         npm install -g @dotenvx/dotenvx
         npm clean-install
         npm run prisma:generate
-        npm run ncs:prod
+        npm run tsx:prod
     stdin_open: true
     tty: true
 
@@ -47,3 +45,4 @@ networks:
     name: nishikata-coast-story
   reverse-proxy:
     name: reverse-proxy
+    external: true

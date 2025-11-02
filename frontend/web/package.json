@@ -4,7 +4,9 @@
   "scripts": {
     "postinstall": "npm run nuxt:postinstall",
     "ncs:dev": "npm run prisma:generate && npm run nuxt:dev",
-    "ncs:build": "npm run prisma:generate && npm run nuxt:build",
+    "ncs:prod": "node .output/server/index.mjs",
+    "ncs:up": "dotenvx run -f compose.${NCS_ENV}.env -- docker compose -f compose.${NCS_ENV}.yml up -d --pull always --force-recreate -V --wait",
+    "ncs:down": "dotenvx run -f compose.${NCS_ENV}.env -- docker compose -f compose.${NCS_ENV}.yml down",
     "dotenvx:decrypt": "dotenvx decrypt -f *.env",
     "dotenvx:encrypt": "dotenvx encrypt -f *.env",
     "eslint": "eslint",
