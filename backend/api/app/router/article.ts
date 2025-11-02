@@ -8,6 +8,7 @@ import ArticleDao from "../module/article-dao.ts"
 import dbClient from "../module/db-client.ts"
 
 const article = new Hono().get("/", async (context) => {
+  console.log("API呼び出し開始")
   const articleDao = new ArticleDao(dbClient)
 
   const articles = (await articleDao.findMany({
