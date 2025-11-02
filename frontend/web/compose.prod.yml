@@ -1,0 +1,36 @@
+services:
+  web:
+    image: node:lts
+    container_name: ncs-web-prod
+    init: true
+    restart: always
+    networks:
+      - nishikata-coast-story
+      - reverse-proxy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.ncs-web-prod.entrypoints=websecure
+      - traefik.http.routers.ncs-web-prod.tls.certresolver=mydnsjp
+      - traefik.http.routers.ncs-web-prod.rule=Host(`${WEB_SERVER_HOST}`)
+      - traefik.http.services.ncs-web-prod.loadbalancer.server.port=${WEB_SERVER_PORT}
+    environment:
+      - NCS_ENV=${NCS_ENV}
+      - TZ=Asia/Tokyo
+    volumes:
+      - ./.output:/workspace/nishikata-coast-story/.output
+      - /usr/share/zoneinfo/Asia/Tokyo:/etc/localtime:ro
+    working_dir: /workspace/nishikata-coast-story
+    command:
+      - bash
+      - -c
+      - |
+        npm run ncs:prod
+    stdin_open: true
+    tty: true
+
+networks:
+  nishikata-coast-story:
+    name: nishikata-coast-story
+  reverse-proxy:
+    name: reverse-proxy
+    external: true

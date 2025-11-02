@@ -3,7 +3,6 @@
   "type": "module",
   "scripts": {
     "ncs:dev": "npm run prisma:generate && npm run tsx:dev",
-    "ncs:prod": "npm run tsx:prod",
     "ncs:qc": "dotenvx run -f compose.qc.env -- docker compose -f compose.qc.yml up -d --pull always --force-recreate -V --wait && NCS_ENV=qc npm run prisma:db:push && npm run vitest",
     "ncs:up": "docker compose -f compose.${NCS_ENV}.yml up -d --pull always --force-recreate -V --wait",
     "ncs:down": "docker compose -f compose.${NCS_ENV}.yml down",

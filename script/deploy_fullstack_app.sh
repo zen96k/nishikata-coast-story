@@ -18,34 +18,37 @@ rm -rf node_modules
 npm install -g @dotenvx/dotenvx
 
 cd ${COMMON_DIRNAME}
-nvm install
 rm -rf node_modules
 
 cd ${FRONTEND_DIRNAME}/web
-nvm install
-rm -rf node_modules
+npm run ncs:down
 
 cd ${BACKEND_DIRNAME}/api
-nvm install
-rm -rf node_modules
 npm run ncs:down
 
 cd ${BACKEND_DIRNAME}/batch
-nvm install
-rm -rf node_modules
 npm run ncs:down
 
 cd ${BACKEND_DIRNAME}/db
-nvm install
-rm -rf node_modules
+npm run ncs:down
+rm -rf node_modules type
 npm clean-install
 npm run prisma:generate
-npm run ncs:down
 npm run ncs:migrate
 npm run ncs:up
 
 cd ${BACKEND_DIRNAME}/batch
+rm -rf node_modules type
 npm run ncs:up
 
 cd ${BACKEND_DIRNAME}/api
+rm -rf node_modules type
+npm run ncs:up
+
+cd ${FRONTEND_DIRNAME}/web
+rm -rf .output .data .nuxt .nitro .cache dist
+rm -rf node_modules type
+npm clean-install
+npm run prisma:generate
+npm run nuxt:build
 npm run ncs:up
