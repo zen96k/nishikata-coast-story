@@ -11,10 +11,12 @@ const article = new Hono().get("/", async (context) => {
 
   const articles = (await articleDao.findMany({
     include: { rssPublisher: true },
-    orderBy: { publishedAt: "desc" }
+    orderBy: { publishedAt: "desc" },
+    take: 1
   })) as Prisma.ArticleGetPayload<{
     include: { rssPublisher: true }
     orderBy: { publishedAt: "desc" }
+    take: 1
   }>[]
 
   return context.text(
