@@ -6,12 +6,10 @@ export default defineEventHandler(async (event) => {
   console.log("ncsApiBaseUrl", ncsApiBaseUrl)
 
   try {
-    console.log("API呼び出し開始")
     const articles = await $fetch<DeserializedArticle[]>(
       `${ncsApiBaseUrl}/article`,
       { parseResponse: superjson.parse }
     )
-    console.log("API呼び出し終了")
 
     return superjson.stringify(articles)
   } catch (error) {
