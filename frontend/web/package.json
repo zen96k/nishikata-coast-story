@@ -32,6 +32,7 @@
   "devDependencies": {
     "@compodium/nuxt": "0.1.0-beta.12",
     "@nuxt/eslint": "1.10.0",
+    "@nuxt/image": "1.11.0",
     "@nuxt/kit": "4.2.0",
     "@nuxt/ui": "4.1.0",
     "@prisma/client": "6.18.0",

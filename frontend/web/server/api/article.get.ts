@@ -3,7 +3,6 @@ import superjson from "superjson"
 
 export default defineEventHandler(async (event) => {
   const { ncsApiBaseUrl: ncsApiBaseUrl } = useRuntimeConfig(event)
-  console.log("ncsApiBaseUrl", ncsApiBaseUrl)
 
   try {
     const articles = await $fetch<DeserializedArticle[]>(
