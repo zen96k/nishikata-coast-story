@@ -14,7 +14,6 @@ export default defineEventHandler(async (event) => {
     return superjson.stringify(articles)
   } catch (error) {
     console.error(error)
-
     handleNitroError(error as H3Error)
   }
 })
