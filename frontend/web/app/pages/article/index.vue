@@ -18,21 +18,25 @@
         </template>
         <template #body>
           <div>
-            <img
+            <NuxtImg
               v-if="article.link.includes(QiitaBaseUrl)"
-              src="assets/image/qiita/logo-background-color.png"
+              src="/qiita/logo-background-color.png"
+              class="min-h-32"
             />
-            <img
+            <NuxtImg
               v-else-if="article.link.includes(ZennBaseUrl)"
-              src="assets/image/zenn/logo.png"
+              src="/zenn/logo.png"
+              class="min-h-32"
             />
-            <img
+            <NuxtImg
               v-else
               src="https://nuxt.com/assets/design-kit/logo-green-white.png"
+              class="min-h-32"
             />
           </div>
         </template>
         <template #footer>
+          <div>投稿者: {{ article.author }} さん</div>
           <ClientOnly>
             <div>
               公開日時:
