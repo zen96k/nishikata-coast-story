@@ -3,6 +3,7 @@ import superjson from "superjson"
 
 export default defineEventHandler(async (event) => {
   const { ncsApiBaseUrl: ncsApiBaseUrl } = useRuntimeConfig(event)
+  console.log("ncsApiBaseUrl", ncsApiBaseUrl)
 
   try {
     console.log("API呼び出し開始")
