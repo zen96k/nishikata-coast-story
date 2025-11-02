@@ -60,7 +60,7 @@
 
   const articles = ref<DeserializedArticle[]>()
 
-  const { data: data, error: error } = await useFetch<
+  const { data: data, error: error } = await useLazyFetch<
     DeserializedArticle[],
     H3Error
   >("/api/article", { parseResponse: superjson.parse })
