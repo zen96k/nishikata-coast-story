@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "postinstall": "npm run nuxt:postinstall",
-    "ncs:dev": "npm run prisma:generate && npm run nuxt:dev",
+    "ncs:dev": "npm run nuxt:dev",
     "ncs:prod": "node .output/server/index.mjs",
     "ncs:up": "dotenvx run -f compose.${NCS_ENV}.env -- docker compose -f compose.${NCS_ENV}.yml up -d --pull always --force-recreate -V --wait",
     "ncs:down": "dotenvx run -f compose.${NCS_ENV}.env -- docker compose -f compose.${NCS_ENV}.yml down",
@@ -15,14 +15,10 @@
     "nuxt:generate": "nuxt generate",
     "nuxt:preview": "nuxt preview",
     "nuxt:postinstall": "nuxt prepare",
-    "prisma:generate": "prisma generate",
     "tsc:check": "tsc --noEmit",
     "knip": "knip",
     "ncu": "ncu",
     "ncu:upgrade": "ncu -u && npm install"
-  },
-  "prisma": {
-    "schema": "prisma"
   },
   "dependencies": {
     "nuxt": "4.2.0",
@@ -32,7 +28,6 @@
   "devDependencies": {
     "@nuxt/eslint": "1.10.0",
     "@nuxt/ui": "4.1.0",
-    "@prisma/client": "6.18.0",
     "@tsconfig/recommended": "1.0.11",
     "@types/luxon": "3.7.1",
     "@vueuse/core": "14.0.0",
@@ -45,7 +40,6 @@
     "prettier": "3.6.2",
     "prettier-plugin-organize-imports": "4.3.0",
     "prettier-plugin-tailwindcss": "0.7.1",
-    "prisma": "6.18.0",
     "superjson": "2.2.5",
     "typescript": "5.9.3",
     "vue-tsc": "3.1.2",
