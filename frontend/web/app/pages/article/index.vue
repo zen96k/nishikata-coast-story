@@ -62,15 +62,21 @@
   import QiitaBaseUrl from "../../../../../common/constant-variable/qiita"
   import ZennBaseUrl from "../../../../../common/constant-variable/zenn"
 
+  const page = ref(1)
+  const limit = ref(30)
   const articles = ref<DeserializedArticle[]>()
 
   const { data: data, error: error } = await useLazyFetch<
-    DeserializedArticle[],
+    { superjson: string },
     H3Error
-  >("/api/article", { parseResponse: superjson.parse })
+  >("/api/article", { body: { page: page.value, limit: limit.value } })
 
   if (data.value) {
-    articles.value = data.value
+    const { articles: superjsonArticles } = superjson.parse(
+      data.value.superjson
+    ) as { articles: DeserializedArticle[] }
+    console.log(superjsonArticles)
+    articles.value = superjsonArticles
   }
   if (error.value) {
     console.error(error.value)

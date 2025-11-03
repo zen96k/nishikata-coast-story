@@ -2,7 +2,6 @@ import { serve } from "@hono/node-server"
 import { Hono } from "hono"
 import { cors } from "hono/cors"
 import type { ContentfulStatusCode } from "hono/utils/http-status"
-import superjson from "superjson"
 import statusCode from "../constant-variable/status-code.mts"
 import article from "./router/article.ts"
 
@@ -20,10 +19,9 @@ const app = new Hono()
       message: error.message
     }
 
-    return context.text(
-      superjson.stringify(errorResponse),
-      statusCode.InternalServerError.code as ContentfulStatusCode,
-      { "Content-Type": "application/json" }
+    return context.json(
+      errorResponse,
+      statusCode.InternalServerError.code as ContentfulStatusCode
     )
   })
 
