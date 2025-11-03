@@ -10,7 +10,11 @@
       >
         <template #header>
           <div class="h-16 font-bold">
-            {{ article.title }}
+            {{
+              article.title.length > 50
+                ? `${article.title.substring(0, 49)}...`
+                : article.title
+            }}
           </div>
         </template>
         <template #description>
@@ -74,7 +78,7 @@
   })
 
   if (data.value) {
-    const { pageLength: pageLength, articles: superjsonArticles } =
+    const { pageCount: pageCount, articles: superjsonArticles } =
       superjson.parse(data.value.superjson) as ArticleGetAllPagingResponse
     articles.value = superjsonArticles
   }

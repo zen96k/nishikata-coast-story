@@ -23,7 +23,7 @@ const article = new Hono()
     const skip = Number(page) ? (Number(page) - 1) * Number(limit) : 0
     const take = Number(limit) ? Number(limit) : 30
 
-    const { pages: pages, articles: articles } =
+    const { pageCount: pageCount, articles: articles } =
       await article.readAllWithPaging(
         {},
         {
@@ -35,7 +35,12 @@ const article = new Hono()
       )
 
     return context.json(
-      { superjson: superjson.stringify({ pages: pages, articles: articles }) },
+      {
+        superjson: superjson.stringify({
+          pageCount: pageCount,
+          articles: articles
+        })
+      },
       statusCode.OK.code as ContentfulStatusCode
     )
   })

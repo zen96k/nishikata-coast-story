@@ -29,7 +29,7 @@ class Article {
     ])
 
     return {
-      pageLength: Math.ceil(count / findManyArgs.take!),
+      pageCount: Math.ceil(count / findManyArgs.take!),
       articles: articles
     }
   }
