@@ -11,11 +11,6 @@ class Article {
     this.dbClient = dbClient
   }
 
-  /*
-  【残作業】
-  RssPublisherクラスを作成する
-  作成・更新の対象となる記事の取得は、RssPublisherクラスで実行する
-  */
   public async createOrUpdateByRss() {
     await this.dbClient.$transaction(async (transaction) => {
       const rssPublishers = await transaction.rssPublisher.findMany()

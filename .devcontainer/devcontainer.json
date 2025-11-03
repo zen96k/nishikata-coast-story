@@ -31,6 +31,7 @@
       ],
       "settings": {
         "continue.telemetryEnabled": false,
+        "codeium.enableCodeLens": false,
         "editor.autoClosingBrackets": "always",
         "editor.autoClosingQuotes": "always",
         "editor.codeActionsOnSave": {
