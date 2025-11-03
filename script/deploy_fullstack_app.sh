@@ -49,6 +49,5 @@ cd ${FRONTEND_DIRNAME}/web
 rm -rf .output .data .nuxt .nitro .cache dist
 rm -rf node_modules type
 # npm clean-install
-# npm run prisma:generate
 # npm run nuxt:build
 # npm run ncs:up
