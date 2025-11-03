@@ -64,18 +64,17 @@
 
   const page = ref(1)
   const limit = ref(30)
-  const articles = ref<DeserializedArticle[]>()
+  const articles = ref<Article[]>()
 
   const { data: data, error: error } = await useLazyFetch<
-    { superjson: string },
+    NcsApiResponse,
     H3Error
   >("/api/article", { body: { page: page.value, limit: limit.value } })
 
   if (data.value) {
     const { articles: superjsonArticles } = superjson.parse(
       data.value.superjson
-    ) as { articles: DeserializedArticle[] }
-    console.log(superjsonArticles)
+    ) as ArticleGetResponse
     articles.value = superjsonArticles
   }
   if (error.value) {
