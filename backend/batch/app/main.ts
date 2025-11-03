@@ -1,6 +1,6 @@
 import cron from "node-cron"
-import ArticleDao from "./module/article-dao.ts"
-import CronTaskScheduleDao from "./module/cron-task-schedule-dao.ts"
+import Article from "./module/article.ts"
+import CronTaskSchedule from "./module/cron-task-schedule.ts"
 import dbClient from "./module/db-client.ts"
 import RssParser from "./module/rss-parser.ts"
 
@@ -8,20 +8,20 @@ const main = async () => {
   console.info("バッチ処理(cron)を開始します")
 
   const rssParser = new RssParser()
-  const articleDao = new ArticleDao(rssParser, dbClient)
-  const cronTaskScheduleDao = new CronTaskScheduleDao(articleDao, dbClient)
+  const article = new Article(rssParser, dbClient)
+  const cronTaskSchedule = new CronTaskSchedule(article, dbClient)
 
   try {
-    await cronTaskScheduleDao.deleteTaskSchedule()
+    await cronTaskSchedule.deleteTaskSchedule()
 
-    await cronTaskScheduleDao.manageTaskSchedule(
+    await cronTaskSchedule.manageTaskSchedule(
       cron.schedule(
         process.env.NCS_ENV === "dev" ? "*/15 * * * *" : "00 */1 * * *",
         async (context) => {
           const task = context.task
 
           console.info(`${task?.name}を開始します`)
-          await cronTaskScheduleDao.runCreateOrUpdateArticlesByRss()
+          await cronTaskSchedule.runCreateOrUpdateArticlesByRss()
           console.info(`${task?.name}を終了します`)
         },
         {

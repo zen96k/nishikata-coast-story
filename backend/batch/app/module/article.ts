@@ -2,7 +2,7 @@ import { DateTime as luxon } from "luxon"
 import { PrismaClient } from "../../type/prisma/client.ts"
 import RssParser from "./rss-parser.ts"
 
-class ArticleDao {
+class Article {
   private rssParser: RssParser
   private dbClient: PrismaClient
 
@@ -11,6 +11,11 @@ class ArticleDao {
     this.dbClient = dbClient
   }
 
+  /*
+  【残作業】
+  RssPublisherクラスを作成する
+  作成・更新の対象となる記事の取得は、RssPublisherクラスで実行する
+  */
   public async createOrUpdateByRss() {
     await this.dbClient.$transaction(async (transaction) => {
       const rssPublishers = await transaction.rssPublisher.findMany()
@@ -78,4 +83,4 @@ class ArticleDao {
   }
 }
 
-export default ArticleDao
+export default Article

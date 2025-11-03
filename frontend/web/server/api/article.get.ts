@@ -4,7 +4,9 @@ export default defineEventHandler(async (event) => {
   const { ncsApiBaseUrl: ncsApiBaseUrl } = useRuntimeConfig(event)
 
   try {
-    const response = await $fetch<NcsApiResponse>(`${ncsApiBaseUrl}/article`)
+    const response = await $fetch<NcsApiResponse>(`${ncsApiBaseUrl}/article`, {
+      query: getQuery(event)
+    })
 
     return response
   } catch (error) {

@@ -69,7 +69,7 @@
   const { data: data, error: error } = await useLazyFetch<
     NcsApiResponse,
     H3Error
-  >("/api/article", { body: { page: page.value, limit: limit.value } })
+  >("/api/article", { query: { page: page.value, limit: limit.value } })
 
   if (data.value) {
     const { articles: superjsonArticles } = superjson.parse(
