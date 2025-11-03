@@ -20,23 +20,27 @@ const article = new Hono()
     const article = new Article(dbClient)
 
     const { page: page, limit: limit } = context.req.query()
-    const skip = Number(page) ? (Number(page) - 1) * Number(limit) : 0
-    const take = Number(limit) ? Number(limit) : 30
+    const skip = (Number(page) - 1) * Number(limit)
+    const take = Number(limit)
 
-    const { pageCount: pageCount, articles: articles } =
-      await article.readAllWithPaging(
-        {},
-        {
-          skip: skip,
-          take: take,
-          include: { rssPublisher: true },
-          orderBy: { publishedAt: "desc" }
-        }
-      )
+    const {
+      count: count,
+      pageCount: pageCount,
+      articles: articles
+    } = await article.readAllWithPaging(
+      {},
+      {
+        skip: skip,
+        take: take,
+        include: { rssPublisher: true },
+        orderBy: { publishedAt: "desc" }
+      }
+    )
 
     return context.json(
       {
         superjson: superjson.stringify({
+          count: count,
           pageCount: pageCount,
           articles: articles
         })
