@@ -18,7 +18,7 @@
     "prisma:migrate:dev": "dotenvx run -f prisma.dev.env -- prisma migrate dev",
     "prisma:migrate:reset": "dotenvx run -f prisma.dev.env -- prisma migrate reset",
     "prisma:migrate:deploy": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma migrate deploy",
-    "prisma:studio": "prisma studio",
+    "prisma:studio": "dotenvx run -f prisma.dev.env -- prisma studio --browser none",
     "tsc:check": "tsc --noEmit",
     "knip": "knip",
     "ncu": "ncu",

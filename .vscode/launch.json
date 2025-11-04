@@ -24,6 +24,16 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "DB Server",
+      "preLaunchTask": "npm: install - backend/db",
+      "cwd": "${workspaceFolder}/backend/db",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "prisma:studio"],
+      "outputCapture": "std"
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Web Server",
       "preLaunchTask": "npm: install - frontend/web",
       "cwd": "${workspaceFolder}/frontend/web",
@@ -39,8 +49,10 @@
       "runtimeArgs": [
         "--incognito",
         "--auto-open-devtools-for-tabs",
-        "http://localhost:3000"
-      ]
+        "http://localhost:3000",
+        "http://localhost:5555"
+      ],
+      "webRoot": "${workspaceFolder}/frontend/web/app"
     }
   ],
   "compounds": [
@@ -49,6 +61,7 @@
       "configurations": [
         "API Server",
         "Batch Server",
+        "DB Server",
         "Web Server",
         "Web Client"
       ]
