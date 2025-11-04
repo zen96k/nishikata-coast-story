@@ -32,6 +32,6 @@ cd ${BACKEND_DIRNAME}/batch
 npm install && npm run prisma:generate
 cd ${BACKEND_DIRNAME}/db
 npm install && npm run prisma:generate
-npm run ncs:dev && npm run prisma:migrate:deploy && npm run prisma:db:seed
+npm run ncs:dev && npm run prisma:migrate:deploy
 
 docker system prune -af --volumes
