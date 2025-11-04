@@ -127,7 +127,8 @@
         const toast = useToast()
         toast.add({
           title: `${value.statusCode} Error`,
-          description: value.statusMessage
+          description: value.statusMessage,
+          color: "error"
         })
       }
     },
