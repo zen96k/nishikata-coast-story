@@ -5,7 +5,7 @@
     "ncs:dev": "dotenvx run -f compose.dev.env -- docker compose -f compose.dev.yml up -d --pull always --force-recreate -V --wait",
     "ncs:up": "dotenvx run -f compose.${NCS_ENV}.env -- docker compose -f compose.${NCS_ENV}.yml up -d --pull always --force-recreate -V --wait",
     "ncs:down": "dotenvx run -f compose.${NCS_ENV}.env -- docker compose -f compose.${NCS_ENV}.yml down",
-    "ncs:migrate": "dotenvx run -f compose.${NCS_ENV}.env -- docker compose -f compose.migrate.yml up -d --pull always --force-recreate -V --wait && npm run prisma:migrate:deploy && npm run prisma:db:seed && dotenvx run -f compose.prod.env -- docker compose -f compose.migrate.yml down",
+    "ncs:migrate": "dotenvx run -f compose.${NCS_ENV}.env -- docker compose -f compose.migrate.yml up -d --pull always --force-recreate -V --wait && npm run prisma:migrate:deploy && dotenvx run -f compose.prod.env -- docker compose -f compose.migrate.yml down",
     "dotenvx:decrypt": "dotenvx decrypt -f *.env",
     "dotenvx:encrypt": "dotenvx encrypt -f *.env",
     "eslint": "eslint",

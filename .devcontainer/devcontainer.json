@@ -25,6 +25,7 @@
         "ms-vscode.cpptools-themes",
         "Nuxtr.nuxtr-vscode",
         "Prisma.prisma",
+        "ReneSaarsoo.sql-formatter-vsc",
         "vscode-icons-team.vscode-icons",
         "vitest.explorer",
         "Vue.volar"
@@ -94,6 +95,9 @@
         },
         "[prisma]": {
           "editor.defaultFormatter": "Prisma.prisma"
+        },
+        "[sql]": {
+          "editor.defaultFormatter": "ReneSaarsoo.sql-formatter-vsc"
         }
       }
     }

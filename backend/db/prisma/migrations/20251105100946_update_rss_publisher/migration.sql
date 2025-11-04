@@ -1,0 +1,1 @@
+ALTER TABLE rss_publisher AUTO_INCREMENT = 3;
