@@ -3,7 +3,6 @@
     <div class="flex justify-center">
       <UPagination
         v-model:page="articlePage"
-        show-edges
         :total="articleCount"
         :items-per-page="articleLimit"
         @update:page="updatePage"
@@ -69,7 +68,6 @@
     <div class="flex justify-center">
       <UPagination
         v-model:page="articlePage"
-        show-edges
         :total="articleCount"
         :items-per-page="articleLimit"
         @update:page="updatePage"

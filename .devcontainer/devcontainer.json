@@ -33,6 +33,8 @@
       "settings": {
         "continue.telemetryEnabled": false,
         "codeium.enableCodeLens": false,
+        "debug.toolBarLocation": "docked",
+        "diffEditor.ignoreTrimWhitespace": false,
         "editor.autoClosingBrackets": "always",
         "editor.autoClosingQuotes": "always",
         "editor.codeActionsOnSave": {
@@ -47,7 +49,6 @@
         },
         "editor.renderWhitespace": "all",
         "editor.tabSize": 2,
-        "diffEditor.ignoreTrimWhitespace": false,
         "files.associations": {
           "*.css": "tailwindcss"
         },
