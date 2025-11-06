@@ -24,22 +24,22 @@
     "hono": "4.10.4"
   },
   "devDependencies": {
-    "@eslint/js": "9.39.0",
-    "@prisma/client": "6.18.0",
+    "@eslint/js": "9.39.1",
+    "@prisma/client": "6.19.0",
     "@tsconfig/node-lts": "22.0.2",
     "@tsconfig/node-ts": "23.6.1",
     "@tsconfig/recommended": "1.0.11",
-    "@types/node": "24.9.2",
-    "eslint": "9.39.0",
+    "@types/node": "24.10.0",
+    "eslint": "9.39.1",
     "eslint-config-prettier": "10.1.8",
-    "knip": "5.66.4",
+    "knip": "5.68.0",
     "npm-check-updates": "19.1.2",
     "prettier": "3.6.2",
     "prettier-plugin-organize-imports": "4.3.0",
-    "prisma": "6.18.0",
+    "prisma": "6.19.0",
     "superjson": "2.2.5",
     "tsx": "4.20.6",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.46.2"
+    "typescript-eslint": "8.46.3"
   }
 }
