@@ -19,11 +19,9 @@
       >
         <template #header>
           <div class="h-16 font-bold">
-            {{
-              article.title.length > 50
-                ? `${article.title.substring(0, 49)}...`
-                : article.title
-            }}
+            <div class="line-clamp-3 leading-snug">
+              {{ article.title }}
+            </div>
           </div>
         </template>
         <template #description>
