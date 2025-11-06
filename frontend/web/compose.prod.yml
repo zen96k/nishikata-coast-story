@@ -14,7 +14,6 @@ services:
       - traefik.http.routers.ncs-web-prod.rule=Host(`${WEB_SERVER_HOST}`)
       - traefik.http.services.ncs-web-prod.loadbalancer.server.port=${WEB_SERVER_PORT}
     environment:
-      - NODE_OPTIONS=--max-old-space-size=${NODE_MAX_OLD_SPACE_SIZE}
       - NCS_ENV=${NCS_ENV}
       - TZ=Asia/Tokyo
     volumes:
