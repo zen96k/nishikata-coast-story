@@ -42,5 +42,5 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           command: |
-            wrangler pages download config nishikata-coast-story
-            wrangler pages deploy --project-name nishikata-coast-story
+            pages download config nishikata-coast-story
+            pages deploy --project-name nishikata-coast-story
