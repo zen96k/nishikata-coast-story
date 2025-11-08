@@ -57,4 +57,4 @@ VALUES
         'Qiita',
         'https://qiita.com/popular-items/feed.atom'
     ),
-    ('Zenn', 'https://zenn.dev/feeds');
+    ('Zenn', 'https://zenn.dev/feed');
