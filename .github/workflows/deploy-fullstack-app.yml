@@ -4,13 +4,13 @@ on:
     branches:
       - main
 jobs:
-  deploy-backend-prod:
-    name: Deploy Backend
+  deploy-backend-app-prod:
+    name: Deploy Backend App
     runs-on: ubuntu-22.04
     if: github.ref_name == 'main'
     environment: prod
     steps:
-      - name: Deploy Backend
+      - name: Deploy Backend App
         uses: appleboy/ssh-action@v1
         env:
           DEPLOY_WORKSPACE_DIRNAME: ${{ secrets.DEPLOY_WORKSPACE_DIRNAME }}
@@ -23,25 +23,30 @@ jobs:
             git pull origin main
             NCS_ENV=prod bash script/deploy_fullstack_app.sh
           envs: DEPLOY_WORKSPACE_DIRNAME
-  deploy-frontend-prod:
-    name: Deploy Frontend
+  deploy-frontend-app-prod:
+    name: Deploy Frontend App
     runs-on: ubuntu-22.04
     if: github.ref_name == 'main'
-    needs: deploy-backend-prod
+    needs: deploy-backend-app-prod
     environment: prod
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v5
-      - name: Deploy Frontend
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+      - name: Install Dependencies
+        run: npm install -g @dotenvx/dotenvx && npm install
+        working-directory: frontend/web
+      - name: Build Frontend App
         env:
           DOTENV_PRIVATE_KEY_ENV: ${{ secrets.DOTENV_PRIVATE_KEY_ENV }}
           NCS_ENV: ${{ vars.NCS_ENV }}
-          TZ: ${{ vars.TZ }}
+        run: npm run nuxt:build -- --preset=cloudflare_pages
+        working-directory: frontend/web
+      - name: Deploy Frontend
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           wranglerVersion: 4.46.0
-          command: |
-            pages download config nishikata-coast-story
-            pages deploy --project-name nishikata-coast-story
+          command: pages deploy frontend/web/dist --project-name nishikata-coast-story
