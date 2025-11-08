@@ -8,7 +8,7 @@ CREATE TABLE `article` (
     `summary` LONGTEXT NULL,
     `published_at` DATETIME NOT NULL,
     `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updated_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
     UNIQUE INDEX `uq_article_link` (`link`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER
@@ -27,7 +27,7 @@ CREATE TABLE `cron_task_schedule` (
     `finished_at` DATETIME NULL,
     `errorMessage` LONGTEXT NULL,
     `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updated_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
     UNIQUE INDEX `uq_cron_task_schedule_execution_id` (`execution_id`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER
@@ -40,7 +40,7 @@ CREATE TABLE `rss_publisher` (
     `name` VARCHAR(255) NOT NULL,
     `url` VARCHAR(255) NOT NULL,
     `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updated_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
     UNIQUE INDEX `uq_rss_publisher_url` (`url`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER

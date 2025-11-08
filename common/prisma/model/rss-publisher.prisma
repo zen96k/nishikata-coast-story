@@ -4,7 +4,7 @@ model RssPublisher {
   url       String    @unique(map: "uq_rss_publisher_url") @db.VarChar(255)
   articles  Article[]
   createdAt DateTime  @default(now()) @map("created_at") @db.DateTime()
-  updatedAt DateTime  @updatedAt @map("updated_at") @db.DateTime()
+  updatedAt DateTime  @default(now()) @updatedAt @map("updated_at") @db.DateTime()
 
   @@map("rss_publisher")
 }

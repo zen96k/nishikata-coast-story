@@ -9,7 +9,7 @@ model CronTaskSchedule {
   finishedAt   DateTime?   @map("finished_at") @db.DateTime()
   errorMessage String?     @db.LongText
   createdAt    DateTime    @default(now()) @map("created_at") @db.DateTime()
-  updatedAt    DateTime    @updatedAt @map("updated_at") @db.DateTime()
+  updatedAt    DateTime    @default(now()) @updatedAt @map("updated_at") @db.DateTime()
 
   @@map("cron_task_schedule")
 }
