@@ -53,5 +53,8 @@ ALTER TABLE `article` ADD CONSTRAINT `fk_article_rss_publisher_id` FOREIGN KEY (
 INSERT INTO
     `rss_publisher` (`name`, `url`)
 VALUES
-    ('Qiita', 'https://qiita.com/feeds'),
+    (
+        'Qiita',
+        'https://qiita.com/popular-items/feed.atom'
+    ),
     ('Zenn', 'https://zenn.dev/feeds');
