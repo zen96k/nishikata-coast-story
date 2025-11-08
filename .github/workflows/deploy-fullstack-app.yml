@@ -33,6 +33,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v5
       - name: Deploy Frontend
+        working-directory: frontend/web
         env:
           DOTENV_PRIVATE_KEY_ENV: ${{ secrets.DOTENV_PRIVATE_KEY_ENV }}
           NCS_ENV: ${{ vars.NCS_ENV }}
@@ -40,4 +41,6 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          command: pages deploy --project-name nishikata-coast-story
+          command: |
+            wrangler pages download config nishikata-coast-story
+            wrangler pages deploy --project-name nishikata-coast-story
