@@ -33,7 +33,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v5
       - name: Deploy Frontend
-        working-directory: frontend/web
+        # working-directory: frontend/web
         env:
           DOTENV_PRIVATE_KEY_ENV: ${{ secrets.DOTENV_PRIVATE_KEY_ENV }}
           NCS_ENV: ${{ vars.NCS_ENV }}
