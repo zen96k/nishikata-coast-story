@@ -1,0 +1,26 @@
+name: Scan Leak
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy-backend:
+    name: Deploy Backend
+    runs-on: ubuntu-22.04
+    if: github.ref_name == main
+    environment: prod
+    steps:
+      - name: Deploy Backend
+        uses: appleboy/ssh-action@v1
+        env:
+          DEPLOY_WORKSPACE_DIRNAME: ${{ secrets.DEPLOY_WORKSPACE_DIRNAME }}
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          script: |
+            cd ${DEPLOY_WORKSPACE_DIRNAME}
+            git pull origin main
+            pwd
+            nvm use
+          envs: DEPLOY_WORKSPACE_DIRNAME
