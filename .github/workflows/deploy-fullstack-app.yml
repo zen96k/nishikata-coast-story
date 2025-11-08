@@ -43,7 +43,7 @@ jobs:
           NCS_ENV: ${{ vars.NCS_ENV }}
         run: npm run nuxt:build -- --preset=cloudflare_pages
         working-directory: frontend/web
-      - name: Deploy Frontend
+      - name: Deploy Frontend App
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
