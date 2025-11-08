@@ -4,7 +4,7 @@ on:
     branches:
       - main
 jobs:
-  deploy-backend:
+  deploy-backend-prod:
     name: Deploy Backend
     runs-on: ubuntu-22.04
     if: github.ref_name == 'main'
