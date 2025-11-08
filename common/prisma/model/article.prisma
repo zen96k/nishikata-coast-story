@@ -8,7 +8,7 @@ model Article {
   summary        String?      @db.LongText
   publishedAt    DateTime     @map("published_at") @db.DateTime()
   createdAt      DateTime     @default(now()) @map("created_at") @db.DateTime()
-  updatedAt      DateTime     @updatedAt @map("updated_at") @db.DateTime()
+  updatedAt      DateTime     @default(now()) @updatedAt @map("updated_at") @db.DateTime()
 
   @@map("article")
 }
