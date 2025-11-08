@@ -19,7 +19,7 @@ describe("RssParser", () => {
 
           expect(item.link).toBeDefined()
           expect(item.link).not.toBe("")
-          expect(item.link).toContain("QiitaBaseUrl")
+          expect(item.link).toContain(QiitaBaseUrl)
 
           expect(item.author).toBeDefined()
           expect(item.author).not.toBe("")
