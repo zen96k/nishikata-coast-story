@@ -1,4 +1,4 @@
-name: Scan Leak
+name: Deploy Backend
 on:
   push:
     branches:
@@ -7,7 +7,7 @@ jobs:
   deploy-backend:
     name: Deploy Backend
     runs-on: ubuntu-22.04
-    if: github.ref_name == "main"
+    if: github.ref_name == 'main'
     environment: prod
     steps:
       - name: Deploy Backend
