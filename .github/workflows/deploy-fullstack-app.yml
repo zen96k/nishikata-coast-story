@@ -28,18 +28,19 @@ jobs:
     runs-on: ubuntu-22.04
     if: github.ref_name == 'main'
     needs: deploy-backend-prod
-    # environment: prod
+    environment: prod
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v5
       - name: Deploy Frontend
-        # env:
-        #   DOTENV_PRIVATE_KEY_ENV: ${{ secrets.DOTENV_PRIVATE_KEY_ENV }}
-        #   NCS_ENV: ${{ vars.NCS_ENV }}
-        #   TZ: ${{ vars.TZ }}
+        env:
+          DOTENV_PRIVATE_KEY_ENV: ${{ secrets.DOTENV_PRIVATE_KEY_ENV }}
+          NCS_ENV: ${{ vars.NCS_ENV }}
+          TZ: ${{ vars.TZ }}
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           wranglerVersion: 4.46.0
           command: |
             pages download config nishikata-coast-story
