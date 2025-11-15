@@ -1,7 +1,8 @@
 import type { H3Error } from "h3"
 
 export default defineEventHandler(async (event) => {
-  const { ncsApiBaseUrl: ncsApiBaseUrl } = useRuntimeConfig(event)
+  const { private: privateRuntimeConfig } = useRuntimeConfig(event)
+  const { ncsApiBaseUrl: ncsApiBaseUrl } = privateRuntimeConfig
 
   try {
     const response = await $fetch<NcsApiResponse>(
