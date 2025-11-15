@@ -14,7 +14,7 @@ jobs:
         with:
           node-version-file: .nvmrc
       - name: Install Dependencies
-        run: npm install -g @dotenvx/dotenvx && npm install
+        run: npm install -g @dotenvx/dotenvx && npm install && npm run prisma:generate
         working-directory: backend/api
       - name: Run ESLint
         run: npm run eslint
