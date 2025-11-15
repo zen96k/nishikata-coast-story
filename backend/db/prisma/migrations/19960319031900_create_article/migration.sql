@@ -1,0 +1,11 @@
+CREATE TABLE `article` (
+  `id` BIGINT UNSIGNED NOT NULL auto_increment,
+  `title` VARCHAR(255) NOT NULL,
+  `link` VARCHAR(255) NOT NULL,
+  `author` VARCHAR(255) NOT NULL,
+  `published_at` DATETIME NOT NULL,
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE INDEX `uq_article_link` (`link`),
+  CONSTRAINT `pk_article_id` PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;

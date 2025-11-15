@@ -1,0 +1,11 @@
+model ArticleLabelRelation {
+  id             BigInt       @id @default(autoincrement()) @db.UnsignedBigInt
+  article        Article      @relation(fields: [articleId], references: [id], map: "fk_article_label_article_id", onDelete: Cascade, onUpdate: Cascade)
+  articleId      BigInt       @map("article_id") @db.UnsignedBigInt
+  articleLabel   ArticleLabel @relation(fields: [articleLabelId], references: [id], map: "fk_article_label_article_label_id", onDelete: Cascade, onUpdate: Cascade)
+  articleLabelId BigInt       @map("article_label_id") @db.UnsignedBigInt
+  createdAt      DateTime     @default(now()) @map("created_at") @db.DateTime()
+  updatedAt      DateTime     @default(now()) @updatedAt @map("updated_at") @db.DateTime()
+
+  @@map("article_label_relation")
+}
