@@ -2,6 +2,7 @@
   "name": "ncs",
   "type": "module",
   "scripts": {
+    "knip": "knip",
     "ncu": "ncu",
     "ncu:upgrade": "ncu -u && npm install"
   },
@@ -10,6 +11,7 @@
     "npm": "11.6.2"
   },
   "devDependencies": {
+    "knip": "5.69.1",
     "lefthook": "2.0.2",
     "npm-check-updates": "19.1.2"
   }
