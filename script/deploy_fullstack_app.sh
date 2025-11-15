@@ -13,7 +13,7 @@ BACKEND_DIRNAME=${PROJECT_DIRNAME}/backend
 COMMON_DIRNAME=${PROJECT_DIRNAME}/common
 
 cd ${PROJECT_DIRNAME}
-nvm use
+nvm install
 rm -rf node_modules
 npm install -g @dotenvx/dotenvx
 
