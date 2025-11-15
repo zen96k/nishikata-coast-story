@@ -7,32 +7,16 @@ class Article {
     this.dbClient = dbClient
   }
 
-  public async count(args?: Prisma.ArticleCountArgs) {
-    const count = await this.dbClient.article.count(args)
-
-    return count
-  }
-
-  public async readAll(args?: Prisma.ArticleFindManyArgs) {
-    const articles = await this.dbClient.article.findMany(args)
-
-    return articles
-  }
-
-  public async readAllWithPaging(
-    countArgs: Prisma.ArticleCountArgs,
-    findManyArgs: Prisma.ArticleFindManyArgs
+  public async readAll(
+    countArgs?: Prisma.ArticleCountArgs,
+    findManyArgs?: Prisma.ArticleFindManyArgs
   ) {
     const [count, articles] = await this.dbClient.$transaction([
       this.dbClient.article.count(countArgs),
       this.dbClient.article.findMany(findManyArgs)
     ])
 
-    return {
-      count: count,
-      pageCount: Math.ceil(count / findManyArgs.take!),
-      articles: articles
-    }
+    return { count: count, articles: articles }
   }
 }
 

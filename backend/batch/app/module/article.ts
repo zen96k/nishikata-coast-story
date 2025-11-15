@@ -41,7 +41,6 @@ class Article {
                     !!title && !!link && !!author && !!pubDate
                   if (qiitaPattern) {
                     return {
-                      rssPublisherId: rssPublisher.id,
                       title: title,
                       link: link,
                       author: author,
@@ -53,7 +52,6 @@ class Article {
                     !!title && !!link && !!creator && !!pubDate
                   if (zennPattern) {
                     return {
-                      rssPublisherId: rssPublisher.id,
                       title: title,
                       link: link,
                       author: creator,

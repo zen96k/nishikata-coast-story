@@ -5,9 +5,9 @@ export default defineEventHandler(async (event) => {
   const { ncsApiBaseUrl: ncsApiBaseUrl } = privateRuntimeConfig
 
   try {
-    const response = await $fetch<NcsApiResponse>(
-      `${ncsApiBaseUrl}/article/all/paging`,
-      { query: getQuery(event) }
+    const response = await $fetch<{ superjson: string }>(
+      `${ncsApiBaseUrl}/article/popular/fetch`,
+      { method: "POST", body: await readBody(event) }
     )
 
     return response

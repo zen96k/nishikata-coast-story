@@ -5,48 +5,45 @@ import statusCode from "../../constant-variable/status-code.mts"
 import Article from "../module/article.ts"
 import dbClient from "../module/db-client.ts"
 
-const article = new Hono()
-  .get("/all", async (context) => {
-    const article = new Article(dbClient)
+const article = new Hono().post("/popular/fetch", async (context) => {
+  const article = new Article(dbClient)
 
-    const articles = await article.readAll()
+  const {
+    page: page,
+    limit: limit,
+    order: order
+  } = (await context.req.json()) as {
+    page?: number
+    limit?: number
+    order?: object
+  }
+  const skip = page && limit && (page - 1) * limit
+  const take = limit
 
-    return context.json(
-      { superjson: superjson.stringify({ articles: articles }) },
-      statusCode.OK.code as ContentfulStatusCode
-    )
-  })
-  .get("/all/paging", async (context) => {
-    const article = new Article(dbClient)
-
-    const { page: page, limit: limit } = context.req.query()
-    const skip = (Number(page) - 1) * Number(limit)
-    const take = Number(limit)
-
-    const {
-      count: count,
-      pageCount: pageCount,
-      articles: articles
-    } = await article.readAllWithPaging(
-      {},
-      {
-        skip: skip,
-        take: take,
-        include: { rssPublisher: true },
-        orderBy: { publishedAt: "desc" }
+  const { count: count, articles: articles } = await article.readAll(
+    {
+      where: {
+        articleLabelRelations: {
+          some: { articleLabel: { is: { value: "popular" } } }
+        }
       }
-    )
-
-    return context.json(
-      {
-        superjson: superjson.stringify({
-          count: count,
-          pageCount: pageCount,
-          articles: articles
-        })
+    },
+    {
+      skip: skip,
+      take: take,
+      include: {
+        articleLabelRelations: {
+          where: { articleLabel: { is: { value: "popular" } } }
+        }
       },
-      statusCode.OK.code as ContentfulStatusCode
-    )
-  })
+      orderBy: order || { publishedAt: "desc" }
+    }
+  )
+
+  return context.json(
+    { superjson: superjson.stringify({ count: count, articles: articles }) },
+    statusCode.OK.code as ContentfulStatusCode
+  )
+})
 
 export default article

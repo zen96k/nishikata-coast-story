@@ -29,8 +29,7 @@
     "npm": "11.6.2"
   },
   "prisma": {
-    "schema": "prisma",
-    "seed": "tsx prisma/seed.ts"
+    "schema": "prisma"
   },
   "dependencies": {
     "@prisma/client": "6.19.0",
