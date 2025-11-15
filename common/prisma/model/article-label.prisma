@@ -1,13 +1,13 @@
 model ArticleLabel {
-  id        BigInt            @id @default(autoincrement()) @db.UnsignedBigInt
-  value     ArticleLabelValue @unique(map: "uq_article_label_value")
-  createdAt DateTime          @default(now()) @map("created_at") @db.DateTime()
-  updatedAt DateTime          @default(now()) @updatedAt @map("updated_at") @db.DateTime()
+  id        BigInt           @id @default(autoincrement()) @db.UnsignedBigInt
+  value     ArticleLabelEnum @unique(map: "uq_article_label_value")
+  createdAt DateTime         @default(now()) @map("created_at") @db.DateTime()
+  updatedAt DateTime         @default(now()) @updatedAt @map("updated_at") @db.DateTime()
 
   @@map("article_label")
 }
 
-enum ArticleLabelValue {
+enum ArticleLabelEnum {
   new
   popular
 }
