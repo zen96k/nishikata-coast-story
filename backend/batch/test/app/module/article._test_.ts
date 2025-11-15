@@ -23,9 +23,7 @@ describe("Article", () => {
     test("Publisherが存在しない場合", async () => {
       await article.createOrUpdateByRss()
 
-      const articles = await dbClient.article.findMany({
-        include: { rssPublisher: true }
-      })
+      const articles = await dbClient.article.findMany()
 
       expect(articles).toStrictEqual([])
     })
@@ -54,8 +52,7 @@ describe("Article", () => {
       await article.createOrUpdateByRss()
 
       const qiitaArticle = await dbClient.article.findUniqueOrThrow({
-        where: { link: qiitaItem.link },
-        include: { rssPublisher: true }
+        where: { link: qiitaItem.link }
       })
       expect(qiitaArticle.title).toBe(qiitaItem.title)
       expect(qiitaArticle.link).toBe(qiitaItem.link)
@@ -65,8 +62,7 @@ describe("Article", () => {
       )
 
       const zennArticle = await dbClient.article.findUniqueOrThrow({
-        where: { link: zennItem.link },
-        include: { rssPublisher: true }
+        where: { link: zennItem.link }
       })
       expect(zennArticle.title).toBe(zennItem.title)
       expect(zennArticle.link).toBe(zennItem.link)

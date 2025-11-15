@@ -1,6 +1,6 @@
 import { DateTime as luxon } from "luxon"
 import cron from "node-cron"
-import { PrismaClient, TaskStatus } from "../../type/prisma/client.ts"
+import { CronTaskStatusEnum, PrismaClient } from "../../type/prisma/client.ts"
 import Article from "./article.ts"
 
 class CronTaskSchedule {
@@ -59,7 +59,9 @@ class CronTaskSchedule {
       data: {
         executionId: execution?.id,
         taskName: task?.name,
-        taskStatus: task ? ((await task.getStatus()) as TaskStatus) : undefined,
+        taskStatus: task
+          ? ((await task.getStatus()) as CronTaskStatusEnum)
+          : undefined,
         scheduledAt: luxon.fromJSDate(context.date).toUTC().toJSDate(),
         triggeredAt: luxon.fromJSDate(context.triggeredAt).toUTC().toJSDate(),
         startedAt:
@@ -82,7 +84,9 @@ class CronTaskSchedule {
       data: {
         executionId: execution?.id,
         taskName: task?.name,
-        taskStatus: task ? ((await task.getStatus()) as TaskStatus) : undefined,
+        taskStatus: task
+          ? ((await task.getStatus()) as CronTaskStatusEnum)
+          : undefined,
         scheduledAt: luxon.fromJSDate(context.date).toUTC().toJSDate(),
         triggeredAt: luxon.fromJSDate(context.triggeredAt).toUTC().toJSDate(),
         startedAt:

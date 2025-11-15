@@ -1,20 +1,20 @@
 model CronTaskSchedule {
-  id           BigInt      @id @default(autoincrement()) @db.UnsignedBigInt
-  executionId  String?     @unique(map: "uq_cron_task_schedule_execution_id") @map("execution_id") @db.VarChar(255)
-  taskName     String?     @map("task_name") @db.VarChar(255)
-  taskStatus   TaskStatus? @map("task_status")
-  scheduledAt  DateTime?   @map("scheduled_at") @db.DateTime()
-  triggeredAt  DateTime?   @map("triggered_at") @db.DateTime()
-  startedAt    DateTime?   @map("started_at") @db.DateTime()
-  finishedAt   DateTime?   @map("finished_at") @db.DateTime()
-  errorMessage String?     @db.LongText
-  createdAt    DateTime    @default(now()) @map("created_at") @db.DateTime()
-  updatedAt    DateTime    @default(now()) @updatedAt @map("updated_at") @db.DateTime()
+  id           BigInt              @id @default(autoincrement()) @db.UnsignedBigInt
+  executionId  String?             @unique(map: "uq_cron_task_schedule_execution_id") @map("execution_id") @db.VarChar(255)
+  taskName     String?             @map("task_name") @db.VarChar(255)
+  taskStatus   CronTaskStatusEnum? @map("task_status")
+  scheduledAt  DateTime?           @map("scheduled_at") @db.DateTime()
+  triggeredAt  DateTime?           @map("triggered_at") @db.DateTime()
+  startedAt    DateTime?           @map("started_at") @db.DateTime()
+  finishedAt   DateTime?           @map("finished_at") @db.DateTime()
+  errorMessage String?             @db.LongText
+  createdAt    DateTime            @default(now()) @map("created_at") @db.DateTime()
+  updatedAt    DateTime            @default(now()) @updatedAt @map("updated_at") @db.DateTime()
 
   @@map("cron_task_schedule")
 }
 
-enum TaskStatus {
+enum CronTaskStatusEnum {
   idle
   running
   stopped

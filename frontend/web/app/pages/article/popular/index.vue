@@ -24,9 +24,6 @@
             </div>
           </div>
         </template>
-        <template #description>
-          <div>{{ article.summary ?? "" }}</div>
-        </template>
         <template #body>
           <div>
             <img
@@ -81,19 +78,32 @@
   import superjson from "superjson"
   import QiitaBaseUrl from "../../../../../../common/constant-variable/qiita"
   import ZennBaseUrl from "../../../../../../common/constant-variable/zenn"
+  import type { Prisma } from "../../../../type/prisma/client.ts"
 
   const { y: windowScrollY } = useWindowScroll()
 
-  const articles = ref<Article[]>()
+  const articles = ref<
+    Prisma.ArticleGetPayload<{
+      skip: number
+      take: number
+      include: {
+        articleLabelRelations: {
+          where: { articleLabel: { is: { value: "popular" } } }
+        }
+      }
+      orderBy: { publishedAt: string }
+    }>[]
+  >([])
   const articleCount = ref(0)
   const articlePage = ref(1)
-  const articleLimit = ref(30)
+  const articleLimit = ref(15)
 
   const { data: data, error: error } = await useLazyFetch<
-    NcsApiResponse,
+    { superjson: string },
     H3Error
-  >("/api/article/all/paging", {
-    query: { page: articlePage, limit: articleLimit }
+  >("/api/article/popular/fetch", {
+    method: "POST",
+    body: { page: articlePage, limit: articleLimit }
   })
 
   const updatePage = (page: number) => {
@@ -106,7 +116,19 @@
     (value) => {
       if (value) {
         const { count: superjsonCount, articles: superjsonArticles } =
-          superjson.parse(value.superjson) as ArticleGetAllPagingResponse
+          superjson.parse(value.superjson) as {
+            count: number
+            articles: Prisma.ArticleGetPayload<{
+              skip: number
+              take: number
+              include: {
+                articleLabelRelations: {
+                  where: { articleLabel: { is: { value: "popular" } } }
+                }
+              }
+              orderBy: { publishedAt: string }
+            }>[]
+          }
 
         articleCount.value = superjsonCount
         articles.value = superjsonArticles

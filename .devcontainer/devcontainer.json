@@ -56,6 +56,11 @@
         "files.trimFinalNewlines": true,
         "files.trimTrailingWhitespace": true,
         "git.postCommitCommand": "push",
+        "SQL-Formatter-VSCode.dialect": "mariadb",
+        "SQL-Formatter-VSCode.keywordCase": "upper",
+        "SQL-Formatter-VSCode.dataTypeCase": "upper",
+        "SQL-Formatter-VSCode.functionCase": "upper",
+        "SQL-Formatter-VSCode.identifierCase": "lower",
         "tailwindCSS.classAttributes": ["class", "ui"],
         "tailwindCSS.experimental.classRegex": [
           ["ui:\\s*{([^)]*)\\s*}", "(?:'|\"|`)([^']*)(?:'|\"|`)"]

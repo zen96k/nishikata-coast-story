@@ -22,12 +22,16 @@ docker compose up -d --pull always --force-recreate -V
 npm install
 cd ${FRONTEND_DIRNAME}/web
 rm -rf .output .data .nuxt .nitro .cache dist
-npm install
+rm -rf type
+npm install && npm run prisma:generate
 cd ${BACKEND_DIRNAME}/api
+rm -rf type
 npm install && npm run prisma:generate
 cd ${BACKEND_DIRNAME}/batch
+rm -rf type
 npm install && npm run prisma:generate
 cd ${BACKEND_DIRNAME}/db
+rm -rf type
 npm install && npm run prisma:generate
 npm run ncs:dev && npm run prisma:migrate:deploy
 

@@ -9,13 +9,13 @@
     "dotenvx:decrypt": "dotenvx decrypt -f *.env",
     "dotenvx:encrypt": "dotenvx encrypt -f *.env",
     "eslint": "eslint",
-    "mariadb:backup": "mkdir -p backup && docker container exec ncs-mariadb-${NCS_ENV} bash -c 'mariadb-dump -A -u root -p${MARIADB_ROOT_PASSWORD}' > backup/${NCS_ENV}-$(date +%Y%m%d%H%M%S).sql",
-    "mariadb:restore": "docker container exec ncs-mariadb-${NCS_ENV} bash -c 'mariadb -u root -p${MARIADB_ROOT_PASSWORD}' <",
+    "mariadb:backup": "mkdir -p backup && docker container exec -it ncs-mariadb-${NCS_ENV} bash -c 'mariadb-dump -A -u root -p${MARIADB_ROOT_PASSWORD}' > backup/${NCS_ENV}-$(date +%Y%m%d%H%M%S).sql",
+    "mariadb:restore": "docker container exec -i ncs-mariadb-${NCS_ENV} bash -c 'mariadb -u root -p${MARIADB_ROOT_PASSWORD}' <",
     "prisma:generate": "prisma generate",
     "prisma:db:pull": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma db pull",
     "prisma:db:push": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma db push",
     "prisma:db:seed": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma db seed",
-    "prisma:migrate:dev": "dotenvx run -f prisma.dev.env -- prisma migrate dev",
+    "prisma:migrate:dev": "dotenvx run -f prisma.dev.env -- prisma migrate dev --create-only",
     "prisma:migrate:reset": "dotenvx run -f prisma.dev.env -- prisma migrate reset",
     "prisma:migrate:deploy": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma migrate deploy",
     "prisma:studio": "dotenvx run -f prisma.dev.env -- prisma studio --browser none",
@@ -29,8 +29,7 @@
     "npm": "11.6.2"
   },
   "prisma": {
-    "schema": "prisma",
-    "seed": "tsx prisma/seed.ts"
+    "schema": "prisma"
   },
   "dependencies": {
     "@prisma/client": "6.19.0",

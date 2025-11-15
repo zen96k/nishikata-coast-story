@@ -14,6 +14,10 @@ class Article {
   public async createOrUpdateByRss() {
     await this.dbClient.$transaction(async (transaction) => {
       const rssPublishers = await transaction.rssPublisher.findMany()
+      const popularArticleLabel =
+        await transaction.articleLabel.findUniqueOrThrow({
+          where: { value: "popular" }
+        })
 
       const articles = (
         await Promise.all(
@@ -37,7 +41,6 @@ class Article {
                     !!title && !!link && !!author && !!pubDate
                   if (qiitaPattern) {
                     return {
-                      rssPublisherId: rssPublisher.id,
                       title: title,
                       link: link,
                       author: author,
@@ -49,13 +52,14 @@ class Article {
                     !!title && !!link && !!creator && !!pubDate
                   if (zennPattern) {
                     return {
-                      rssPublisherId: rssPublisher.id,
                       title: title,
                       link: link,
                       author: creator,
                       publishedAt: luxon.fromRFC2822(pubDate).toUTC().toJSDate()
                     }
                   }
+
+                  return void 0
                 })
               )
             ).filter((article) => article !== undefined)
@@ -67,11 +71,27 @@ class Article {
 
       await Promise.all(
         articles.map(async (article) => {
-          return await transaction.article.upsert({
+          const upsertedArticle = await transaction.article.upsert({
             where: { link: article.link },
             update: { title: article.title },
             create: article
           })
+
+          await transaction.articleLabelRelation.upsert({
+            where: {
+              articleId_articleLabelId: {
+                articleId: upsertedArticle.id,
+                articleLabelId: popularArticleLabel.id
+              }
+            },
+            update: {},
+            create: {
+              articleId: upsertedArticle.id,
+              articleLabelId: popularArticleLabel.id
+            }
+          })
+
+          return void 0
         })
       )
     })
