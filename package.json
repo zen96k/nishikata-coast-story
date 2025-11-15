@@ -5,6 +5,10 @@
     "ncu": "ncu",
     "ncu:upgrade": "ncu -u && npm install"
   },
+  "engines": {
+    "node": "24.11.1",
+    "npm": "11.6.2"
+  },
   "devDependencies": {
     "lefthook": "2.0.2",
     "npm-check-updates": "19.1.2"
