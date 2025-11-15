@@ -9,7 +9,6 @@ PROJECT_DIRNAME=$(cd ${SCRIPT_DIRNAME}/../.. && pwd)
 
 FRONTEND_DIRNAME=${PROJECT_DIRNAME}/frontend
 BACKEND_DIRNAME=${PROJECT_DIRNAME}/backend
-COMMON_DIRNAME=${PROJECT_DIRNAME}/common
 
 cd ${PROJECT_DIRNAME}
 
@@ -20,8 +19,6 @@ git config --global user.email ${GIT_USER_EMAIL}
 
 docker compose up -d --pull always --force-recreate -V
 
-npm install
-cd ${COMMON_DIRNAME}
 npm install
 cd ${FRONTEND_DIRNAME}/web
 rm -rf .output .data .nuxt .nitro .cache dist

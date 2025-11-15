@@ -10,15 +10,11 @@ PROJECT_DIRNAME=$(cd ${SCRIPT_DIRNAME}/.. && pwd)
 
 FRONTEND_DIRNAME=${PROJECT_DIRNAME}/frontend
 BACKEND_DIRNAME=${PROJECT_DIRNAME}/backend
-COMMON_DIRNAME=${PROJECT_DIRNAME}/common
 
 cd ${PROJECT_DIRNAME}
 nvm install
 rm -rf node_modules
 npm install -g @dotenvx/dotenvx
-
-cd ${COMMON_DIRNAME}
-rm -rf node_modules
 
 cd ${FRONTEND_DIRNAME}/web
 npm run ncs:down
