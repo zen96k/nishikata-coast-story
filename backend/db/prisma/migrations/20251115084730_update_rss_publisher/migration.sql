@@ -1,0 +1,1 @@
+ALTER TABLE rss_publisher CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
