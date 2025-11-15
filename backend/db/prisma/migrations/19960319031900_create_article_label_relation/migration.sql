@@ -7,10 +7,10 @@ CREATE TABLE `article_label_relation` (
     CONSTRAINT `pk_article_label_relation_id` PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 
--- AddForeignKey
 ALTER TABLE `article_label_relation`
 ADD CONSTRAINT `fk_article_label_article_id` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
--- AddForeignKey
 ALTER TABLE `article_label_relation`
 ADD CONSTRAINT `fk_article_label_article_label_id` FOREIGN KEY (`article_label_id`) REFERENCES `article_label` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+CREATE UNIQUE INDEX `uq_article_label_reration_article_id_article_label_id` ON `article_label_relation` (`article_id`, `article_label_id`);

@@ -7,5 +7,6 @@ model ArticleLabelRelation {
   createdAt      DateTime     @default(now()) @map("created_at") @db.DateTime()
   updatedAt      DateTime     @default(now()) @updatedAt @map("updated_at") @db.DateTime()
 
+  @@unique(map: "uq_article_label_reration_article_id_article_label_id", [articleId, articleLabelId])
   @@map("article_label_relation")
 }
