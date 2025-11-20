@@ -13,7 +13,8 @@
     },
     {
       "label": "wait-for-backend-server",
-      "dependsOn": ["wait-for-api-server", "wait-for-web-server"]
+      "dependsOn": ["wait-for-api-server", "wait-for-web-server"],
+      "dependsOrder": "sequence"
     }
   ]
 }
