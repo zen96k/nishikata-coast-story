@@ -14,14 +14,13 @@ jobs:
         with:
           node-version-file: .nvmrc
       - name: Install Dependencies
-        run: npm install -g @dotenvx/dotenvx && npm install
-        # run: npm install -g @dotenvx/dotenvx && npm install && npm run prisma:generate
+        run: npm install -g @dotenvx/dotenvx && npm install && npm run prisma:generate
         working-directory: backend/batch
       - name: Run ESLint
         run: npm run eslint
         working-directory: backend/batch
       - name: Run TypeCheck
-        run: ls -lah && npm run tsc:check
+        run: npm run tsc:check
         working-directory: backend/batch
       - name: Run QC
         env:
