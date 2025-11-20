@@ -14,11 +14,10 @@ jobs:
         with:
           node-version-file: .nvmrc
       - name: Install Dependencies
-        # run: npm install -g @dotenvx/dotenvx && npm install && npm run prisma:generate
-        run: npm install -g @dotenvx/dotenvx && npm install
+        run: npm install -g @dotenvx/dotenvx && npm install && npm run prisma:generate
         working-directory: frontend/web
       - name: Run ESLint
-        run: npm run eslint -- --debug
+        run: npm run eslint
         working-directory: frontend/web
       - name: Run TypeCheck
         run: npm run tsc:check
