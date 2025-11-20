@@ -45,7 +45,7 @@
       "type": "chrome",
       "request": "launch",
       "name": "Web Client",
-      "preLaunchTask": "wait-for-backend",
+      "preLaunchTask": "wait-for-backend-server",
       "runtimeArgs": [
         "--incognito",
         "--auto-open-devtools-for-tabs",

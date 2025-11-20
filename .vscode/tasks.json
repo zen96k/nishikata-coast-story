@@ -12,7 +12,7 @@
       "command": "while ! nc -z localhost 3000; do echo 'Waiting for http://localhost:3000 ...'; sleep 1; done"
     },
     {
-      "label": "wait-for-backend",
+      "label": "wait-for-backend-server",
       "dependsOn": ["wait-for-api-server", "wait-for-web-server"]
     }
   ]
