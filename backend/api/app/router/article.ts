@@ -1,7 +1,7 @@
 import { Hono } from "hono"
 import type { ContentfulStatusCode } from "hono/utils/http-status"
 import superjson from "superjson"
-import statusCode from "../../constant-variable/status-code.mts"
+import statusCode from "../../constant-variable/status-code.ts"
 import Article from "../module/article.ts"
 import dbClient from "../module/db-client.ts"
 
