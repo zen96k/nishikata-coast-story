@@ -8,7 +8,7 @@
     "dotenvx:decrypt": "dotenvx decrypt -f *.env",
     "dotenvx:encrypt": "dotenvx encrypt -f *.env",
     "eslint": "eslint",
-    "prisma:generate": "prisma generate",
+    "prisma:generate": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma generate",
     "tsc:check": "tsc --noEmit",
     "tsx:dev": "dotenvx run -f hono.dev.env prisma.dev.env -- tsx watch app/main.ts",
     "tsx:prod": "dotenvx run -f hono.prod.env prisma.prod.env -- tsx app/main.ts",

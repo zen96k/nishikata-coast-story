@@ -8,7 +8,6 @@
   },
   "init": true,
   "runArgs": ["--env-file", ".devcontainer/devcontainer.env", "--rm"],
-  "appPort": [3000],
   "forwardPorts": [3000, 3001, 5306, 5555],
   "customizations": {
     "vscode": {
@@ -29,83 +28,7 @@
         "vscode-icons-team.vscode-icons",
         "vitest.explorer",
         "Vue.volar"
-      ],
-      "settings": {
-        "continue.telemetryEnabled": false,
-        "codeium.enableCodeLens": false,
-        "debug.toolBarLocation": "docked",
-        "diffEditor.ignoreTrimWhitespace": false,
-        "editor.autoClosingBrackets": "always",
-        "editor.autoClosingQuotes": "always",
-        "editor.codeActionsOnSave": {
-          "source.fixAll.eslint": "always",
-          "source.fixAll.ts": "always"
-        },
-        "editor.fontFamily": "BIZ UDGothic",
-        "editor.fontSize": 14,
-        "editor.formatOnSave": true,
-        "editor.quickSuggestions": {
-          "strings": true
-        },
-        "editor.renderWhitespace": "all",
-        "editor.tabSize": 2,
-        "files.associations": {
-          "*.css": "tailwindcss"
-        },
-        "files.insertFinalNewline": true,
-        "files.trimFinalNewlines": true,
-        "files.trimTrailingWhitespace": true,
-        "git.postCommitCommand": "push",
-        "SQL-Formatter-VSCode.dialect": "mariadb",
-        "SQL-Formatter-VSCode.keywordCase": "upper",
-        "SQL-Formatter-VSCode.dataTypeCase": "upper",
-        "SQL-Formatter-VSCode.functionCase": "upper",
-        "SQL-Formatter-VSCode.identifierCase": "lower",
-        "tailwindCSS.classAttributes": ["class", "ui"],
-        "tailwindCSS.experimental.classRegex": [
-          ["ui:\\s*{([^)]*)\\s*}", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
-        ],
-        "terminal.integrated.defaultProfile.linux": "zsh",
-        "terminal.integrated.fontSize": 14,
-        "vue.autoInsert.dotValue": true,
-        "workbench.colorTheme": "Visual Studio Dark - C++",
-        "workbench.iconTheme": "vscode-icons",
-        "workbench.secondarySideBar.showLabels": false,
-        "[markdown]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode",
-          "files.trimTrailingWhitespace": false
-        },
-        "[json]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[jsonc]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[yml]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[yaml]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[javascript]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[typescript]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[vue]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[css]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[prisma]": {
-          "editor.defaultFormatter": "Prisma.prisma"
-        },
-        "[sql]": {
-          "editor.defaultFormatter": "ReneSaarsoo.sql-formatter-vsc"
-        }
-      }
+      ]
     }
   },
   "onCreateCommand": "bash .devcontainer/script/on_create_command.sh",
