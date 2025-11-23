@@ -1,6 +1,9 @@
 import { DateTime as luxon } from "luxon"
+import ZennBaseUrl from "../../constant-variable/zenn.ts"
 import { PrismaClient } from "../../type/prisma/client.ts"
+import QiitaApi from "./qiita-api.ts"
 import RssParser from "./rss-parser.ts"
+import ZennApi from "./zenn-api.ts"
 
 class Article {
   private rssParser: RssParser
@@ -11,13 +14,13 @@ class Article {
     this.dbClient = dbClient
   }
 
-  public async createOrUpdateByRss() {
+  public async createOrUpdateWithRss() {
     await this.dbClient.$transaction(async (transaction) => {
-      const rssPublishers = await transaction.rssPublisher.findMany()
       const popularArticleLabel =
         await transaction.articleLabel.findUniqueOrThrow({
           where: { value: "popular" }
         })
+      const rssPublishers = await transaction.rssPublisher.findMany()
 
       const articles = (
         await Promise.all(
@@ -73,7 +76,7 @@ class Article {
         articles.map(async (article) => {
           const upsertedArticle = await transaction.article.upsert({
             where: { link: article.link },
-            update: { title: article.title },
+            update: { title: article.title, author: article.author },
             create: article
           })
 
@@ -95,6 +98,123 @@ class Article {
         })
       )
     })
+  }
+
+  public async createOrUpdateWithApi() {
+    const qiitaItems = await this.fetchQiitaItem()
+    const zennItems = await this.fetchZennArticle()
+
+    const qiitaArticles = await Promise.all(
+      qiitaItems.map(async (item) => {
+        return {
+          title: item.title,
+          link: item.url,
+          author: item.user.id,
+          publishedAt: luxon.fromISO(item.created_at).toUTC().toJSDate()
+        }
+      })
+    )
+    const zennArticles = (
+      await Promise.all(
+        zennItems.map(async (item) => {
+          return {
+            title: item.title,
+            link: `${ZennBaseUrl}${item.path}`,
+            author: item.user.name,
+            publishedAt: luxon.fromISO(item.published_at).toUTC().toJSDate()
+          }
+        })
+      )
+    ).filter((article) => {
+      const publishedDateString = luxon
+        .fromJSDate(article.publishedAt)
+        .setZone("Asia/Tokyo")
+        .toISODate()
+      const todayDateString = luxon.now().setZone("Asia/Tokyo").toISODate()
+
+      const isPublishedToday =
+        publishedDateString &&
+        todayDateString &&
+        publishedDateString >= todayDateString
+
+      return isPublishedToday
+    })
+
+    const articles = [...qiitaArticles, ...zennArticles]
+
+    await this.dbClient.$transaction(async (transaction) => {
+      const newArticleLabel = await transaction.articleLabel.findUniqueOrThrow({
+        where: { value: "new" }
+      })
+
+      await Promise.all(
+        articles.map(async (article) => {
+          const upsertedArticle = await transaction.article.upsert({
+            where: { link: article.link },
+            update: { title: article.title, author: article.author },
+            create: article
+          })
+
+          await transaction.articleLabelRelation.upsert({
+            where: {
+              articleId_articleLabelId: {
+                articleId: upsertedArticle.id,
+                articleLabelId: newArticleLabel.id
+              }
+            },
+            update: {},
+            create: {
+              articleId: upsertedArticle.id,
+              articleLabelId: newArticleLabel.id
+            }
+          })
+
+          return void 0
+        })
+      )
+    })
+  }
+
+  private async fetchQiitaItem() {
+    const maxPage = 100
+    const maxPerPage = 100
+    const todayDateString =
+      luxon.now().setZone("Asia/Tokyo").toISODate() || "2025-01-01"
+    const query = `created:>=${todayDateString}`
+
+    const qiitaApi = new QiitaApi()
+    const qiitaArticles = []
+    for (let page = 1; page <= maxPage; page++) {
+      const qiitaItems = await qiitaApi.fetchItem(page, maxPerPage, query)
+      qiitaArticles.push(...qiitaItems)
+
+      if (qiitaItems.length < maxPerPage) {
+        break
+      }
+    }
+
+    return qiitaArticles
+  }
+
+  private async fetchZennArticle() {
+    const maxCount = 100
+
+    const zennApi = new ZennApi()
+    let page = 1
+    const zennArticles = []
+    while (true) {
+      const { articles: zennItems, next_page: nextPage } =
+        await zennApi.fetchArticle(page, maxCount)
+      zennArticles.push(...zennItems)
+
+      if (nextPage) {
+        page = nextPage
+      } else {
+        break
+      }
+    }
+
+    return zennArticles
   }
 }
 

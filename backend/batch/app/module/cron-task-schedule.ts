@@ -12,7 +12,7 @@ class CronTaskSchedule {
     this.dbClient = dbClient
   }
 
-  public async deleteTaskSchedule() {
+  public async deleteAll() {
     await this.dbClient.$transaction(async (transaction) => {
       await transaction.cronTaskSchedule.deleteMany()
       await transaction.$queryRaw`
@@ -21,37 +21,41 @@ class CronTaskSchedule {
     })
   }
 
-  public async manageTaskSchedule(task: cron.ScheduledTask) {
+  public async manage(task: cron.ScheduledTask) {
     task.on("execution:started", async (context) => {
-      await this.createTaskSchedule(context)
+      await this.create(context)
     })
 
     task.on("execution:finished", async (context) => {
-      await this.updateTaskSchedule(context)
+      await this.update(context)
     })
 
     task.on("execution:failed", async (context) => {
-      await this.updateTaskSchedule(context)
+      await this.update(context)
     })
 
     task.on("task:started", async (context) => {
-      await this.updateTaskSchedule(context)
+      await this.update(context)
     })
 
     task.on("task:stopped", async (context) => {
-      await this.updateTaskSchedule(context)
+      await this.update(context)
     })
 
     task.on("task:destroyed", async (context) => {
-      await this.updateTaskSchedule(context)
+      await this.update(context)
     })
   }
 
-  public async runCreateOrUpdateArticlesByRss() {
-    await this.article.createOrUpdateByRss()
+  public async runCreateOrUpdateArticlesWithRss() {
+    await this.article.createOrUpdateWithRss()
   }
 
-  private async createTaskSchedule(context: cron.TaskContext) {
+  public async runCreateOrUpdateArticlesWithApi() {
+    await this.article.createOrUpdateWithApi()
+  }
+
+  private async create(context: cron.TaskContext) {
     const task = context.task
     const execution = context.execution
 
@@ -76,7 +80,7 @@ class CronTaskSchedule {
     })
   }
 
-  private async updateTaskSchedule(context: cron.TaskContext) {
+  private async update(context: cron.TaskContext) {
     const task = context.task
     const execution = context.execution
 

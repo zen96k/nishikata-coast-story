@@ -29,7 +29,7 @@ rm -rf type
 npm install && npm run prisma:generate
 cd ${BACKEND_DIRNAME}/batch
 rm -rf type
-npm install && npm run prisma:generate
+npm install && npm run json2ts:qiita && npm run prisma:generate
 cd ${BACKEND_DIRNAME}/db
 rm -rf type
 npm install && npm run prisma:generate
