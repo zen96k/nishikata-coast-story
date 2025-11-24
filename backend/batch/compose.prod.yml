@@ -15,6 +15,7 @@ services:
       - ./prisma/model:/workspace/nishikata-coast-story/prisma/model
       - ./prisma/schema.prisma:/workspace/nishikata-coast-story/prisma/schema.prisma:ro
       - ./.env.keys:/workspace/nishikata-coast-story/.env.keys:ro
+      - ./app.prod.env:/workspace/nishikata-coast-story/app.prod.env:ro
       - ./prisma.prod.env:/workspace/nishikata-coast-story/prisma.prod.env:ro
       - ./package.json:/workspace/nishikata-coast-story/package.json:ro
       - ./package-lock.json:/workspace/nishikata-coast-story/package-lock.json:ro
