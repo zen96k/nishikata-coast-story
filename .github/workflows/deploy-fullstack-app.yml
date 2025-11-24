@@ -35,17 +35,12 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc
-      - name: Install Dependencies
-        run: |
-          npm install -g @dotenvx/dotenvx vercel
-          npm install
-          npm run prisma:generate
+      - name: Install Vercel CLI
+        run: npm install -g vercel
         working-directory: frontend/web
       - name: Build Frontend App
         run: |
           vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
           vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-        # working-directory: frontend/web
       - name: Deploy Frontend App
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
-        # working-directory: frontend/web
