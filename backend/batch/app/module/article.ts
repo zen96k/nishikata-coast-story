@@ -65,7 +65,11 @@ class Article {
         articles.map(async (article) => {
           const upsertedArticle = await transaction.article.upsert({
             where: { link: article.link },
-            update: { title: article.title, author: article.author },
+            update: {
+              title: article.title,
+              author: article.author,
+              publishedAt: article.publishedAt
+            },
             create: article
           })
 
@@ -153,7 +157,11 @@ class Article {
         articles.map(async (article) => {
           const upsertedArticle = await transaction.article.upsert({
             where: { link: article.link },
-            update: { title: article.title, author: article.author },
+            update: {
+              title: article.title,
+              author: article.author,
+              publishedAt: article.publishedAt
+            },
             create: article
           })
 
