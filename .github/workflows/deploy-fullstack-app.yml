@@ -40,10 +40,11 @@ jobs:
           npm install -g @dotenvx/dotenvx vercel
           npm install
           npm run prisma:generate
-          vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
         working-directory: frontend/web
       - name: Build Frontend App
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: |
+          vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+          vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
         # working-directory: frontend/web
       - name: Deploy Frontend App
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
