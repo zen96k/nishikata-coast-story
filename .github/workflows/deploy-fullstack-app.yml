@@ -8,7 +8,7 @@ jobs:
     name: Deploy Backend App
     runs-on: ubuntu-22.04
     if: github.ref_name == 'main'
-    environment: prod
+    environment: Production
     steps:
       - name: Deploy Backend App
         uses: appleboy/ssh-action@v1
@@ -28,7 +28,6 @@ jobs:
     runs-on: ubuntu-22.04
     if: github.ref_name == 'main'
     needs: deploy-backend-app-prod
-    environment: prod
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v5
@@ -37,18 +36,16 @@ jobs:
         with:
           node-version-file: .nvmrc
       - name: Install Dependencies
-        run: npm install -g @dotenvx/dotenvx && npm install && npm run prisma:generate
+        run: |
+          npm install -g @dotenvx/dotenvx vercel
+          npm install
+          npm run prisma:generate
+          vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
         working-directory: frontend/web
       - name: Build Frontend App
-        env:
-          DOTENV_PRIVATE_KEY_ENV: ${{ secrets.DOTENV_PRIVATE_KEY_ENV }}
-          NCS_ENV: ${{ vars.NCS_ENV }}
-        run: npm run nuxt:build -- --preset=cloudflare_pages
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
         working-directory: frontend/web
       - name: Deploy Frontend App
         uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          wranglerVersion: 4.46.0
-          command: pages deploy frontend/web/dist --project-name nishikata-coast-story
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+        working-directory: frontend/web

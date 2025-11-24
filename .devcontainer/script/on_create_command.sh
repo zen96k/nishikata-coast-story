@@ -36,5 +36,6 @@ apt install -y ./fastfetch-linux-amd64.deb
 rm -rf fastfetch-linux-amd64.deb
 
 npm install -g @aikidosec/safe-chain \
-               @dotenvx/dotenvx
+               @dotenvx/dotenvx \
+               vercel
 safe-chain setup
