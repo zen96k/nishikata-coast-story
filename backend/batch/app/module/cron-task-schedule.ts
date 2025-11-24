@@ -47,12 +47,12 @@ class CronTaskSchedule {
     })
   }
 
-  public async runCreateOrUpdateArticlesWithRss() {
-    await this.article.createOrUpdateWithRss()
-  }
-
   public async runCreateOrUpdateArticlesWithApi() {
     await this.article.createOrUpdateWithApi()
+  }
+
+  public async runCreateOrUpdateArticlesWithRss() {
+    await this.article.createOrUpdateWithRss()
   }
 
   private async create(context: cron.TaskContext) {

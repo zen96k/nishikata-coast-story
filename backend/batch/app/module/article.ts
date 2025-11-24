@@ -14,92 +14,6 @@ class Article {
     this.dbClient = dbClient
   }
 
-  public async createOrUpdateWithRss() {
-    await this.dbClient.$transaction(async (transaction) => {
-      const popularArticleLabel =
-        await transaction.articleLabel.findUniqueOrThrow({
-          where: { value: "popular" }
-        })
-      const rssPublishers = await transaction.rssPublisher.findMany()
-
-      const articles = (
-        await Promise.all(
-          rssPublishers.map(async (rssPublisher) => {
-            const { items: items } = await this.rssParser.parseUrl(
-              rssPublisher.url
-            )
-
-            const articles = (
-              await Promise.all(
-                items.map(async (item) => {
-                  const {
-                    title: title,
-                    link: link,
-                    author: author,
-                    creator: creator,
-                    pubDate: pubDate
-                  } = item
-
-                  const qiitaPattern =
-                    !!title && !!link && !!author && !!pubDate
-                  if (qiitaPattern) {
-                    return {
-                      title: title,
-                      link: link,
-                      author: author,
-                      publishedAt: luxon.fromISO(pubDate).toUTC().toJSDate()
-                    }
-                  }
-
-                  const zennPattern =
-                    !!title && !!link && !!creator && !!pubDate
-                  if (zennPattern) {
-                    return {
-                      title: title,
-                      link: link,
-                      author: creator,
-                      publishedAt: luxon.fromRFC2822(pubDate).toUTC().toJSDate()
-                    }
-                  }
-
-                  return void 0
-                })
-              )
-            ).filter((article) => article !== undefined)
-
-            return articles
-          })
-        )
-      ).flatMap((article) => article)
-
-      await Promise.all(
-        articles.map(async (article) => {
-          const upsertedArticle = await transaction.article.upsert({
-            where: { link: article.link },
-            update: { title: article.title, author: article.author },
-            create: article
-          })
-
-          await transaction.articleLabelRelation.upsert({
-            where: {
-              articleId_articleLabelId: {
-                articleId: upsertedArticle.id,
-                articleLabelId: popularArticleLabel.id
-              }
-            },
-            update: {},
-            create: {
-              articleId: upsertedArticle.id,
-              articleLabelId: popularArticleLabel.id
-            }
-          })
-
-          return void 0
-        })
-      )
-    })
-  }
-
   public async createOrUpdateWithApi() {
     const qiitaItems = await this.fetchQiitaItem()
     const zennItems = await this.fetchZennArticle()
@@ -166,6 +80,94 @@ class Article {
             create: {
               articleId: upsertedArticle.id,
               articleLabelId: newArticleLabel.id
+            }
+          })
+
+          return void 0
+        })
+      )
+    })
+  }
+
+  public async createOrUpdateWithRss() {
+    await this.dbClient.$transaction(async (transaction) => {
+      const popularArticleLabel =
+        await transaction.articleLabel.findUniqueOrThrow({
+          where: { value: "popular" }
+        })
+      const rssPublishers = await transaction.rssPublisher.findMany()
+
+      const articles = (
+        await Promise.all(
+          rssPublishers.map(async (rssPublisher) => {
+            const { items: items } = await this.rssParser.parseUrl(
+              rssPublisher.url
+            )
+
+            const articles = (
+              await Promise.all(
+                items.map(async (item) => {
+                  const {
+                    title: title,
+                    link: link,
+                    author: author,
+                    creator: creator,
+                    pubDate: pubDate
+                  } = item
+
+                  const qiitaPattern =
+                    !!title && !!link && !!author && !!pubDate
+                  if (qiitaPattern) {
+                    const url = new URL(link)
+
+                    return {
+                      title: title,
+                      link: url.origin + url.pathname,
+                      author: author,
+                      publishedAt: luxon.fromISO(pubDate).toUTC().toJSDate()
+                    }
+                  }
+
+                  const zennPattern =
+                    !!title && !!link && !!creator && !!pubDate
+                  if (zennPattern) {
+                    return {
+                      title: title,
+                      link: link,
+                      author: creator,
+                      publishedAt: luxon.fromRFC2822(pubDate).toUTC().toJSDate()
+                    }
+                  }
+
+                  return void 0
+                })
+              )
+            ).filter((article) => article !== undefined)
+
+            return articles
+          })
+        )
+      ).flatMap((article) => article)
+
+      await Promise.all(
+        articles.map(async (article) => {
+          const upsertedArticle = await transaction.article.upsert({
+            where: { link: article.link },
+            update: { title: article.title, author: article.author },
+            create: article
+          })
+
+          await transaction.articleLabelRelation.upsert({
+            where: {
+              articleId_articleLabelId: {
+                articleId: upsertedArticle.id,
+                articleLabelId: popularArticleLabel.id
+              }
+            },
+            update: {},
+            create: {
+              articleId: upsertedArticle.id,
+              articleLabelId: popularArticleLabel.id
             }
           })
 
