@@ -37,7 +37,6 @@ jobs:
           node-version-file: .nvmrc
       - name: Install Vercel CLI
         run: npm install -g vercel
-        working-directory: frontend/web
       - name: Build Frontend App
         run: |
           vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
