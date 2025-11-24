@@ -44,7 +44,7 @@ jobs:
         working-directory: frontend/web
       - name: Build Frontend App
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-        working-directory: frontend/web
+        # working-directory: frontend/web
       - name: Deploy Frontend App
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
-        working-directory: frontend/web
+        # working-directory: frontend/web
