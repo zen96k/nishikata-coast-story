@@ -46,6 +46,5 @@ jobs:
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
         working-directory: frontend/web
       - name: Deploy Frontend App
-        uses: cloudflare/wrangler-action@v3
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
         working-directory: frontend/web
