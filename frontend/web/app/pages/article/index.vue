@@ -3,5 +3,5 @@
 </template>
 
 <script setup lang="ts">
-  await navigateTo("/article/popular")
+  await navigateTo("/article/new")
 </script>

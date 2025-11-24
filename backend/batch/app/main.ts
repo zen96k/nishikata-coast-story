@@ -21,11 +21,11 @@ const main = async () => {
           const task = context.task
 
           console.info(`${task?.name}を開始します`)
-          await cronTaskSchedule.runCreateOrUpdateArticlesWithRss()
+          await cronTaskSchedule.runCreateOrUpdateArticlesWithApi()
           console.info(`${task?.name}を終了します`)
         },
         {
-          name: "CreateOrUpdateArticlesWithRss",
+          name: "CreateOrUpdateArticlesWithApi",
           timezone: "Asia/Tokyo",
           noOverlap: true
         }
@@ -39,11 +39,11 @@ const main = async () => {
           const task = context.task
 
           console.info(`${task?.name}を開始します`)
-          await cronTaskSchedule.runCreateOrUpdateArticlesWithApi()
+          await cronTaskSchedule.runCreateOrUpdateArticlesWithRss()
           console.info(`${task?.name}を終了します`)
         },
         {
-          name: "CreateOrUpdateArticlesWithApi",
+          name: "CreateOrUpdateArticlesWithRss",
           timezone: "Asia/Tokyo",
           noOverlap: true
         }
