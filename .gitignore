@@ -1,5 +1,6 @@
 devcontainer.env
 *.env.keys
 
+.vercel
 node_modules
 volume
