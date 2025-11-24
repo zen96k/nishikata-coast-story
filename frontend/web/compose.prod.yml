@@ -18,7 +18,8 @@ services:
       - TZ=Asia/Tokyo
     volumes:
       - ./.output:/workspace/nishikata-coast-story/.output
-      - ./package.json:/workspace/nishikata-coast-story/package.json
+      - ./package.json:/workspace/nishikata-coast-story/package.json:ro
+      - ./package-lock.json:/workspace/nishikata-coast-story/package-lock.json:ro
       - /usr/share/zoneinfo/Asia/Tokyo:/etc/localtime:ro
     working_dir: /workspace/nishikata-coast-story
     command:

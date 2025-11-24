@@ -12,20 +12,38 @@ const main = async () => {
   const cronTaskSchedule = new CronTaskSchedule(article, dbClient)
 
   try {
-    await cronTaskSchedule.deleteTaskSchedule()
+    await cronTaskSchedule.deleteAll()
 
-    await cronTaskSchedule.manageTaskSchedule(
+    await cronTaskSchedule.manage(
       cron.schedule(
         process.env.NCS_ENV === "dev" ? "*/15 * * * *" : "00 */1 * * *",
         async (context) => {
           const task = context.task
 
           console.info(`${task?.name}を開始します`)
-          await cronTaskSchedule.runCreateOrUpdateArticlesByRss()
+          await cronTaskSchedule.runCreateOrUpdateArticlesWithRss()
           console.info(`${task?.name}を終了します`)
         },
         {
-          name: "CreateOrUpdateArticlesByRss",
+          name: "CreateOrUpdateArticlesWithRss",
+          timezone: "Asia/Tokyo",
+          noOverlap: true
+        }
+      )
+    )
+
+    await cronTaskSchedule.manage(
+      cron.schedule(
+        process.env.NCS_ENV === "dev" ? "*/15 * * * *" : "00 */1 * * *",
+        async (context) => {
+          const task = context.task
+
+          console.info(`${task?.name}を開始します`)
+          await cronTaskSchedule.runCreateOrUpdateArticlesWithApi()
+          console.info(`${task?.name}を終了します`)
+        },
+        {
+          name: "CreateOrUpdateArticlesWithApi",
           timezone: "Asia/Tokyo",
           noOverlap: true
         }
