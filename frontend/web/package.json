@@ -21,10 +21,6 @@
     "ncu": "ncu",
     "ncu:upgrade": "ncu -u && npm install"
   },
-  "engines": {
-    "node": "24.11.1",
-    "npm": "11.6.2"
-  },
   "prisma": {
     "schema": "prisma"
   },
