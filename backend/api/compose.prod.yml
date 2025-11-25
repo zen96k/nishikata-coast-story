@@ -11,8 +11,8 @@ services:
       - traefik.enable=true
       - traefik.http.routers.ncs-api-prod.entrypoints=websecure
       - traefik.http.routers.ncs-api-prod.tls.certresolver=mydnsjp
-      - traefik.http.routers.ncs-api-prod.rule=Host(`${API_SERVER_HOST}`)
-      - traefik.http.services.ncs-api-prod.loadbalancer.server.port=${API_SERVER_PORT}
+      - traefik.http.routers.ncs-api-prod.rule=Host(`${NCS_API_HOST}`)
+      - traefik.http.services.ncs-api-prod.loadbalancer.server.port=${NCS_API_PORT}
     environment:
       - NCS_ENV=${NCS_ENV}
       - TZ=Asia/Tokyo
