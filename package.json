@@ -7,8 +7,8 @@
     "ncu:upgrade": "ncu -u && npm install"
   },
   "devDependencies": {
-    "knip": "5.69.1",
-    "lefthook": "2.0.2",
+    "knip": "5.70.1",
+    "lefthook": "2.0.4",
     "npm-check-updates": "19.1.2"
   }
 }

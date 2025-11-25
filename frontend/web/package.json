@@ -26,12 +26,12 @@
   },
   "dependencies": {
     "nuxt": "4.2.1",
-    "vue": "3.5.24",
+    "vue": "3.5.25",
     "vue-router": "4.6.3"
   },
   "devDependencies": {
     "@nuxt/eslint": "1.10.0",
-    "@nuxt/ui": "4.1.0",
+    "@nuxt/ui": "4.2.1",
     "@prisma/client": "6.19.0",
     "@tsconfig/recommended": "1.0.13",
     "@types/luxon": "3.7.1",
@@ -39,7 +39,7 @@
     "@vueuse/nuxt": "14.0.0",
     "eslint": "9.39.1",
     "eslint-config-prettier": "10.1.8",
-    "knip": "5.69.1",
+    "knip": "5.70.1",
     "luxon": "3.7.2",
     "npm-check-updates": "19.1.2",
     "prettier": "3.6.2",
@@ -48,6 +48,6 @@
     "prisma": "6.19.0",
     "superjson": "2.2.5",
     "typescript": "5.9.3",
-    "vue-tsc": "3.1.4"
+    "vue-tsc": "3.1.5"
   }
 }
