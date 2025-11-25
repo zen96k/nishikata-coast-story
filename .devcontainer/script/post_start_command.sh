@@ -17,7 +17,7 @@ git config --global init.defaultBranch ${GIT_DEFAULT_BRANCH}
 git config --global user.name ${GIT_USER_NAME}
 git config --global user.email ${GIT_USER_EMAIL}
 
-docker compose up -d --pull always --force-recreate -V
+docker compose up -d --pull always --force-recreate -V --wait
 
 npm install
 cd ${FRONTEND_DIRNAME}/web
