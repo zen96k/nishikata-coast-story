@@ -23,7 +23,7 @@ npm install
 cd ${FRONTEND_DIRNAME}/web
 rm -rf .output .data .nuxt .nitro .cache dist
 rm -rf type
-npm install && npm run prisma:generate
+npm install && npm run openapi-typescript:generate:ogp-scanner && npm run prisma:generate
 cd ${BACKEND_DIRNAME}/api
 rm -rf type
 npm install && npm run prisma:generate

@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "postinstall": "npm run nuxt:postinstall",
-    "ncs:dev": "npm run prisma:generate && npm run nuxt:dev",
+    "ncs:dev": "npm run openapi-typescript:generate:ogp-scanner && npm run prisma:generate && npm run nuxt:dev",
     "ncs:prod": "node .output/server/index.mjs",
     "ncs:up": "dotenvx run -f compose.${NCS_ENV}.env -- docker compose -f compose.${NCS_ENV}.yml up -d --pull always --force-recreate -V --wait",
     "ncs:down": "dotenvx run -f compose.${NCS_ENV}.env -- docker compose -f compose.${NCS_ENV}.yml down",
@@ -15,6 +15,7 @@
     "nuxt:generate": "nuxt generate",
     "nuxt:preview": "nuxt preview",
     "nuxt:postinstall": "nuxt prepare",
+    "openapi-typescript:generate:ogp-scanner": "mkdir -p type/ogp-scanner && openapi-typescript https://ogp-scanner.kunon.jp/openapi.json -o type/ogp-scanner/schema.ts",
     "prisma:generate": "prisma generate",
     "tsc:check": "tsc --noEmit",
     "knip": "knip",
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "@nuxt/eslint": "1.10.0",
+    "@nuxt/image": "2.0.0",
     "@nuxt/ui": "4.2.1",
     "@prisma/client": "6.19.0",
     "@tsconfig/recommended": "1.0.13",
@@ -42,6 +44,7 @@
     "knip": "5.70.1",
     "luxon": "3.7.2",
     "npm-check-updates": "19.1.2",
+    "openapi-typescript": "7.10.1",
     "prettier": "3.6.2",
     "prettier-plugin-organize-imports": "4.3.0",
     "prettier-plugin-tailwindcss": "0.7.1",

@@ -26,19 +26,19 @@
         </template>
         <template #body>
           <div>
-            <img
+            <NuxtImg
               v-if="article.link.includes(QiitaBaseUrl)"
-              class="min-h-32"
-              src="~/assets/image/qiita/logo-background-color.png"
+              class="min-h-24"
+              :src="await fetchOgpInfo(article.link)"
             />
-            <img
+            <NuxtImg
               v-else-if="article.link.includes(ZennBaseUrl)"
-              class="min-h-32"
-              src="~/assets/image/zenn/logo.png"
+              class="min-h-24"
+              src="https://nuxt.com/assets/design-kit/logo-green-white.png"
             />
-            <img
+            <NuxtImg
               v-else
-              class="min-h-32"
+              class="min-h-24"
               src="https://nuxt.com/assets/design-kit/logo-green-white.png"
             />
           </div>
@@ -78,7 +78,8 @@
   import superjson from "superjson"
   import QiitaBaseUrl from "../../../../../../common/constant-variable/qiita"
   import ZennBaseUrl from "../../../../../../common/constant-variable/zenn"
-  import type { Prisma } from "../../../../type/prisma/client.ts"
+  import type { operations } from "../../../../type/ogp-scanner/schema"
+  import type { Prisma } from "../../../../type/prisma/client"
 
   const { y: windowScrollY } = useWindowScroll()
 
@@ -96,7 +97,7 @@
   >([])
   const articleCount = ref(0)
   const articlePage = ref(1)
-  const articleLimit = ref(15)
+  const articleLimit = ref(30)
 
   const { data: data, error: error } = await useLazyFetch<
     { superjson: string },
@@ -105,6 +106,22 @@
     method: "POST",
     body: { page: articlePage, limit: articleLimit }
   })
+
+  const fetchOgpInfo = async (url: string) => {
+    const { public: publicRuntimeConfig } = useRuntimeConfig()
+    const ogpScannerApiBaseUrl = publicRuntimeConfig.ogpScannerApiBaseUrl
+
+    const { data: data, error: error } = await useLazyFetch<
+      operations["ogp_info_v1_ogp_info_get"]["responses"]["200"]["content"]["application/json"],
+      | operations["ogp_info_v1_ogp_info_get"]["responses"]["403"]["content"]["application/json"]
+      | operations["ogp_info_v1_ogp_info_get"]["responses"]["422"]["content"]["application/json"]
+    >(`${ogpScannerApiBaseUrl}/ogp_info`, { query: { url: url } })
+
+    console.dir(data)
+    console.dir(error)
+
+    return ""
+  }
 
   const updatePage = (page: number) => {
     articlePage.value = page
