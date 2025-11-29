@@ -1,6 +1,6 @@
 services:
   batch:
-    image: node:lts
+    image: node:22.21.1
     container_name: ncs-batch-prod
     init: true
     restart: always
