@@ -17,7 +17,7 @@ jobs:
         run: npm install -g @dotenvx/dotenvx && npm install && npm run prisma:generate
         working-directory: backend/api
       - name: Run ESLint
-        run: npm run eslint
+        run: npm run eslint:lint
         working-directory: backend/api
       - name: Run TypeCheck
         run: npm run typescript:lint

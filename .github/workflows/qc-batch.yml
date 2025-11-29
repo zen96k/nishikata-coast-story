@@ -21,7 +21,7 @@ jobs:
           npm run prisma:generate
         working-directory: backend/batch
       - name: Run ESLint
-        run: npm run eslint
+        run: npm run eslint:lint
         working-directory: backend/batch
       - name: Run TypeCheck
         run: npm run typescript:lint
