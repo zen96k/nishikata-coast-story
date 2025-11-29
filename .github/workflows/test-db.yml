@@ -1,8 +1,8 @@
-name: QC DB
+name: Test DB
 on: pull_request
 jobs:
-  qc-db:
-    name: QC DB
+  test-db:
+    name: Test DB
     runs-on: ubuntu-22.04
     permissions:
       pull-requests: write

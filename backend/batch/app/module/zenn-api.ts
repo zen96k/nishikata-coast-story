@@ -8,13 +8,15 @@ interface Article {
 }
 
 class ZennApi {
-  public async fetchArticle(page?: number, count?: number) {
+  public async fetchArticle(page?: number, count?: number, topic?: string) {
     const zennApiBaseUrl = process.env.ZENN_API_BASE_URL || ""
 
     const articles = await ofetch<{
       articles: Article[]
       next_page: number | null
-    }>(`${zennApiBaseUrl}/articles`, { query: { page: page, count: count } })
+    }>(`${zennApiBaseUrl}/articles`, {
+      query: { page: page, count: count, topicname: topic }
+    })
 
     return articles
   }

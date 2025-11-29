@@ -1,8 +1,8 @@
-name: QC API
+name: Test Web
 on: pull_request
 jobs:
-  qc-api:
-    name: QC API
+  test-web:
+    name: Test Web
     runs-on: ubuntu-22.04
     permissions:
       pull-requests: write
@@ -19,10 +19,10 @@ jobs:
           safe-chain setup-ci
       - name: Install Dependencies
         run: npm install -g @dotenvx/dotenvx && npm install && npm run prisma:generate
-        working-directory: backend/api
+        working-directory: frontend/web
       - name: Run ESLint
         run: npm run eslint:lint
-        working-directory: backend/api
+        working-directory: frontend/web
       - name: Run TypeCheck
         run: npm run typescript:lint
-        working-directory: backend/api
+        working-directory: frontend/web

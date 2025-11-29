@@ -28,31 +28,16 @@ class Article {
         }
       })
     )
-    const zennArticles = (
-      await Promise.all(
-        zennItems.map(async (item) => {
-          return {
-            title: item.title,
-            link: `${ZennBaseUrl}${item.path}`,
-            author: item.user.name,
-            publishedAt: luxon.fromISO(item.published_at).toUTC().toJSDate()
-          }
-        })
-      )
-    ).filter((article) => {
-      const publishedDateString = luxon
-        .fromJSDate(article.publishedAt)
-        .setZone("Asia/Tokyo")
-        .toISODate()
-      const todayDateString = luxon.now().setZone("Asia/Tokyo").toISODate()
-
-      const isPublishedToday =
-        publishedDateString &&
-        todayDateString &&
-        publishedDateString >= todayDateString
-
-      return isPublishedToday
-    })
+    const zennArticles = await Promise.all(
+      zennItems.map(async (item) => {
+        return {
+          title: item.title,
+          link: `${ZennBaseUrl}${item.path}`,
+          author: item.user.name,
+          publishedAt: luxon.fromISO(item.published_at).toUTC().toJSDate()
+        }
+      })
+    )
 
     const articles = [...qiitaArticles, ...zennArticles]
 
@@ -188,9 +173,7 @@ class Article {
   private async fetchQiitaItem() {
     const maxPage = 100
     const maxPerPage = 100
-    const todayDateString =
-      luxon.now().setZone("Asia/Tokyo").toISODate() || "2025-01-01"
-    const query = `created:>=${todayDateString}`
+    const query = "tag:個人開発"
 
     const qiitaApi = new QiitaApi()
     const qiitaArticles = []
@@ -208,13 +191,14 @@ class Article {
 
   private async fetchZennArticle() {
     const maxCount = 100
+    const topic = "個人開発"
 
     const zennApi = new ZennApi()
     let page = 1
     const zennArticles = []
     while (true) {
       const { articles: zennItems, next_page: nextPage } =
-        await zennApi.fetchArticle(page, maxCount)
+        await zennApi.fetchArticle(page, maxCount, topic)
       zennArticles.push(...zennItems)
 
       if (nextPage) {

@@ -1,8 +1,8 @@
-name: QC Batch
+name: Test Batch
 on: pull_request
 jobs:
-  qc-batch:
-    name: QC Batch
+  test-batch:
+    name: Test Batch
     runs-on: ubuntu-22.04
     permissions:
       pull-requests: write
@@ -30,10 +30,10 @@ jobs:
       - name: Run TypeCheck
         run: npm run typescript:lint
         working-directory: backend/batch
-      - name: Run QC
+      - name: Run Test
         env:
           DOTENV_PRIVATE_KEY_ENV: ${{ secrets.DOTENV_PRIVATE_KEY_ENV }}
-        run: npm run ncs:qc
+        run: npm run ncs:test
         working-directory: backend/batch
       - name: Report Coverage
         uses: davelosert/vitest-coverage-report-action@v2
