@@ -1,6 +1,6 @@
 services:
   api:
-    image: node:lts
+    image: node:22.21.1
     container_name: ncs-api-prod
     init: true
     restart: always
