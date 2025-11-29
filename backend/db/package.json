@@ -8,7 +8,7 @@
     "ncs:migrate": "dotenvx run -f compose.${NCS_ENV}.env -- docker compose -f compose.migrate.yml up -d --pull always --force-recreate -V --wait && npm run prisma:migrate:deploy && dotenvx run -f compose.prod.env -- docker compose -f compose.migrate.yml down",
     "dotenvx:decrypt": "dotenvx decrypt -f *.env",
     "dotenvx:encrypt": "dotenvx encrypt -f *.env",
-    "eslint": "eslint",
+    "eslint:lint": "eslint",
     "mariadb:backup": "mkdir -p backup && docker container exec -it ncs-mariadb-${NCS_ENV} bash -c 'mariadb-dump -A -u root -p${MARIADB_ROOT_PASSWORD}' > backup/${NCS_ENV}-$(date +%Y%m%d%H%M%S).sql",
     "mariadb:restore": "docker container exec -i ncs-mariadb-${NCS_ENV} bash -c 'mariadb -u root -p${MARIADB_ROOT_PASSWORD}' <",
     "prisma:generate": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma generate",
@@ -19,10 +19,14 @@
     "prisma:migrate:reset": "dotenvx run -f prisma.dev.env -- prisma migrate reset",
     "prisma:migrate:deploy": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma migrate deploy",
     "prisma:studio": "dotenvx run -f prisma.dev.env -- prisma studio --browser none",
-    "tsc:check": "tsc --noEmit",
+    "typescript:lint": "typescript --noEmit",
     "knip": "knip",
-    "ncu": "ncu",
-    "ncu:upgrade": "ncu -u && npm install"
+    "npm-check-updates": "npm-check-updates",
+    "npm-check-updates:upgrade": "npm-check-updates -u && npm install"
+  },
+  "engines": {
+    "node": "22.21.1",
+    "npm": "10.9.4"
   },
   "prisma": {
     "schema": "prisma"

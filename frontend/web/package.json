@@ -4,12 +4,9 @@
   "scripts": {
     "postinstall": "npm run nuxt:postinstall",
     "ncs:dev": "npm run openapi-typescript:generate:ogp-scanner && npm run prisma:generate && npm run nuxt:dev",
-    "ncs:prod": "node .output/server/index.mjs",
-    "ncs:up": "dotenvx run -f compose.${NCS_ENV}.env -- docker compose -f compose.${NCS_ENV}.yml up -d --pull always --force-recreate -V --wait",
-    "ncs:down": "dotenvx run -f compose.${NCS_ENV}.env -- docker compose -f compose.${NCS_ENV}.yml down",
     "dotenvx:decrypt": "dotenvx decrypt -f *.env",
     "dotenvx:encrypt": "dotenvx encrypt -f *.env",
-    "eslint": "eslint",
+    "eslint:lint": "eslint",
     "nuxt:build": "dotenvx run -f nuxt.${NCS_ENV}.env -- nuxt build",
     "nuxt:dev": "dotenvx run -f nuxt.dev.env -- nuxt dev --no-fork",
     "nuxt:generate": "nuxt generate",
@@ -17,10 +14,14 @@
     "nuxt:postinstall": "nuxt prepare",
     "openapi-typescript:generate:ogp-scanner": "mkdir -p type/ogp-scanner && openapi-typescript https://ogp-scanner.kunon.jp/openapi.json -o type/ogp-scanner/schema.ts",
     "prisma:generate": "prisma generate",
-    "tsc:check": "tsc --noEmit",
+    "typescript:lint": "typescript --noEmit",
     "knip": "knip",
-    "ncu": "ncu",
-    "ncu:upgrade": "ncu -u && npm install"
+    "npm-check-updates": "npm-check-updates",
+    "npm-check-updates:upgrade": "npm-check-updates -u && npm install"
+  },
+  "engines": {
+    "node": "22.21.1",
+    "npm": "10.9.4"
   },
   "prisma": {
     "schema": "prisma"

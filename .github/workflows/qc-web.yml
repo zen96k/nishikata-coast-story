@@ -20,5 +20,5 @@ jobs:
         run: npm run eslint
         working-directory: frontend/web
       - name: Run TypeCheck
-        run: npm run tsc:check
+        run: npm run typescript:lint
         working-directory: frontend/web

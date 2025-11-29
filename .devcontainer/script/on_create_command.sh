@@ -23,7 +23,6 @@ apt update && apt install -y zsh
 chsh -s $(which zsh)
 sh -c "$(curl -fsSL https://install.ohmyz.sh)" "" --unattended
 cp -rfv .zshrc ${HOME}
-npm completion >> ${HOME}/.zshrc
 
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
 curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
@@ -34,8 +33,3 @@ rm -rf lazygit.tar.gz lazygit
 wget https://github.com/fastfetch-cli/fastfetch/releases/latest/download/fastfetch-linux-amd64.deb
 apt install -y ./fastfetch-linux-amd64.deb
 rm -rf fastfetch-linux-amd64.deb
-
-npm install -g @aikidosec/safe-chain \
-               @dotenvx/dotenvx \
-               vercel
-safe-chain setup

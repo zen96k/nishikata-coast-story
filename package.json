@@ -3,8 +3,12 @@
   "type": "module",
   "scripts": {
     "knip": "knip",
-    "ncu": "ncu",
-    "ncu:upgrade": "ncu -u && npm install"
+    "npm-check-updates": "npm-check-updates",
+    "npm-check-updates:upgrade": "npm-check-updates -u && npm install"
+  },
+  "engines": {
+    "node": "22.21.1",
+    "npm": "10.9.4"
   },
   "devDependencies": {
     "knip": "5.70.1",
