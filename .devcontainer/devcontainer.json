@@ -2,9 +2,25 @@
   "name": "nishikata-coast-story",
   "image": "ubuntu",
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "ghcr.io/devcontainers/features/go:1": {},
-    "ghcr.io/devcontainers/features/node:1": {}
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "moby": true,
+      "mobyBuildxVersion": "latest",
+      "dockerDashComposeVersion": "v2",
+      "azureDnsAutoDetection": true,
+      "dockerDefaultAddressPool": "",
+      "installDockerBuildx": true,
+      "installDockerComposeSwitch": true,
+      "disableIp6tables": false
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22.21.1",
+      "nodeGypDependencies": true,
+      "nvmInstallPath": "/usr/local/share/nvm",
+      "pnpmVersion": "latest",
+      "nvmVersion": "latest",
+      "installYarnUsingApt": true
+    }
   },
   "init": true,
   "runArgs": ["--env-file", ".devcontainer/devcontainer.env", "--rm"],

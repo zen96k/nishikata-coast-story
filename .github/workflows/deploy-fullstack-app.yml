@@ -34,7 +34,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version-file: .nvmrc
+          node-version-file: package.json
+      - name: Setup safe-chain
+        run: |
+          npm install -g @aikidosec/safe-chain
+          safe-chain setup-ci
       - name: Install Vercel CLI
         run: npm install -g vercel
       - name: Build Frontend App

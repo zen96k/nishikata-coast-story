@@ -3,35 +3,38 @@
   "type": "module",
   "scripts": {
     "postinstall": "npm run nuxt:postinstall",
-    "ncs:dev": "npm run prisma:generate && npm run nuxt:dev",
-    "ncs:prod": "node .output/server/index.mjs",
-    "ncs:up": "dotenvx run -f compose.${NCS_ENV}.env -- docker compose -f compose.${NCS_ENV}.yml up -d --pull always --force-recreate -V --wait",
-    "ncs:down": "dotenvx run -f compose.${NCS_ENV}.env -- docker compose -f compose.${NCS_ENV}.yml down",
+    "ncs:dev": "npm run openapi-typescript:generate:ogp-scanner && npm run prisma:generate && npm run nuxt:dev",
     "dotenvx:decrypt": "dotenvx decrypt -f *.env",
     "dotenvx:encrypt": "dotenvx encrypt -f *.env",
-    "eslint": "eslint",
+    "eslint:lint": "eslint",
     "nuxt:build": "dotenvx run -f nuxt.${NCS_ENV}.env -- nuxt build",
     "nuxt:dev": "dotenvx run -f nuxt.dev.env -- nuxt dev --no-fork",
     "nuxt:generate": "nuxt generate",
     "nuxt:preview": "nuxt preview",
     "nuxt:postinstall": "nuxt prepare",
+    "openapi-typescript:generate:ogp-scanner": "mkdir -p type/ogp-scanner && openapi-typescript https://ogp-scanner.kunon.jp/openapi.json -o type/ogp-scanner/schema.ts",
     "prisma:generate": "prisma generate",
-    "tsc:check": "tsc --noEmit",
+    "typescript:lint": "tsc --noEmit",
     "knip": "knip",
-    "ncu": "ncu",
-    "ncu:upgrade": "ncu -u && npm install"
+    "npm-check-updates": "npm-check-updates",
+    "npm-check-updates:upgrade": "npm-check-updates -u && npm install"
+  },
+  "engines": {
+    "node": "22.21.1",
+    "npm": "10.9.4"
   },
   "prisma": {
     "schema": "prisma"
   },
   "dependencies": {
     "nuxt": "4.2.1",
-    "vue": "3.5.24",
+    "vue": "3.5.25",
     "vue-router": "4.6.3"
   },
   "devDependencies": {
     "@nuxt/eslint": "1.10.0",
-    "@nuxt/ui": "4.1.0",
+    "@nuxt/image": "2.0.0",
+    "@nuxt/ui": "4.2.1",
     "@prisma/client": "6.19.0",
     "@tsconfig/recommended": "1.0.13",
     "@types/luxon": "3.7.1",
@@ -39,15 +42,16 @@
     "@vueuse/nuxt": "14.0.0",
     "eslint": "9.39.1",
     "eslint-config-prettier": "10.1.8",
-    "knip": "5.69.1",
+    "knip": "5.70.1",
     "luxon": "3.7.2",
     "npm-check-updates": "19.1.2",
+    "openapi-typescript": "7.10.1",
     "prettier": "3.6.2",
     "prettier-plugin-organize-imports": "4.3.0",
     "prettier-plugin-tailwindcss": "0.7.1",
     "prisma": "6.19.0",
     "superjson": "2.2.5",
     "typescript": "5.9.3",
-    "vue-tsc": "3.1.4"
+    "vue-tsc": "3.1.5"
   }
 }

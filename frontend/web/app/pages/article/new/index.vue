@@ -78,7 +78,7 @@
   import superjson from "superjson"
   import QiitaBaseUrl from "../../../../../../common/constant-variable/qiita"
   import ZennBaseUrl from "../../../../../../common/constant-variable/zenn"
-  import type { Prisma } from "../../../../type/prisma/client.ts"
+  import type { Prisma } from "../../../../type/prisma/client"
 
   const { y: windowScrollY } = useWindowScroll()
 

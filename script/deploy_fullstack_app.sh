@@ -47,3 +47,5 @@ rm -rf node_modules type
 # npm clean-install
 # npm run nuxt:build
 # npm run ncs:up
+
+docker system prune -af --volumes

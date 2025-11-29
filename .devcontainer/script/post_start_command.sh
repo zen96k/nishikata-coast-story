@@ -19,20 +19,25 @@ git config --global user.email ${GIT_USER_EMAIL}
 
 docker compose up -d --pull always --force-recreate -V --wait
 
+source ${HOME}/.safe-chain/scripts/init-posix.sh
+npm install -g @dotenvx/dotenvx \
+               vercel
 npm install
+
 cd ${FRONTEND_DIRNAME}/web
 rm -rf .output .data .nuxt .nitro .cache dist
 rm -rf type
-npm install && npm run prisma:generate
+npm install && npm run openapi-typescript:generate:ogp-scanner && npm run prisma:generate
+
 cd ${BACKEND_DIRNAME}/api
 rm -rf type
 npm install && npm run prisma:generate
+
 cd ${BACKEND_DIRNAME}/batch
 rm -rf type
 npm install && npm run json2ts:qiita && npm run prisma:generate
+
 cd ${BACKEND_DIRNAME}/db
 rm -rf type
 npm install && npm run prisma:generate
 npm run ncs:dev && npm run prisma:migrate:deploy
-
-docker system prune -af --volumes

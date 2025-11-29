@@ -3,11 +3,12 @@ const config = defineNuxtConfig({
   devtools: { enabled: true },
   app: { head: { title: "西方コーストストーリー", htmlAttrs: { lang: "ja" } } },
   runtimeConfig: {
-    private: { ncsApiBaseUrl: process.env.NUXT_NCS_API_BASE_URL }
+    private: { ncsApiBaseUrl: process.env.NUXT_NCS_API_BASE_URL },
+    public: { ogpScannerApiBaseUrl: process.env.OGP_SCANNER_API_BASE_URL }
   },
   typescript: { typeCheck: true },
   css: ["assets/css/main.css"],
-  modules: ["@nuxt/eslint", "@nuxt/ui", "@vueuse/nuxt"]
+  modules: ["@nuxt/eslint", "@nuxt/ui", "@nuxt/image", "@vueuse/nuxt"]
 })
 
 export default config

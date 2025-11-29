@@ -7,14 +7,18 @@
     "ncs:down": "dotenvx run -f compose.${NCS_ENV}.env -- docker compose -f compose.${NCS_ENV}.yml down",
     "dotenvx:decrypt": "dotenvx decrypt -f *.env",
     "dotenvx:encrypt": "dotenvx encrypt -f *.env",
-    "eslint": "eslint",
+    "eslint:lint": "eslint",
     "prisma:generate": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma generate",
-    "tsc:check": "tsc --noEmit",
     "tsx:dev": "dotenvx run -f hono.dev.env prisma.dev.env -- tsx watch app/main.ts",
     "tsx:prod": "dotenvx run -f hono.prod.env prisma.prod.env -- tsx app/main.ts",
+    "typescript:lint": "tsc --noEmit",
     "knip": "knip",
-    "ncu": "ncu",
-    "ncu:upgrade": "ncu -u && npm install"
+    "npm-check-updates": "npm-check-updates",
+    "npm-check-updates:upgrade": "npm-check-updates -u && npm install"
+  },
+  "engines": {
+    "node": "22.21.1",
+    "npm": "10.9.4"
   },
   "prisma": {
     "schema": "prisma"
@@ -26,13 +30,13 @@
   "devDependencies": {
     "@eslint/js": "9.39.1",
     "@prisma/client": "6.19.0",
-    "@tsconfig/node-lts": "22.0.3",
+    "@tsconfig/node-lts": "24.0.0",
     "@tsconfig/node-ts": "23.6.2",
     "@tsconfig/recommended": "1.0.13",
     "@types/node": "24.10.1",
     "eslint": "9.39.1",
     "eslint-config-prettier": "10.1.8",
-    "knip": "5.69.1",
+    "knip": "5.70.1",
     "npm-check-updates": "19.1.2",
     "prettier": "3.6.2",
     "prettier-plugin-organize-imports": "4.3.0",
@@ -40,6 +44,6 @@
     "superjson": "2.2.5",
     "tsx": "4.20.6",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.46.4"
+    "typescript-eslint": "8.47.0"
   }
 }
