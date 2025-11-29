@@ -37,12 +37,6 @@
       to: "/article/new",
       class: "text-white",
       active: route.path.startsWith("/article/new")
-    },
-    {
-      label: "人気記事",
-      to: "/article/popular",
-      class: "text-white",
-      active: route.path.startsWith("/article/popular")
     }
   ])
 </script>

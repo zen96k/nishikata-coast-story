@@ -32,23 +32,23 @@ const main = async () => {
       )
     )
 
-    await cronTaskSchedule.manage(
-      cron.schedule(
-        process.env.NCS_ENV === "dev" ? "*/15 * * * *" : "*/15 * * * *",
-        async (context) => {
-          const task = context.task
+    // await cronTaskSchedule.manage(
+    //   cron.schedule(
+    //     process.env.NCS_ENV === "dev" ? "*/15 * * * *" : "*/15 * * * *",
+    //     async (context) => {
+    //       const task = context.task
 
-          console.info(`${task?.name}を開始します`)
-          await cronTaskSchedule.runCreateOrUpdateArticlesWithRss()
-          console.info(`${task?.name}を終了します`)
-        },
-        {
-          name: "CreateOrUpdateArticlesWithRss",
-          timezone: "Asia/Tokyo",
-          noOverlap: true
-        }
-      )
-    )
+    //       console.info(`${task?.name}を開始します`)
+    //       await cronTaskSchedule.runCreateOrUpdateArticlesWithRss()
+    //       console.info(`${task?.name}を終了します`)
+    //     },
+    //     {
+    //       name: "CreateOrUpdateArticlesWithRss",
+    //       timezone: "Asia/Tokyo",
+    //       noOverlap: true
+    //     }
+    //   )
+    // )
   } catch (error) {
     console.error(error)
   }
