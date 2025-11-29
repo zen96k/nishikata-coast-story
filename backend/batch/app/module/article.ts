@@ -41,41 +41,45 @@ class Article {
 
     const articles = [...qiitaArticles, ...zennArticles]
 
-    await this.dbClient.$transaction(async (transaction) => {
-      const newArticleLabel = await transaction.articleLabel.findUniqueOrThrow({
-        where: { value: "new" }
-      })
-
-      await Promise.all(
-        articles.map(async (article) => {
-          const upsertedArticle = await transaction.article.upsert({
-            where: { link: article.link },
-            update: {
-              title: article.title,
-              author: article.author,
-              publishedAt: article.publishedAt
-            },
-            create: article
+    await this.dbClient.$transaction(
+      async (transaction) => {
+        const newArticleLabel =
+          await transaction.articleLabel.findUniqueOrThrow({
+            where: { value: "new" }
           })
 
-          await transaction.articleLabelRelation.upsert({
-            where: {
-              articleId_articleLabelId: {
+        await Promise.all(
+          articles.map(async (article) => {
+            const upsertedArticle = await transaction.article.upsert({
+              where: { link: article.link },
+              update: {
+                title: article.title,
+                author: article.author,
+                publishedAt: article.publishedAt
+              },
+              create: article
+            })
+
+            await transaction.articleLabelRelation.upsert({
+              where: {
+                articleId_articleLabelId: {
+                  articleId: upsertedArticle.id,
+                  articleLabelId: newArticleLabel.id
+                }
+              },
+              update: {},
+              create: {
                 articleId: upsertedArticle.id,
                 articleLabelId: newArticleLabel.id
               }
-            },
-            update: {},
-            create: {
-              articleId: upsertedArticle.id,
-              articleLabelId: newArticleLabel.id
-            }
-          })
+            })
 
-          return void 0
-        })
-      )
-    })
+            return void 0
+          })
+        )
+      },
+      { timeout: 10000 }
+    )
   }
 
   public async createOrUpdateWithRss() {
