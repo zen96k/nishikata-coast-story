@@ -13,6 +13,10 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version-file: package.json
+      - name: Setup safe-chain
+        run: |
+          npm install -g @aikidosec/safe-chain
+          safe-chain setup-ci
       - name: Install Dependencies
         run: |
           npm install -g @dotenvx/dotenvx

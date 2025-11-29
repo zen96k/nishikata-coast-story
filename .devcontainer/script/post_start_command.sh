@@ -19,12 +19,9 @@ git config --global user.email ${GIT_USER_EMAIL}
 
 docker compose up -d --pull always --force-recreate -V --wait
 
-npm install -g @aikidosec/safe-chain \
-               @dotenvx/dotenvx \
+source ${HOME}/.safe-chain/scripts/init-posix.sh
+npm install -g @dotenvx/dotenvx \
                vercel
-safe-chain setup
-npm completion >> ${HOME}/.zshrc
-
 npm install
 
 cd ${FRONTEND_DIRNAME}/web
