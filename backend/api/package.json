@@ -11,7 +11,7 @@
     "prisma:generate": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma generate",
     "tsx:dev": "dotenvx run -f hono.dev.env prisma.dev.env -- tsx watch app/main.ts",
     "tsx:prod": "dotenvx run -f hono.prod.env prisma.prod.env -- tsx app/main.ts",
-    "typescript:lint": "typescript --noEmit",
+    "typescript:lint": "tsc --noEmit",
     "knip": "knip",
     "npm-check-updates": "npm-check-updates",
     "npm-check-updates:upgrade": "npm-check-updates -u && npm install"

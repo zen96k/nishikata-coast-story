@@ -19,7 +19,7 @@
     "prisma:migrate:reset": "dotenvx run -f prisma.dev.env -- prisma migrate reset",
     "prisma:migrate:deploy": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma migrate deploy",
     "prisma:studio": "dotenvx run -f prisma.dev.env -- prisma studio --browser none",
-    "typescript:lint": "typescript --noEmit",
+    "typescript:lint": "tsc --noEmit",
     "knip": "knip",
     "npm-check-updates": "npm-check-updates",
     "npm-check-updates:upgrade": "npm-check-updates -u && npm install"

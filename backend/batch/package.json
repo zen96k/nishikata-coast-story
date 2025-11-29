@@ -14,7 +14,7 @@
     "prisma:migrate:deploy": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma migrate deploy",
     "tsx:dev": "dotenvx run -f app.dev.env -f prisma.dev.env -- tsx watch app/main.ts",
     "tsx:prod": "dotenvx run -f app.prod.env -f prisma.prod.env -- tsx app/main.ts",
-    "typescript:lint": "typescript --noEmit",
+    "typescript:lint": "tsc --noEmit",
     "vitest": "dotenvx run -f prisma.qc.env -- vitest run --coverage",
     "knip": "knip",
     "npm-check-updates": "npm-check-updates",

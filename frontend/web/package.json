@@ -14,7 +14,7 @@
     "nuxt:postinstall": "nuxt prepare",
     "openapi-typescript:generate:ogp-scanner": "mkdir -p type/ogp-scanner && openapi-typescript https://ogp-scanner.kunon.jp/openapi.json -o type/ogp-scanner/schema.ts",
     "prisma:generate": "prisma generate",
-    "typescript:lint": "typescript --noEmit",
+    "typescript:lint": "tsc --noEmit",
     "knip": "knip",
     "npm-check-updates": "npm-check-updates",
     "npm-check-updates:upgrade": "npm-check-updates -u && npm install"
