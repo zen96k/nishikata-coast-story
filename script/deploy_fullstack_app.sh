@@ -17,7 +17,7 @@ rm -rf node_modules
 npm install -g @dotenvx/dotenvx
 
 cd ${FRONTEND_DIRNAME}/web
-npm run ncs:down
+# npm run ncs:down
 
 cd ${BACKEND_DIRNAME}/api
 npm run ncs:down
