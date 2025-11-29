@@ -10,7 +10,7 @@
     "dotenvx:encrypt": "dotenvx encrypt -f *.env",
     "eslint:lint": "eslint",
     "json2ts:qiita": "mkdir -p type/qiita && wget -O - https://qiita.com/api/v2/schema | json2ts > type/qiita/api.ts",
-    "prisma:generate": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma generate",
+    "prisma:generate": "prisma generate",
     "prisma:migrate:deploy": "dotenvx run -f prisma.${NCS_ENV}.env -- prisma migrate deploy",
     "tsx:dev": "dotenvx run -f app.dev.env -f prisma.dev.env -- tsx watch app/main.ts",
     "tsx:prod": "dotenvx run -f app.prod.env -f prisma.prod.env -- tsx app/main.ts",
