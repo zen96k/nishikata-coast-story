@@ -14,41 +14,41 @@ const main = async () => {
   try {
     await cronTaskSchedule.deleteAll()
 
-    await cronTaskSchedule.manage(
-      cron.schedule(
-        process.env.NCS_ENV === "dev" ? "*/15 * * * *" : "00 */1 * * *",
-        async (context) => {
-          const task = context.task
-
-          console.info(`${task?.name}を開始します`)
-          await cronTaskSchedule.runCreateOrUpdateArticlesWithApi()
-          console.info(`${task?.name}を終了します`)
-        },
-        {
-          name: "CreateOrUpdateArticlesWithApi",
-          timezone: "Asia/Tokyo",
-          noOverlap: true
-        }
-      )
-    )
-
     // await cronTaskSchedule.manage(
     //   cron.schedule(
-    //     process.env.NCS_ENV === "dev" ? "*/15 * * * *" : "*/15 * * * *",
+    //     process.env.NCS_ENV === "dev" ? "*/15 * * * *" : "00 */1 * * *",
     //     async (context) => {
     //       const task = context.task
 
     //       console.info(`${task?.name}を開始します`)
-    //       await cronTaskSchedule.runCreateOrUpdateArticlesWithRss()
+    //       await cronTaskSchedule.runCreateOrUpdateArticlesWithApi()
     //       console.info(`${task?.name}を終了します`)
     //     },
     //     {
-    //       name: "CreateOrUpdateArticlesWithRss",
+    //       name: "CreateOrUpdateArticlesWithApi",
     //       timezone: "Asia/Tokyo",
     //       noOverlap: true
     //     }
     //   )
     // )
+
+    await cronTaskSchedule.manage(
+      cron.schedule(
+        process.env.NCS_ENV === "dev" ? "*/15 * * * *" : "*/15 * * * *",
+        async (context) => {
+          const task = context.task
+
+          console.info(`${task?.name}を開始します`)
+          await cronTaskSchedule.runCreateOrUpdateArticlesWithRss()
+          console.info(`${task?.name}を終了します`)
+        },
+        {
+          name: "CreateOrUpdateArticlesWithRss",
+          timezone: "Asia/Tokyo",
+          noOverlap: true
+        }
+      )
+    )
   } catch (error) {
     console.error(error)
   }

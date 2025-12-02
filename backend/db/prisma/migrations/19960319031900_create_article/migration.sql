@@ -1,5 +1,6 @@
 CREATE TABLE `article` (
   `id` BIGINT UNSIGNED NOT NULL auto_increment,
+  `publisher_id` BIGINT UNSIGNED NOT NULL,
   `title` VARCHAR(255) NOT NULL,
   `link` VARCHAR(255) NOT NULL,
   `author` VARCHAR(255) NOT NULL,
@@ -9,3 +10,6 @@ CREATE TABLE `article` (
   UNIQUE INDEX `uq_article_link` (`link`),
   CONSTRAINT `pk_article_id` PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
+
+ALTER TABLE `article`
+ADD CONSTRAINT `fk_article_publisher_id` FOREIGN KEY (`publisher_id`) REFERENCES `publisher` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

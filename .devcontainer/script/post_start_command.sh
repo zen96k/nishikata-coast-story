@@ -19,7 +19,6 @@ git config --global user.email ${GIT_USER_EMAIL}
 
 docker compose up -d --pull always --force-recreate -V --wait
 
-source ${HOME}/.safe-chain/scripts/init-posix.sh
 npm install -g @dotenvx/dotenvx \
                vercel
 npm install

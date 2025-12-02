@@ -47,8 +47,8 @@
       ]
     }
   },
-  "onCreateCommand": "bash .devcontainer/script/on_create_command.sh",
-  "postStartCommand": "bash .devcontainer/script/post_start_command.sh",
-  "postAttachCommand": "bash .devcontainer/script/post_attach_command.sh",
+  "onCreateCommand": "bash -i .devcontainer/script/on_create_command.sh",
+  "postStartCommand": "bash -i .devcontainer/script/post_start_command.sh",
+  "postAttachCommand": "bash -i .devcontainer/script/post_attach_command.sh",
   "waitFor": "onCreateCommand"
 }

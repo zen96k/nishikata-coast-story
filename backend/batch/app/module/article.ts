@@ -1,5 +1,4 @@
 import { DateTime as luxon } from "luxon"
-import ZennBaseUrl from "../../constant-variable/zenn.ts"
 import { PrismaClient } from "../../type/prisma/client.ts"
 import QiitaApi from "./qiita-api.ts"
 import RssParser from "./rss-parser.ts"
@@ -14,73 +13,73 @@ class Article {
     this.dbClient = dbClient
   }
 
-  public async createOrUpdateWithApi() {
-    const qiitaItems = await this.fetchQiitaItem()
-    const zennItems = await this.fetchZennArticle()
+  // public async createOrUpdateWithApi() {
+  //   const qiitaItems = await this.fetchQiitaItem()
+  //   const zennItems = await this.fetchZennArticle()
 
-    const qiitaArticles = await Promise.all(
-      qiitaItems.map(async (item) => {
-        return {
-          title: item.title,
-          link: item.url,
-          author: item.user.id,
-          publishedAt: luxon.fromISO(item.created_at).toUTC().toJSDate()
-        }
-      })
-    )
-    const zennArticles = await Promise.all(
-      zennItems.map(async (item) => {
-        return {
-          title: item.title,
-          link: `${ZennBaseUrl}${item.path}`,
-          author: item.user.name,
-          publishedAt: luxon.fromISO(item.published_at).toUTC().toJSDate()
-        }
-      })
-    )
+  //   const qiitaArticles = await Promise.all(
+  //     qiitaItems.map(async (item) => {
+  //       return {
+  //         title: item.title,
+  //         link: item.url,
+  //         author: item.user.id,
+  //         publishedAt: luxon.fromISO(item.created_at).toUTC().toJSDate()
+  //       }
+  //     })
+  //   )
+  //   const zennArticles = await Promise.all(
+  //     zennItems.map(async (item) => {
+  //       return {
+  //         title: item.title,
+  //         link: `${ZennBaseUrl}${item.path}`,
+  //         author: item.user.name,
+  //         publishedAt: luxon.fromISO(item.published_at).toUTC().toJSDate()
+  //       }
+  //     })
+  //   )
 
-    const articles = [...qiitaArticles, ...zennArticles]
+  //   const articles = [...qiitaArticles, ...zennArticles]
 
-    await this.dbClient.$transaction(
-      async (transaction) => {
-        const newArticleLabel =
-          await transaction.articleLabel.findUniqueOrThrow({
-            where: { value: "new" }
-          })
+  //   await this.dbClient.$transaction(
+  //     async (transaction) => {
+  //       const newArticleLabel =
+  //         await transaction.articleLabel.findUniqueOrThrow({
+  //           where: { value: "new" }
+  //         })
 
-        await Promise.all(
-          articles.map(async (article) => {
-            const upsertedArticle = await transaction.article.upsert({
-              where: { link: article.link },
-              update: {
-                title: article.title,
-                author: article.author,
-                publishedAt: article.publishedAt
-              },
-              create: article
-            })
+  //       await Promise.all(
+  //         articles.map(async (article) => {
+  //           const upsertedArticle = await transaction.article.upsert({
+  //             where: { link: article.link },
+  //             update: {
+  //               title: article.title,
+  //               author: article.author,
+  //               publishedAt: article.publishedAt
+  //             },
+  //             create: article
+  //           })
 
-            await transaction.articleLabelRelation.upsert({
-              where: {
-                articleId_articleLabelId: {
-                  articleId: upsertedArticle.id,
-                  articleLabelId: newArticleLabel.id
-                }
-              },
-              update: {},
-              create: {
-                articleId: upsertedArticle.id,
-                articleLabelId: newArticleLabel.id
-              }
-            })
+  //           await transaction.articleLabelRelation.upsert({
+  //             where: {
+  //               articleId_articleLabelId: {
+  //                 articleId: upsertedArticle.id,
+  //                 articleLabelId: newArticleLabel.id
+  //               }
+  //             },
+  //             update: {},
+  //             create: {
+  //               articleId: upsertedArticle.id,
+  //               articleLabelId: newArticleLabel.id
+  //             }
+  //           })
 
-            return void 0
-          })
-        )
-      },
-      { timeout: 10000 }
-    )
-  }
+  //           return void 0
+  //         })
+  //       )
+  //     },
+  //     { timeout: 10000 }
+  //   )
+  // }
 
   public async createOrUpdateWithRss() {
     await this.dbClient.$transaction(async (transaction) => {
@@ -88,13 +87,13 @@ class Article {
         await transaction.articleLabel.findUniqueOrThrow({
           where: { value: "popular" }
         })
-      const rssPublishers = await transaction.rssPublisher.findMany()
+      const publishers = await transaction.publisher.findMany()
 
       const articles = (
         await Promise.all(
-          rssPublishers.map(async (rssPublisher) => {
+          publishers.map(async (publisher) => {
             const { items: items } = await this.rssParser.parseUrl(
-              rssPublisher.url
+              publisher.url
             )
 
             const articles = (
@@ -114,6 +113,7 @@ class Article {
                     const url = new URL(link)
 
                     return {
+                      publisherId: publisher.id,
                       title: title,
                       link: url.origin + url.pathname,
                       author: author,
@@ -125,6 +125,7 @@ class Article {
                     !!title && !!link && !!creator && !!pubDate
                   if (zennPattern) {
                     return {
+                      publisherId: publisher.id,
                       title: title,
                       link: link,
                       author: creator,

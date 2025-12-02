@@ -33,10 +33,10 @@
 
   const items = computed<NavigationMenuItem[]>(() => [
     {
-      label: "新着記事",
-      to: "/article/new",
+      label: "人気記事",
+      to: "/article/popular",
       class: "text-white",
-      active: route.path.startsWith("/article/new")
+      active: route.path.startsWith("/article/popular")
     }
   ])
 </script>
