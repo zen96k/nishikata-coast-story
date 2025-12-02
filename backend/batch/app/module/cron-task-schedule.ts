@@ -47,9 +47,9 @@ class CronTaskSchedule {
     })
   }
 
-  public async runCreateOrUpdateArticlesWithApi() {
-    await this.article.createOrUpdateWithApi()
-  }
+  // public async runCreateOrUpdateArticlesWithApi() {
+  //   await this.article.createOrUpdateWithApi()
+  // }
 
   public async runCreateOrUpdateArticlesWithRss() {
     await this.article.createOrUpdateWithRss()
