@@ -73,6 +73,7 @@ const article = new Hono()
         skip: skip,
         take: take,
         include: {
+          publisher: true,
           articleLabelRelations: {
             where: { articleLabel: { is: { value: "popular" } } }
           }

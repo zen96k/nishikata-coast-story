@@ -1,9 +1,0 @@
-model RssPublisher {
-  id        BigInt   @id @default(autoincrement()) @db.UnsignedBigInt
-  name      String   @db.VarChar(255)
-  url       String   @unique(map: "uq_rss_publisher_url") @db.VarChar(255)
-  createdAt DateTime @default(now()) @map("created_at") @db.DateTime()
-  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.DateTime()
-
-  @@map("rss_publisher")
-}

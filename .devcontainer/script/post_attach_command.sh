@@ -9,7 +9,7 @@ PROJECT_DIRNAME=$(cd ${SCRIPT_DIRNAME}/../.. && pwd)
 
 cd ${PROJECT_DIRNAME}
 
-bash script/encrypt_environment_variables.sh
+bash -i script/encrypt_environment_variables.sh
 
 docker container exec ncs-ollama ollama pull gemma3
 cp -rfv config.yaml ${HOME}/.continue

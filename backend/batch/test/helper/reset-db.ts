@@ -6,7 +6,7 @@ const resetDb = async () => {
     await transaction.articleLabel.deleteMany()
     await transaction.articleLabelRelation.deleteMany()
     await transaction.cronTaskSchedule.deleteMany()
-    await transaction.rssPublisher.deleteMany()
+    await transaction.publisher.deleteMany()
   })
 }
 

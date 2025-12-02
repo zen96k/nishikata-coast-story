@@ -87,8 +87,9 @@
       skip: number
       take: number
       include: {
+        publisher: true
         articleLabelRelations: {
-          where: { articleLabel: { is: { value: "new" } } }
+          where: { articleLabel: { is: { value: "popular" } } }
         }
       }
       orderBy: { publishedAt: string }
@@ -96,12 +97,12 @@
   >([])
   const articleCount = ref(0)
   const articlePage = ref(1)
-  const articleLimit = ref(15)
+  const articleLimit = ref(30)
 
   const { data: data, error: error } = await useLazyFetch<
     { superjson: string },
     H3Error
-  >("/api/article/new/fetch", {
+  >("/api/article/popular/fetch", {
     method: "POST",
     body: { page: articlePage, limit: articleLimit }
   })
@@ -122,8 +123,9 @@
               skip: number
               take: number
               include: {
+                publisher: true
                 articleLabelRelations: {
-                  where: { articleLabel: { is: { value: "new" } } }
+                  where: { articleLabel: { is: { value: "popular" } } }
                 }
               }
               orderBy: { publishedAt: string }
