@@ -34,11 +34,12 @@
       "extensions": [
         "bradlc.vscode-tailwindcss",
         "Codeium.codeium",
-        "Continue.continue",
         "dbaeumer.vscode-eslint",
         "dotenv.dotenvx-vscode",
         "eamodio.gitlens",
         "esbenp.prettier-vscode",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
         "ms-azuretools.vscode-docker",
         "MS-CEINTL.vscode-language-pack-ja",
         "ms-vscode.cpptools-themes",
