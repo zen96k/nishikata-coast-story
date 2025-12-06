@@ -1,5 +1,4 @@
 {
-  "continue.telemetryEnabled": false,
   "codeium.enableCodeLens": false,
   "debug.toolBarLocation": "docked",
   "diffEditor.ignoreTrimWhitespace": false,
@@ -24,6 +23,10 @@
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
   "git.postCommitCommand": "push",
+  "github.copilot.enable": {
+    "*": false
+  },
+  "github.copilot.chat.byok.ollamaEndpoint": "http://localhost:11434",
   "SQL-Formatter-VSCode.dialect": "mariadb",
   "SQL-Formatter-VSCode.keywordCase": "upper",
   "SQL-Formatter-VSCode.dataTypeCase": "upper",

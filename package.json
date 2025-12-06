@@ -11,8 +11,8 @@
     "npm": "10.9.4"
   },
   "devDependencies": {
-    "knip": "5.70.1",
-    "lefthook": "2.0.4",
+    "knip": "5.71.0",
+    "lefthook": "2.0.8",
     "npm-check-updates": "19.1.2"
   }
 }

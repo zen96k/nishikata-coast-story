@@ -5,7 +5,9 @@ jobs:
     name: Scan Code
     runs-on: ubuntu-22.04
     permissions:
+      actions: read
       security-events: write
+      contents: read
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v5
@@ -16,3 +18,5 @@ jobs:
           queries: security-and-quality
       - name: Run CodeQL
         uses: github/codeql-action/init@v4
+      - name: Run OSV-Scanner
+        uses: google/osv-scanner-action/osv-scanner-action@v2.3.0

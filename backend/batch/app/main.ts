@@ -34,7 +34,7 @@ const main = async () => {
 
     await cronTaskSchedule.manage(
       cron.schedule(
-        process.env.NCS_ENV === "dev" ? "*/15 * * * *" : "*/15 * * * *",
+        process.env.NCS_ENV === "dev" ? "*/15 * * * *" : "00 */1 * * *",
         async (context) => {
           const task = context.task
 
