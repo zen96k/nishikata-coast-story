@@ -1,8 +1,8 @@
-name: Scan Code (CodeQL)
+name: Scan Code
 on: pull_request
 jobs:
   scan-code:
-    name: Scan Code
+    name: Scan Code (CodeQL)
     runs-on: ubuntu-22.04
     permissions:
       security-events: write
@@ -16,12 +16,8 @@ jobs:
           queries: security-and-quality
       - name: Run CodeQL
         uses: github/codeql-action/init@v4
-
-name: Scan Code (OSV-Scanner)
-on: pull_request
-jobs:
   scan-code:
-    name: Scan Code
+    name: Scan Code (OSV-Scanner)
     runs-on: ubuntu-22.04
     permissions:
       actions: read
