@@ -25,13 +25,13 @@ sh -c "$(curl -fsSL https://install.ohmyz.sh)" "" --unattended
 cp -rfv .zshrc ${HOME}
 npm completion >> ${HOME}/.zshrc
 
-npm install -g @aikidosec/safe-chain
-safe-chain setup
+go install github.com/google/osv-scanner/v2/cmd/osv-scanner@latest
+curl -fsSL https://raw.githubusercontent.com/AikidoSec/safe-chain/main/install-scripts/install-safe-chain.sh | sh
 
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
 curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
 tar xf lazygit.tar.gz lazygit
-install lazygit -D -t /usr/local/bin/
+install lazygit -D -t /usr/local/bin
 rm -rf lazygit.tar.gz lazygit
 
 wget https://github.com/fastfetch-cli/fastfetch/releases/latest/download/fastfetch-linux-amd64.deb

@@ -20,3 +20,4 @@ npx lefthook install
 apt update && apt full-upgrade -y
 
 fastfetch
+osv-scanner scan source -r .
