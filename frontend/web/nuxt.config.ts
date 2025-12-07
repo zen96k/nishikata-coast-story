@@ -19,7 +19,7 @@ const config = defineNuxtConfig({
         { property: "og:type", content: "website" },
         {
           property: "og:image",
-          content: "https://nuxt.com/assets/design-kit/logo-green-white.png"
+          content: "https://nuxt.com/assets/design-kit/icon-green.png"
         },
         { property: "og:locale", content: "ja_JP" },
         { name: "twitter:title", content: "西方コーストストーリー" },
@@ -29,7 +29,7 @@ const config = defineNuxtConfig({
         },
         {
           name: "twitter:image",
-          content: "https://nuxt.com/assets/design-kit/logo-green-white.png"
+          content: "https://nuxt.com/assets/design-kit/icon-green.png"
         }
       ]
     }
