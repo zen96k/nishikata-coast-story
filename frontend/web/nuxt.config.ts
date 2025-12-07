@@ -22,6 +22,7 @@ const config = defineNuxtConfig({
           content: "https://nuxt.com/assets/design-kit/icon-green.png"
         },
         { property: "og:locale", content: "ja_JP" },
+        { name: "twitter:card", content: "summary" },
         { name: "twitter:title", content: "西方コーストストーリー" },
         {
           name: "twitter:description",
