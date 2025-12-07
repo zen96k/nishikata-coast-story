@@ -106,13 +106,25 @@
   })
 
   const fetchImageUrl = async (url: string) => {
-    const data = await $fetch<
-      operations["ogp_info_v1_ogp_info_get"]["responses"]["200"]["content"]["application/json"]
+    const { data: data, error: error } = await useFetch<
+      operations["ogp_info_v1_ogp_info_get"]["responses"]["200"]["content"]["application/json"],
+      H3Error
     >(`${publicRuntimeConfig.ogpScannerApiBaseUrl}/ogp_info`, {
       query: { url: url }
     })
 
-    return data.ogp?.["og:image"]?.[0] || ""
+    if (error.value) {
+      console.error(error.value)
+
+      const toast = useToast()
+      toast.add({
+        title: `${error.value.statusCode} Error`,
+        description: error.value.statusMessage,
+        color: "error"
+      })
+    }
+
+    return data.value?.ogp?.["og:image"]?.[0] || ""
   }
 
   const updatePage = (page: number) => {
