@@ -45,6 +45,7 @@
     "knip": "5.71.0",
     "luxon": "3.7.2",
     "npm-check-updates": "19.1.2",
+    "nuxt-og-image": "5.1.12",
     "openapi-typescript": "7.10.1",
     "prettier": "3.7.4",
     "prettier-plugin-organize-imports": "4.3.0",

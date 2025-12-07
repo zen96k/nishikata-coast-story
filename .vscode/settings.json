@@ -27,6 +27,7 @@
     "*": false
   },
   "github.copilot.chat.byok.ollamaEndpoint": "http://localhost:11434",
+  "github.copilot.chat.localeOverride": "ja",
   "SQL-Formatter-VSCode.dialect": "mariadb",
   "SQL-Formatter-VSCode.keywordCase": "upper",
   "SQL-Formatter-VSCode.dataTypeCase": "upper",
