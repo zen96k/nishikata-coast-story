@@ -167,6 +167,8 @@
           description: value.statusMessage,
           color: "error"
         })
+
+        isLoading.value = false
       }
     },
     { immediate: true }
