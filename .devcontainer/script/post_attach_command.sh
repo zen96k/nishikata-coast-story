@@ -12,7 +12,6 @@ cd ${PROJECT_DIRNAME}
 bash -i script/encrypt_environment_variables.sh
 
 docker container exec ncs-ollama ollama pull gemma3
-cp -rfv config.yaml ${HOME}/.continue
 docker system prune -af --volumes
 
 npx lefthook install

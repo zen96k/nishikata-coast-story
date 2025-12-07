@@ -8,58 +8,62 @@
         @update:page="updatePage"
       />
     </div>
-    <div class="mb-8"></div>
-    <UPageGrid>
-      <UPageCard
-        v-for="(article, index) of articles"
-        :key="index"
-        variant="soft"
-        target="_blank"
-        :to="article.link"
-      >
-        <template #header>
-          <div class="h-16 font-bold">
-            <div class="line-clamp-3 leading-snug">
+    <div class="my-8"></div>
+    <div v-if="isLoading">
+      <UProgress :max="['読込中']" />
+    </div>
+    <div v-else>
+      <UPageGrid>
+        <UPageCard
+          v-for="(article, index) of articles"
+          :key="index"
+          variant="soft"
+          target="_blank"
+          :to="article.link"
+        >
+          <template #header>
+            <div class="line-clamp-3 h-16 leading-snug font-bold">
               {{ article.title }}
             </div>
-          </div>
-        </template>
-        <template #body>
-          <div>
-            <img
-              v-if="article.link.includes(QiitaBaseUrl)"
-              class="min-h-32"
-              src="~/assets/image/qiita/logo-background-color.png"
-            />
-            <img
-              v-else-if="article.link.includes(ZennBaseUrl)"
-              class="min-h-32"
-              src="~/assets/image/zenn/logo.png"
-            />
-            <img
-              v-else
-              class="min-h-32"
-              src="https://nuxt.com/assets/design-kit/logo-green-white.png"
-            />
-          </div>
-        </template>
-        <template #footer>
-          <div>投稿者: {{ article.author }} さん</div>
-          <ClientOnly>
+          </template>
+          <template #body>
             <div>
-              公開日時:
-              {{
-                useDateFormat(
-                  luxon.fromJSDate(article.publishedAt).toLocal().toISO() ?? "",
-                  "YYYY-MM-DD HH:mm"
-                )
-              }}
+              <img
+                v-if="article.link.includes(QiitaBaseUrl)"
+                class="min-h-32"
+                src="~/assets/image/qiita/logo-background-color.png"
+              />
+              <img
+                v-else-if="article.link.includes(ZennBaseUrl)"
+                class="min-h-32"
+                src="~/assets/image/zenn/logo.png"
+              />
+              <img
+                v-else
+                class="min-h-32"
+                src="https://nuxt.com/assets/design-kit/logo-green-white.png"
+              />
             </div>
-          </ClientOnly>
-        </template>
-      </UPageCard>
-    </UPageGrid>
-    <div class="mt-8"></div>
+          </template>
+          <template #footer>
+            <div>投稿者: {{ article.author }} さん</div>
+            <ClientOnly>
+              <div>
+                公開日時:
+                {{
+                  useDateFormat(
+                    luxon.fromJSDate(article.publishedAt).toLocal().toISO() ??
+                      "",
+                    "YYYY-MM-DD HH:mm"
+                  )
+                }}
+              </div>
+            </ClientOnly>
+          </template>
+        </UPageCard>
+      </UPageGrid>
+    </div>
+    <div class="my-8"></div>
     <div class="flex justify-center">
       <UPagination
         v-model:page="articlePage"
@@ -99,17 +103,23 @@
   const articlePage = ref(1)
   const articleLimit = ref(30)
 
-  const { data: data, error: error } = await useLazyFetch<
-    { superjson: string },
-    H3Error
-  >("/api/article/popular/fetch", {
-    method: "POST",
-    body: { page: articlePage, limit: articleLimit }
+  const {
+    data: data,
+    error: error,
+    status: status
+  } = await useLazyFetch<{ superjson: string }, H3Error>(
+    "/api/article/popular/fetch",
+    { method: "POST", body: { page: articlePage, limit: articleLimit } }
+  )
+
+  const isLoading = computed(() => {
+    return status.value === "pending"
   })
 
   const updatePage = (page: number) => {
-    articlePage.value = page
     windowScrollY.value = 0
+    articles.value = []
+    articlePage.value = page
   }
 
   watch(
