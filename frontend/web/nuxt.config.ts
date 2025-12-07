@@ -6,11 +6,22 @@ const config = defineNuxtConfig({
       title: "西方コーストストーリー",
       htmlAttrs: { lang: "ja" },
       meta: [
-        { name: "description", content: "技術記事をまとめる学習用アプリ" },
+        { property: "og:title", content: "西方コーストストーリー" },
+        {
+          property: "og:description",
+          content: "技術記事をまとめる学習用アプリ"
+        },
+        { property: "og:site:name", content: "西方コーストストーリー" },
+        {
+          property: "og:url",
+          content: "https://nishikata-coast-story.vercel.app"
+        },
+        { property: "og:type", content: "website" },
         {
           property: "og:image",
           content: "https://nuxt.com/assets/design-kit/logo-green-white.png"
-        }
+        },
+        { property: "og:locale", content: "ja_JP" }
       ]
     }
   },
